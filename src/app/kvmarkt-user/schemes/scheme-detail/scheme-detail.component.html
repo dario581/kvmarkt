@@ -1,15 +1,16 @@
-<div *ngIf="scheme" class="block block-dark page-info animation-enter-children" style="width: 100%; height: padding-bottom-80px; padding-top: 80px; background-image: url('/assets/rf_dark2.jpg'); background-size: cover; background-position: center">
-  <h1 class="font-style font-extra-light">{{scheme.title}}</h1>
-  <p class="like-box">
+<div class="block block-dark page-info animation-enter-children" 
+style="width: 100%; min-height: 212px; background-image: url('/assets/rf_dark2.jpg'); background-size: cover; background-position: center">
+  <h1 *ngIf="scheme" class="font-style font-extra-light">{{scheme.title}}</h1>
+  <p *ngIf="scheme" class="like-box">
     <span class="fa-stack fa-lg custom-heart" [class.active]="scheme.isFavorite" (click)="toggleSchemeLiked()">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-heart-o fa-stack-1x fa-inverse"></i>
             </span> Mag ich
   </p>
-  <h3><a [routerLink]="[ '/schemes', {categories: scheme.category} ]">{{scheme.category_name}}</a></h3>
+  <h3 *ngIf="scheme" ><a [routerLink]="[ '/schemes', {categories: scheme.category} ]">{{scheme.category_name}}</a></h3>
 </div>
 
-<div *ngIf="!scheme" style="width: 100%; padding-top: 300px; text-align: center;">
+<div *ngIf="!scheme" style="width: 100%; padding-top: 300px; text-align: center; color: #aaaaaa">
   lädt...
 </div>
 
