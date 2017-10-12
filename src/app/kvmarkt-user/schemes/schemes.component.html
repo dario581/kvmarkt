@@ -1,0 +1,84 @@
+<div class="main-content" >
+
+  <div class="block block-dark page-info animation-enter-children" style="background-image: url('/assets/rf_dark2.jpg'); background-size: cover; background-position: center">
+    <p>
+      <span>Finde hier alle Programme, die es auf dieser Seite gibt!</span>
+    </p><br>
+    <div class="button-box"><br>
+      <a class="button-acc " [routerLink]="['/schemes/start']" routerLinkActive="active">Programme entdecken</a>
+      <a class="button-acc" [routerLink]="['/schemes/create']" routerLinkActive="active"><span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
+    </div>
+  </div>
+
+  <div class="filterbar container-fluid animation-enter" > <!-- [style.visibility]="loading ? 'hidden' : 'visible'" -->
+    <div> Sortieren nach:
+      <select [(ngModel)]="selectedSortingString" (ngModelChange)="onParameterChange()">
+        <option [value]="'date_asc'">Datum aufsteigend [alt -> neu]</option>
+        <option [value]="'date_desc'">Datum absteigend [neu -> alt]</option>
+        <option [value]="'alpha_desc'">Alphabetisch absteigend [Z -> A]</option>
+        <option [value]="'alpha_asc'">Alphabetisch aufsteigend [A -> Z]</option>
+      </select>
+    </div>
+    <div> Kategorie:
+      <select [(ngModel)]="scheme_category" (ngModelChange)="onParameterChange()">
+        <option [ngValue]="0">Alle</option>
+        <option *ngFor="let category of scheme_categories" [ngValue]="category.id" >{{category.name}}</option>
+      </select>
+    </div>
+    <div> Ort:
+      <select [(ngModel)]="scheme_place" (ngModelChange)="onParameterChange()">
+        <option [ngValue]="0">Alle</option>
+        <option *ngFor="let place of scheme_places" [ngValue]="place.id" >{{place.name}}</option>
+      </select>
+    </div>
+    <div> Alter:
+      <span>VON</span>
+      <select [(ngModel)]="age_start" (ngModelChange)="onParameterChange()">
+          <option *ngFor="let number of scheme_ages" [ngValue]="number" >{{number}}</option>
+      </select>
+      <span>BIS</span>
+      <select [(ngModel)]="age_end" (ngModelChange)="onParameterChange()">
+          <option *ngFor="let number of scheme_ages" [ngValue]="number" >{{number}}</option>
+      </select>
+    </div>
+    <div>
+      <span *ngIf="totalRows == 1">{{totalRows}} Ergebnis</span>
+      <span *ngIf="totalRows != 1">{{totalRows}} Ergebnisse</span>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && schemes.length == 0" style="width: 100%; padding-top: 200px; text-align: center;">
+    <span *ngIf="!totalRows">Keine Ergebnisse gefunden.</span>
+  </div>
+
+  <div class="scheme-wrapper-full-width container-fluid" [@slideTileAnimation]="getSchemeAnimateState()">
+    <app-scheme-card class="scheme-card col-xs-12 col-sm-6 col-md-3" *ngFor="let scheme of schemes" [scheme]="scheme"></app-scheme-card>
+  </div>
+
+  <ul *ngIf="typePagination" class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li *ngFor="let page of countPages; let i = index"><a [routerLink]="['/schemes', {page: (i+1) }]" routerLinkActive="active">{{i+1}}</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+
+  <div *ngIf="!typePagination" class="block" style="width: 100%; text-align: center">
+    <button *ngIf="!loading && schemes.length < totalRows" class="btn btn-primary enabled" (click)="appendSchemes()">Mehr laden</button>
+    <span *ngIf="loading">Wird geladen...</span>
+  </div>
+
+</div>
+
+<style>
+  .animation-enter-children > * {
+    /* opacity: 0.3;
+    transform: translate(-40px, 0); */
+  }
+</style>

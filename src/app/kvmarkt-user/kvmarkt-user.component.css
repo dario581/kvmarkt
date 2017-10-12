@@ -1,0 +1,326 @@
+
+/* **************************   H E A D B A R   ***************************** */
+header {
+    background-color: rgba(46,47,56,0.95);
+    color: #ebe8ea;
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    width: 100%;
+    height: 52px; 
+    line-height: 52px; 
+    font-size: 11pt; 
+    font-weight: 400; 
+    color: #9d9a99; 
+}
+
+.headbar {
+    top: 0; left: 0;
+}
+
+.headbar > .hbar-item {
+    display: inline-block;
+    height: 100%;
+    padding: 0 20px;
+    color: #9d9a99
+}
+
+.headbar > .hbar-item > span {
+    vertical-align: middle;
+}
+.headbar > .hbar-item  span.glyphicon {
+    top: -2px;
+    padding: 0 5px;
+}
+
+.headbar > .hbar-item:hover {
+    background-color: #24242a;
+    color: #e15038;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.headbar > .hbar-item.active {
+    color: #e15038;
+}
+
+.headbar > .item-right {
+    float: right;
+}
+
+
+.headbar > .hbar-logo {
+    width: 150px;
+    font-size: 2em;
+    display: inline-block;
+}
+
+.headbar > .hbar-menu {
+    display: none;
+}
+.headbar > .hbar-anchor {
+    display: none;
+}
+
+.headbar > .hbar-item-label {
+    font-size: 1.2em;
+}
+
+/* **************************   S I D E B A R   ***************************** */
+
+.sidebar {
+    position: fixed;
+    /*top:60px;*/ left: 0; /*******************************/
+    z-index: 8;
+    width: 120px;
+    height: 110vh;
+    overflow: hidden;
+    background: #DDDDDD;
+}
+
+.sidebar {
+        top: 0;
+        margin-left: -200px;
+        z-index: 12;
+        width: 200px;
+    }
+
+.sidebar > .sbar-item {
+    display: block;
+    width: 120px;
+    height: 120px;
+    background: #EEEEEE;
+    color: #b1b1b1;
+    text-align: center;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
+}
+
+.sidebar > .sbar-logo {
+    display: none;
+    height: 50px;
+    font-size: 1.2em;
+    line-height: 50px;
+    vertical-align: middle;
+    color: #3f3f3f;
+}
+
+.sidebar > .sbar-item > .sbar-item-content {
+    display: inline-block;
+    line-height: normal;
+    margin-top: 20px;
+    text-align: center;
+}
+.sidebar > .sbar-item > .sbar-item-content > span:first-child {
+    font-size: 3em;
+    line-height: 60px;
+    display: block;
+}
+
+.sidebar > .sbar-item > .sbar-item-content >span.glyphicon-correction-left {
+    margin-right: 4px;
+}
+
+.sidebar > .sbar-item > .sbar-item-content >span.glyphicon-correction-right {
+    margin-left: 4px;
+}
+
+.sidebar > a.active {
+    background-color: #fff;
+    color: #E4424A;
+    border-top: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+}
+.sidebar > a:first-child {
+    border-top: none;
+}
+
+.sidebar > a:hover {
+    background: #d4d4d4;
+}
+
+#my-app-content {
+    position: absolute;
+    /*top: 60px;  /*******************************/
+    /*left: 120px;
+    width: calc(100% - 120px);*/
+    width: 100%;
+}
+
+/******          New Header         **********/
+
+span.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+.menu-icon {
+    display: none;
+    height: 52px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.menu-icon > svg {
+    height: 35px;
+    padding-top: 15px;
+    color: #e15038;
+}
+
+.profile-menu {
+    line-height: 23px;
+    float:right; 
+    /*height: 46px; */
+    padding: 0 10px 0 10px;
+}
+
+.profile-menu:hover {
+    background: #24242a;
+    cursor: pointer;
+}
+
+.profile-overlay {
+    width: 300px; 
+    position: absolute; 
+    right: 2%; 
+    top: 54px;
+}
+
+.profile-overlay > div {
+    width: 0; 
+    height: 0; 
+    margin-left: 255px; 
+    border-left: 10px solid transparent; 
+    border-right: 10px solid transparent; 
+    border-bottom: 10px solid #191822;
+}
+
+.profile-overlay ul {
+    background: #191822;
+    color: #ebe8ea;
+    list-style: none;
+    padding-left: 0;
+}
+
+.profile-overlay ul > li {
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border-top: 1px solid #e15038;
+    text-align: right;
+}
+
+.profile-overlay ul > li:first-child {
+    border-top: none;
+}
+
+.profile-overlay ul > li:hover {
+    background: #0d0c13;
+} 
+
+@media screen and (max-width: 600px) {
+    header {
+        width: 100%;
+        left:0;
+    }
+}
+
+.contact-img {
+    display: inline-block;
+    float:left;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    -webkit-border-radius: 19px;
+    -moz-border-radius: 19px;
+    background-image: url('/assets/profile_icon.JPG');
+    background-size: 100%;
+}
+
+
+
+
+
+@media(max-width: 700px) {
+    .sidebar {
+        top: 0;
+        margin-left: -200px;
+        z-index: 12;
+        width: 200px;
+    }
+    .sidebar > .sbar-item {
+        width: 200px;
+        height: 80px;
+    }
+    .sidebar > .sbar-item > .sbar-item-content {
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+        margin-left: 10px
+    }
+    .sidebar > .sbar-item > .sbar-item-content > span:first-child {
+        display: inline;
+        font-size: 1em;
+    }
+    .sidebar > .sbar-logo {
+        display: inline-block;
+        height: 50px;
+        border-bottom:1px solid #9d9d9d;
+    }
+
+    .sidebar.active {
+        margin-left: 0;
+    }
+    #my-app-content {
+        width: 100%;
+        left:0;
+    }
+
+    .headbar > .hbar-item {
+        display: none;
+        padding: 0 12px;
+    }
+    .headbar > .profile-menu {
+        display: block;
+    }
+    .headbar > .hbar-menu {
+        display: inline-block;
+        padding: 0 15px;
+    }
+    .headbar > .hbar-anchor {
+        display: inline-block;
+    }
+    .headbar > .hbar-logo {
+        display: none;
+    }
+    .headbar > .hbar-item > .hbar-item-label {
+        display: none;
+    }
+
+    .menu-icon {
+        display: inline-block;
+    }
+}
+
+/* :host {
+
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+:host /deep/ router-outlet + * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    } */

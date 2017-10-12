@@ -1,0 +1,26 @@
+<a id="scheme-card-content{{scheme.id}}" class="" [class.no-border]="!border" [routerLink]="['/schemes', scheme.id]" routerLinkActive="active">
+    <div class="scheme-card-content">
+        <p>{{scheme.category_name | uppercase }}</p>
+
+        <div style="display: table-cell;">
+            <h3 style="height: 70px;">{{scheme.title}}</h3>
+        </div>
+        <div style="display: table; height: 59px; overflow: hidden; text-overflow: ellipsis; margin-bottom: 15px;">
+            <p style="height: 59px">{{scheme.description}}</p>
+        </div>
+        <div class="scheme-card-content-info scci-asymetric">
+            <span><span class="scheme-card-content-age glyphicon glyphicon-user"></span> {{scheme.age_start}} - {{scheme.age_end}}</span>
+            <!--custom-icon ci-age -->
+            <span><span class="scheme-card-content-location glyphicon glyphicon-home"></span> {{scheme.place_name}}</span>
+            <!--custom-icon ci-forrest -->
+            <!--span><span class="scheme-card-content-preparation glyphicon glyphicon-time"></span> 2 Stunden</span> <!--custom-icon ci-preparation-->
+        </div>
+        <footer>
+            <span class="contact-name-small">
+                <!-- <span class="contact-img"></span> -->
+            <span>{{scheme.author_name}}</span>
+            </span>
+            <span>{{scheme.created |  date:"dd.MM.yyyy" }}</span>
+        </footer>
+    </div>
+</a>

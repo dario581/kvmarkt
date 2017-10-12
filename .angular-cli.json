@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "../CvjsDeploy/kvmarkt-angular",
       "assets": [
         "assets",
         "favicon.ico"
@@ -19,7 +19,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "styles/bootstrap.css",
+        "styles/theme_final.css",
+        "styles/custom.css",
+        "styles/custom-scheme.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

@@ -1,0 +1,73 @@
+<header class="container-fluid headbar" style="height: 52px;">
+  <a class="hbar-item" routerLink="/dashboard" routerLinkActive="active"><span class="glyphicon glyphicon glyphicon-home glyphicon-correction-right"></span>Home</a>
+  <a class="hbar-item" routerLink="/schemes/" routerLinkActive="active"><span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>Programme</a>
+
+  <span class="font-medium" style="left:0; width: 100%; position: absolute; height: 52px; line-height: 52px; vertical-align: middle; z-index: -1; text-align: center; font-size: 11pt; color: #9d9a99;">{{pageTitle | uppercase}}</span>
+  <div class="menu-icon" (click)="toggleMenu($event)">
+    <!-- Generator: Adobe Illustrator 19.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <svg version="1.1" id="Ebene_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-499 373 24 24" style="enable-background:new -499 373 24 24;"
+      xml:space="preserve">
+      <title></title>
+      <desc></desc>
+      <g id="miu">
+        <g id="Artboard-1" transform="translate(-359.000000, -479.000000)">
+          <g id="slice" transform="translate(215.000000, 119.000000)">
+          </g>
+          <path style="fill:#e15038;fill-rule:evenodd" id="editor-list-view-hambuger-menu-outline-stroke" d="M-138.4,858c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
+                    c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,858z M-138.4,863c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
+                    c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,863z M-138.4,868c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
+                    c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,868z" />
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <a class="hbar-item item-right profile-menu" (click)="profileMenuIsActive = !profileMenuIsActive" [style.background]="profileMenuIsActive ? '#24242a' : 'none'">
+    <div style="margin-left: 10px; float: right; display: inline-block; height: 100%">
+      <span class="contact-img" style="margin-top: 6px; margin-bottom: 3px;"></span>
+    </div>
+    <div class="hidden-sm hidden-xs" style="float: right; margin-top: 3px; color:#ebe8ea">
+      <span class="font-light" style="display: block; text-align: right; width: 100%; font-size: 14pt ">{{user_firstname}} {{user_lastname}}</span>
+      <span style="display: block; text-align: right; width: 100%; font-size: 9pt; font-weight: 400; color: #9d9a99; margin-top: -2px;">{{user_association}}</span>
+    </div>
+  </a>
+
+  <div *ngIf="profileMenuIsActive" class="profile-overlay">
+    <div></div>
+    <ul>
+      <li routerLink="/profile" routerLinkActive="active">Profil</li>
+      <li (click)="logout()">abmelden</li>
+    </ul>
+  </div>
+
+</header>
+
+<div class="only-print" style="position: absolute; left: 0; top: 10px; text-align: left">
+  <span><strong >KV Markt</strong><em> - kvmarkt.azurewebsites.de</em></span>
+</div>
+
+<nav class="sidebar" [ngClass]="{active: menuIsOpen}">
+  <a class="sbar-item sbar-logo" (click)="toggleMenu($event)">
+    <!--span>JS<span style="font-size:0.86em; color: #E4424A">IDEA</span></span-->
+    <span class="glyphicon glyphicon-menu-left"></span>
+    <span>Schließen</span>
+  </a>
+  <a (click)="toggleMenu($event)" class="sbar-item" routerLink="/dashboard" routerLinkActive="active"> 
+        <span class="sbar-item-content">
+            <span class="glyphicon glyphicon-home glyphicon-correction-left"></span>
+            <span class="sbar-item-tile">HOME</span>
+        </span>
+    </a>
+  <a (click)="toggleMenu($event)" class="sbar-item" routerLink="/schemes/" routerLinkActive="active">
+        <span class="sbar-item-content">
+            <span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>
+            <span class="sbar-item-tile">PROGRAMME</span>
+        </span>
+    </a>
+</nav>
+
+
+<div id="my-app-content" [@routerTransition]="getState(outlet)" >
+  <router-outlet #outlet="outlet" ></router-outlet>
+</div>

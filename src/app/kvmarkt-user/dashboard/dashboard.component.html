@@ -1,0 +1,94 @@
+<div id="" class="main-content">
+
+  <div class="container-fluid" style="padding-top: 40px;">
+    <div class="row">
+      <!-- first card -->
+      <div class=" col-md-6 col-lg-4">
+        <div class="block dashboard-card animation-enter">
+          <!--        Willkommen         -->
+          <div>
+            <span class="card-accent"></span>
+          </div>
+          <h1 class="font-style font-extra-light">Hallo, {{user_firstname}}</h1>
+          <p>
+            Willkommen bei deinem KV Markt! Finde hier Prgramme für deine Gruppe oder Teile deine Ideen mit anderen!
+          </p>
+          <a class="button-acc " [routerLink]="['/schemes']" routerLinkActive="active"><span class="glyphicon glyphicon-th"></span> Alle Programme anzeigen</a>
+          <a class="button-acc" [routerLink]="['/schemes/create']" routerLinkActive="active"><span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
+
+          <hr class="full-width card-seperator">
+
+          <!--        Neuigkeiten         -->
+          <div>
+            <span class="card-accent"></span>
+          </div>
+          <h2 class="font-style font-light ">Neuigkeiten</h2>
+          <p class="">
+            Erfahre hier was es Neues rund um diese Seite gibt:
+          </p>
+          <hr class="full-width ">
+          <div class="full-width item-card blogpost-card " *ngFor="let blogpost of blogposts">
+            <a class="">
+              <h5 class="blogpost-title">{{blogpost.post_title}}</h5>
+              <p>{{blogpost.post_content}}</p>
+              <div class="col-box-footer">
+                <div class="contact-name-small">
+                  <span class="contact-img"></span>
+                  <span>{{blogpost.post_author_name}}</span>
+                </div>
+                <div>
+                  <span>{{ blogpost.post_time | date:"dd.MM.yyyy" }}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!--a class="button-acc">Alle Neuigkeiten anzeigen</a-->
+          <br>
+        </div>
+      </div>
+
+      <!-- fav card -->
+      <div class=" col-md-6 col-lg-4">
+        <div class="block dashboard-card animation-enter">
+          <div>
+            <span class="card-accent"></span>
+          </div>
+          <h2 class="font-style font-light ">Favoriten</h2>
+          <p class="test">
+            Finde hier alle Programme wieder, die du als „Mag ich“ gekennzeichnet hast.
+          </p>
+          <hr class="full-width no-margin ">
+          <app-scheme-card *ngFor="let scheme of favSchemes" class="scheme-card item-card full-width" [scheme]="scheme"></app-scheme-card>
+          <p *ngIf="!favSchemes ||favSchemes.length === 0" class="text-center">
+            <br>Wie es aussieht, hast du noch keine eigenen Favoriten. Entdecke jetzt coole Programme und speichere sie dir
+            für später!<br><br>
+            <a class="button-acc" [routerLink]="['/schemes']" routerLinkActive="active">Programme anzeigen</a>
+          </p>
+          <a *ngIf="favSchemes && favSchemes.length > 0" class="button-acc" [routerLink]="['/profile']" fragment="favorites" routerLinkActive="active">Alle Favoriten anzeigen</a>
+        </div>
+      </div>
+
+      <!-- own schemes card -->
+      <div class=" col-md-6 col-lg-4">
+        <div class="block dashboard-card animation-enter">
+          <div>
+            <span class="card-accent"></span>
+          </div>
+          <h2 class="font-style font-light">Deine Programme</h2>
+          <p class="">
+            Finde hier deine erstellten Programme:
+          </p>
+          <hr class="full-width no-margin ">
+          <p *ngIf="!ownSchemes || ownSchemes.length === 0" class="text-center">
+            <br>Wie es aussieht, hast du noch keine eigenen Programme. Klick auf den Link und erstelle jetzt dein erstes
+            Programm!<br><br>
+            <a class="button-acc" [routerLink]="['/schemes/create']" routerLinkActive="active"><span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
+          </p>
+          <app-scheme-card *ngFor="let scheme of ownSchemes" class="scheme-card item-card full-width" [scheme]="scheme"></app-scheme-card>
+          <a *ngIf="ownSchemes && ownSchemes.length > 0" class="button-acc" [routerLink]="['/profile']" fragment="schemes" routerLinkActive="active">Deine Programme anzeigen</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

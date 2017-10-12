@@ -1,0 +1,49 @@
+.brick { 
+    padding: 4px 4px;
+    box-sizing: border-box;
+}
+
+.grid-sizer {
+    padding: 0;
+}
+
+.gutter-sizer {
+    width: 2%;
+}
+
+.searchbar {
+    max-width: 600px;
+    width: 90%;
+}
+
+.filterbar > div {
+    background: #e0dedf;
+    padding: 10px;
+    margin: 3px;
+    display: inline-block;
+    text-align: left;
+  }
+
+.filterbar {
+    max-width: 1300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+@media(max-width: 600px) {
+    .brick {
+        width: 100%;
+     }
+
+    .searchbar {
+        width: 90%;
+    }
+
+    .filterbar > div {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

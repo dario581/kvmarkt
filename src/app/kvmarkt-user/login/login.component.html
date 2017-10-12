@@ -1,0 +1,26 @@
+<main class="" style="width: 100%;">
+  <div class="row" style="margin: auto;width: 90%; padding: 5%; max-width: 500px;">
+    <h1>
+      Login
+    </h1>
+    <form [formGroup]="loginForm" class="form-group" style=" width: 100%" (ngSubmit)="onSubmit()">
+      <label for="username">E-Mail Adresse</label>
+      <input id="username" name="username" type="email" class="form-control" placeholder="name@beispiel.de" required formControlName="username" />  <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  -->
+      
+      <label for="password">Passwort</label>
+      <input id="password" name="password" type="password" class="form-control" placeholder="Passwort" formControlName="password"  />
+      <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
+      
+      <button type="submit" class="btn btn-default" >Login</button> <!-- !loginForm.form.valid [disabled]="loginForm.status != 'VALID' --> 
+    </form>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+    <div *ngIf="loading" class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+  </div>
+</main>

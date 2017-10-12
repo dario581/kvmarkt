@@ -8,5 +8,8 @@ if (environment.production) {
   enableProdMode();
 }
 
+localStorage.setItem('backand_url', 'https://api.backand.com');
+localStorage.setItem('backand_app_name', 'cvjs');
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));

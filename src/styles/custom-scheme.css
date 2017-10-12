@@ -1,0 +1,175 @@
+span.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+i.fa {
+    font-family: FontAwesome;
+}
+
+span.custom-heart {
+    color: #aaa;
+}
+
+span.custom-heart:hover {
+    color: #777;
+    cursor: pointer;
+}
+
+span.custom-heart.active {
+    color: #822;
+}
+
+span.custom-heart.active:hover {
+    color: #622;
+}
+
+
+.highlight-text {
+    color: #e15038;
+}
+
+
+input[type=text], select, textarea {
+    border:none;
+    background: none;
+    color: #2e2f38; 
+    border-bottom: 1px solid #9d9a99;
+    /*border-bottom: 1px solid #4d586a;*/
+    outline: none;
+    border-radius: 0;
+}
+
+textarea {
+    width: 100%;
+    margin: 0px;
+    border-right: 1px solid #9d9a99;
+}
+
+input[type=text] {
+    padding-left: 1%;
+    width: 99%;
+    font-size: 18pt;
+}
+
+input[type=text].input-headline {
+    font-size: 30pt;
+}
+
+input[type=text]:focus, select:focus, textarea:focus {
+    border-bottom: 1px solid #e15038;
+}
+
+input[type=text].input-add-item  {
+    width: 90%;
+}
+
+textarea:focus {
+    border-right: 1px solid #e15038;
+}
+
+select {
+    /*width: 300px;
+    /*font-size: 1.2em;*/
+}
+
+option {
+    /*font-size: 0.8em;
+    /**background:#222;*/
+    /*color: #222;*/
+}
+
+.block ol {
+    margin-bottom:0;
+}
+
+
+
+
+.block {
+    background-color: #ebe8ea;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.block-dark {
+    background-color: #2e2f38;
+    color: #ebe8ea; 
+}
+
+.block-dark select, .block-dark input, .block-dark textarea {
+    color: #ebe8ea; 
+    border-bottom: 1px solid #4d586a;
+}
+
+/*          Page Info           */
+.page-info {
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+
+.page-info > p {
+    display: inline-block;
+    max-width: 500px;
+    width: 96%;
+}
+
+.page-info > p span {
+    display: inline-block;
+    margin: 10px 0; 
+    font-size: 1.2em; 
+}
+
+.page-info div.button-box {
+    margin: 0 0 20px 0;
+}
+
+
+
+
+a.button-acc {
+    padding: 5px 10px;
+    margin: 5px;
+    display: inline-block; 
+    text-decoration: none;
+    text-align: center;
+    /*text-align: center;
+    margin: 30px 5px; 
+    padding: 5px 10px; */
+    border: 1px solid #e15038;
+    color: #e15038;
+    font-weight: 400;
+}
+
+.block-dark > a.button-acc {
+    border: 1px solid #e15038; 
+    color: #e15038
+}
+
+a.button-acc:hover {
+    color: #ebe8ea;
+    background: #e15038;
+}
+
+.block-dark a.button-acc:hover {
+    color: #e15038;
+    background-color: #ebe8ea;
+    /*border-color: #ebe8ea;
+    color: #ebe8ea;
+    cursor: pointer;*/
+}
+
+a.button-acc.enabled {
+    cursor: pointer;
+}
+
+
+
+

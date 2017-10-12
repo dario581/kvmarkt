@@ -1,0 +1,84 @@
+/************** scheme card         ***************/
+
+a {
+    color: inherit;
+    display: block;
+    width: 100%;
+    padding: 15px;
+}
+
+.scheme-card-content {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.scheme-card-content h3 {
+    /*height: 55px;*/
+    width: 100%;
+    font-weight: 300;
+    margin:0;
+    padding-bottom: 4px;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.scheme-card-content p {
+    /*height: 60px;*/
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.scheme-card-content > p:first-child {
+    float: right;
+    height: auto;
+    margin:0;
+    margin-left: 100%;
+    font-weight: 400;
+    font-size: 0.8em;
+    padding-bottom: 2px;
+}
+
+.scheme-card-content-info {
+    height: 40px;
+}
+
+.scheme-card-content-info > span {
+    display: inline-block;
+    width: 32%
+}
+
+.scci-asymetric > span:nth-child(2) {
+    width: 64%;
+}
+
+.scheme-card-content footer {
+    display: block;
+    width: 100%;
+    height: 30px;
+}
+
+.scheme-card-content footer > span:last-child {
+    float: right;
+}
+
+.scheme-card-content footer > span:first-child {
+    float: left;
+}
+
+/*      fixed height   */
+.scheme-card-content-text {
+    height: 110px;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 8px;
+}
+
+.scheme-card-text-wrapper {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 150px;
+    background: red;
+}

@@ -1,0 +1,127 @@
+
+.main-content {
+    padding-top: 60px;
+    background-color: #555555;
+    background-image: url('/assets/zela_back.JPG');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+
+.main-content .container {
+    /*font-family: 'Geomanist ExtraLight', sans-serif;*/
+    max-width: 100%;
+}
+
+.headline-big {
+    font-weight: 100;
+    font-size: 4em;
+    color: #ffffff;
+}
+
+.col-md-6 {
+    margin-bottom: 40px;
+}
+
+.col-box {
+    background-color: rgba(0, 0, 0, 0.45);
+    padding: 1px 20px 10px 20px;
+    /*font-family: 'Geomanist', sans-serif;*/
+    font-weight: 300;
+    color: #aaaaaa;
+    margin-top: 4px;
+}
+
+.col-box:hover {
+    background-color: rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+
+.col-box h3 {
+    /*font-family: 'Geomanist ExtraLight', sans-serif;*/
+    font-size: 28px;
+    color: #ffffff
+}
+.dash-card-1 {
+
+}
+
+.col-md-4 {
+    /*margin:0;
+    padding:2px;*/
+}
+
+
+
+.col-box-footer {
+    height: 30px;
+}
+
+.col-box-footer div {
+    display: inline-block;
+    line-height: 30px;
+    height: 30px;
+    float: right;
+}
+
+.col-box-footer div:first-child {
+    float: left;
+}
+
+
+/*      WeatherBox      */
+
+.weather-col > div {
+    height: 121px;
+    width: 100%;
+    line-height:40px;
+    background-color: rgba(0, 13, 85, 0.5);
+    color: #ffffff;
+    font-weight: 200;
+}
+
+.weather-col > div:hover {
+    background-color: rgba(0, 8, 56, 0.5);
+}
+
+.weather-col > div > div {
+    float: left;
+}
+
+.weather-col > div:first-child {
+    line-height: normal;
+    height: auto;
+    font-weight: 300;
+}
+
+.weather-icon {
+    font-size: 70px;
+    top: -10px;
+    width: 70px;
+    height: 50px;
+    margin-right: 25px;
+    margin-left: 4%;
+}
+
+.weather-temp {
+    font-size: 4.5em;
+}
+
+.weather-col > div  .weather-rainprob {
+    margin-right: 2%;
+    float: right;
+}
+
+.weather-rainprob span {
+    font-size: 2em;
+}
+
+.weather-rainprob span:nth-child(2) {
+    font-size: 1em;
+    top: -1px;
+}
