@@ -6,7 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, NavigationStart } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { routerTransition, fadeAnimation } from '../fade.animation';
+import { fadeAnimation } from '../animations';
 
 @Component({
   selector: 'app-kvmarkt-user',

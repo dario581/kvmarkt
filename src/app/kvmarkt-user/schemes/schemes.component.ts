@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operator/filter';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Scheme } from '../../model/scheme.model';
-import { slideTileAnimation, slideAnimation } from '../../fade.animation';
+import { slideTileAnimation } from '../../animations';
 
 @Component({
   selector: 'app-schemes',
   templateUrl: './schemes.component.html',
   styleUrls: ['./schemes.component.css'],
-  animations: [slideTileAnimation, slideAnimation]
+  animations: [slideTileAnimation]
 })
 export class SchemesComponent implements OnInit, AfterViewInit {
 
