@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { ErrorService, NETWORK_ERROR } from '../../../service/error.service';
 
 @Component({
   selector: 'app-scheme-create',
@@ -8,9 +9,17 @@ import { ValidatorFn, AbstractControl } from '@angular/forms';
 })
 export class SchemeCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private errorService: ErrorService) { }
+  error = '';
 
   ngOnInit() {
+    this.errorService.getError().subscribe( (error) => {
+      this.error = error.message;
+    });
+    this.errorService.setError(NETWORK_ERROR);
+    setTimeout(() => {
+      this.errorService.setError(2);
+    }, 2000);
   }
 
   forbiddenEmailPatternValidator(nameRe: RegExp): ValidatorFn {
