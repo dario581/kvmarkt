@@ -49,7 +49,7 @@ export class SchemesComponent implements OnInit, AfterViewInit {
   scheme_place = 0;
 
   constructor(private schemeStore: SchemeStore, private _dataService: DataService,
-    private route: ActivatedRoute, private router: Router, private location: Location) {
+    private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
