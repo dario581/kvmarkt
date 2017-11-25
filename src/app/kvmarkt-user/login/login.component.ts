@@ -54,7 +54,7 @@ export class LoginComponent {
     this.loading = true;
     this.authService.signIn(this.loginForm.get('username').value, this.loginForm.get('password').value).subscribe(
       (data) => {
-        let res = data;
+        const res = data;
         localStorage.setItem('backand_token', res.access_token);
         localStorage.setItem('backand_username', res.username);
         this.getUserInfo();

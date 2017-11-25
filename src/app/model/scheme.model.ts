@@ -1,5 +1,7 @@
-export interface Scheme {
-    id?: number;
+import { IBaseObject } from "./store/BaseStore";
+
+export interface Scheme extends IBaseObject {
+    id: number;
     title: string;
     description: string;
     content?: string;

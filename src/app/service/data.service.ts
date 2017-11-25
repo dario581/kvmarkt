@@ -25,7 +25,8 @@ export class DataService implements DataServiceModel {
 
   getSchemes(): Observable<Scheme[]> {
     if (!this._authService.isLoggedIn) {
-      return;
+      // this._authService.logout();
+      return Observable.of(null);
     }
     if (this._schemes) {
       return Observable.of(this._schemes);

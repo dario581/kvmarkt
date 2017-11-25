@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operator/filter';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Scheme } from '../../model/scheme.model';
 import { slideTileAnimation } from '../../animations';
+import { SchemeStore } from '../../model/store/BaseStore';
 
 @Component({
   selector: 'app-schemes',
@@ -47,25 +48,31 @@ export class SchemesComponent implements OnInit, AfterViewInit {
   scheme_category = 0;
   scheme_place = 0;
 
-  constructor(private backandService: BackandService, private _dataService: DataService,
-    private route: ActivatedRoute, private router: Router) {
+  constructor(private schemeStore: SchemeStore, private _dataService: DataService,
+    private route: ActivatedRoute, private router: Router, private location: Location) {
   }
 
   ngOnInit() {
     this.route.params
       .subscribe(params => {
+        this.schemes = [];
+        // set page
+        this.page = +params['page'] || this.page;
+         // TODO: Check for parameter changes and reset schemes if needed
+        this.scheme_place = +params['place'] || this.scheme_place;
+        this.scheme_category = +params['categories'] || this.scheme_category;
+        this.age_start = +params['age_start'] || this.age_start;
+        this.age_end = +params['age_end'] || this.age_end;
+        // this.setCategories(params['categories'] || '');
+        this.setSorting(params['sort'] || '');
         if (this.firstLoad) {
-          // set page
-          this.page = +params['page'] || this.page;
-          this.scheme_place = +params['place'] || this.scheme_place;
-          this.scheme_category = +params['categories'] || this.scheme_category;
-          this.age_start = +params['age_start'] || this.age_start;
-          this.age_end = +params['age_end'] || this.age_end;
-          // this.setCategories(params['categories'] || '');
-          this.setSorting(params['sort'] || '');
-          this.loadSchemes(1, this.pageSize * this.page);
-          this.firstLoad = false;
+          for (let i = 1; i < this.page; i++) {
+            this.loadSchemes(i, this.pageSize);
+          }
         }
+        this.loadSchemes(this.page, this.pageSize);
+        this.firstLoad = false;
+        // }
       });
     this._dataService.getCategories()
       .subscribe(data => this.scheme_categories = this.scheme_categories.concat(data));
@@ -110,23 +117,23 @@ export class SchemesComponent implements OnInit, AfterViewInit {
 
   onParameterChange() {
     this.setSorting(this.selectedSortingString);
-    // this.schemes = [];
+    this.schemes = [];
     this.page = 1;
-    this.loadSchemes(this.page, this.pageSize);
+    // this.loadSchemes(this.page, this.pageSize);
     this.setRouteUrl();
   }
 
   appendSchemes() {
     this.page++;
     this.loadSchemes(this.page, this.pageSize);
-    this.setRouteUrl();
+    // this.setRouteUrl();
   }
 
   private setRouteUrl() {
     // set params
     // page
     const params: any = {};
-    params.page = this.page;
+    // params.page = this.page;
 
     if (this.scheme_category !== 0) {
       params.categories = this.scheme_category;
@@ -148,13 +155,26 @@ export class SchemesComponent implements OnInit, AfterViewInit {
     if (this.selectedSortingString !== this.defaultSortingString) {
       params.sort = this.selectedSortingString;
     }
+    // change route; alternative change Location
     this.router.navigate(['/schemes', params]);
   }
 
   loadSchemes(page: number, pageSize: number) {
     this.loading = true;
     this.schouldAnimateSchemes = 'no';
-    setTimeout(() => this.loadSchemesFromService(page, pageSize), 1);
+    setTimeout(() => this.loadSchemesFromStore(page, pageSize), 1);
+  }
+
+  private loadSchemesFromStore(page: number, pageSize: number) {
+    const schemeFilter = [
+      { fieldName: 'category', operator: 'in', value: '' + this.scheme_category},
+      { fieldName: 'age_start', operator: 'lessThanOrEqualsTo', value: '' + this.age_end},
+      { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start},
+      { fieldName: 'place', operator: 'in', value: '' + this.scheme_place}
+    ];
+    // TODO: Add Sorting
+    this.schemeStore.setFilter(schemeFilter);
+    this.schemeStore.getItems(true, page, pageSize).subscribe(data => this.handleSchemes(data));
   }
 
   private loadSchemesFromService(page: number, pageSize: number) {
@@ -189,18 +209,20 @@ export class SchemesComponent implements OnInit, AfterViewInit {
     return filter;
   }
 
-  handleSchemes(body: any) {
+  handleSchemes(schemes: Scheme[]) {
     if (this.schemes === undefined) {
       this.schemes = [];
     }
-    body.data.forEach(
+    schemes.forEach(
       (scheme: Scheme) => {
         this.schemes.push(scheme);
       }
     );
-    this.totalRows = body.totalRows;
+    // this.schemes = schemes;
+    this.totalRows = this.schemeStore.totalRows;
     // this.countPages = new Array(Math.ceil(this.totalRows / this.pageSize));
     this.loading = false;
+    this.schouldAnimateSchemes = 'yes';
   }
 
   getSchemeAnimateState() {

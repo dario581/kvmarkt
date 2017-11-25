@@ -9,6 +9,7 @@ import { Scheme } from '../../../model/scheme.model';
 export class SchemeCardComponent implements OnInit {
 
   @Input('scheme') scheme: Scheme = {
+    id: -1,
     title: 'Test Card',
     description: 'Lorem ipsum dolor set amet. Lorem ipsum dolor set amet. Eine kurze Beschreibung des Programms.',
     place: 0,

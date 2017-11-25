@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../model/user.model';
 import { DataError } from './data.error';
 import { BackandService } from './backand.service';
+import { Router } from '@angular/router';
 
 
 
@@ -42,6 +43,7 @@ export class AuthService {
     localStorage.removeItem('backand_username');
     localStorage.removeItem('backand_user_id');
     localStorage.removeItem('backand_token');
+    this.isLoggedIn = false;
   }
 
   private handleError(error: any) {
@@ -65,7 +67,7 @@ export class AuthService {
     }
 
     if (!localStorage.getItem('backand_token') || !localStorage.getItem('backand_username')) {
-      return Observable.throw(new Error('Auth Service getUser no item set'));
+      return Observable.of(false);
     }
 
     const header = new Headers();
@@ -85,7 +87,7 @@ export class AuthService {
       return true;
     })
     .catch( (error) => {
-      return Observable.throw(new Error('Auth Service getUser catch'));
+      return Observable.throw(new DataError(error.status, 'Auth Service getUser catch'));
     });
 
     return this.userObservable;

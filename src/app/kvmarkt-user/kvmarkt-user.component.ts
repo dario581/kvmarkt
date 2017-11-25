@@ -39,7 +39,14 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
     this.user_lastname = localStorage.getItem('backand_user_lastname');
     this.user_association = localStorage.getItem('backand_user_association_name');
     this.setPageTitle();
+    this.setWindowScrolling();
+  }
 
+  ngOnDestroy() {
+    this._subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  setWindowScrolling() {
     this._subscriptions.push(
       // save or restore scroll position on route change
       this.router.events.pairwise().subscribe(([prevRouteEvent, currRouteEvent]) => {
@@ -51,10 +58,6 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
         }
       })
     );
-  }
-
-  ngOnDestroy() {
-    this._subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   setPageTitle() {

@@ -9,6 +9,8 @@ import { DataService } from './service/data.service';
 import { BackandService } from './service/backand.service';
 import { AuthService } from './service/auth.service';
 import { AuthGuardService } from './service/auth-guard.service';
+import { ErrorService } from './service/error.service';
+import { SchemeStore, SchemeFavoriteStore } from './model/store/BaseStore';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,7 @@ import { AuthGuardService } from './service/auth-guard.service';
 
     KvmarktUserModule
   ],
-  providers: [DataService, BackandService, AuthService, AuthGuardService],
+  providers: [DataService, BackandService, AuthService, AuthGuardService, ErrorService, SchemeStore, SchemeFavoriteStore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

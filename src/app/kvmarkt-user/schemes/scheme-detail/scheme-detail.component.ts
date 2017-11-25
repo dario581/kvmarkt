@@ -5,6 +5,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Scheme } from '../../../model/scheme.model';
 import { BackandService } from '../../../service/backand.service';
 import { DataService } from '../../../service/data.service';
+import { SchemeStore } from '../../../model/store/BaseStore';
 
 @Component({
   selector: 'app-scheme-detail',
@@ -16,7 +17,7 @@ export class SchemeDetailComponent implements OnInit {
   scheme: Scheme;
   tagList: Array<{ name: string, id: number }> = [];
 
-  constructor(private route: ActivatedRoute, private backandService: BackandService,
+  constructor(private route: ActivatedRoute, private schemeStore: SchemeStore,
     private _dataService: DataService, private location: PlatformLocation) {
     location.onPopState(() => {
       console.log('back');
@@ -27,7 +28,7 @@ export class SchemeDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
       const id = +params['id'];
-      this._dataService.getScheme(id).subscribe(data => this.init(data));
+      this.schemeStore.getItem(id).subscribe(data => this.init(data));
       /* this.backandService.getTags().subscribe(() => {
         this.backandService.getSchemeTags(id).subscribe(data => this.tagList = data);
       }); // TODO: add tag_name to database table "scheme_tags" and only fetch them */

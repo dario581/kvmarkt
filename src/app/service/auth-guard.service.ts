@@ -4,6 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, CanAc
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { AuthService } from './auth.service';
+import { DataError } from './data.error';
 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild {
@@ -16,7 +17,6 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
       this.authService.requestedUrl = url;
       // this.router.navigate(['/login']);
       console.log('IsLoggedIn: ', this.authService.isLoggedIn);
-      // return true;
     }
 
     if (this.authService.isLoggedIn) {
@@ -24,8 +24,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     }
 
     return this.authService.getUser()
-    .map( data => {
-        if (data) {
+    .map( isLoggedIn => {
+        if (isLoggedIn) {
           this.authService.isLoggedIn = true;
           return true;
         }
@@ -34,6 +34,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     })
     .catch( err => {
       this.router.navigate(['/login']);
+      console.error(err);
       return Observable.of(false);
     });
   }
