@@ -214,7 +214,7 @@ export class BackandService {
 
   public addSchemeToFavorites(favoriteSchemeId: number): Observable<number> {
     const object = {
-      'contributor': 1,
+      // 'contributor': 1,
       'scheme': favoriteSchemeId
     };
     const body = JSON.stringify(object);
