@@ -214,7 +214,6 @@ export class BackandService {
 
   public addSchemeToFavorites(favoriteSchemeId: number): Observable<number> {
     const object = {
-      // 'contributor': 1,
       'scheme': favoriteSchemeId
     };
     const body = JSON.stringify(object);
@@ -256,23 +255,6 @@ export class BackandService {
         this._tagSubject.next(this.scheme_tags);
       });
   }
-
-  getTagOfScheme2(scheme_id: number) {
-    // let tags = this.tagSubject;
-    const o1 = this.getTags();
-    const o2 = this.getSchemeTags(scheme_id);
-    o1.concat(o2);
-    return o1.map(data => console.log(data));
-    /*return o1.flatMap((value, index) => {
-      o2
-    });
-    return Observable
-      .zip(o1, this.getSchemeTags(scheme_id))
-      .map(data => {
-        return data[1];
-      });*/
-  }
-
 
   public getTags() {
     if (this.scheme_tags) {
@@ -419,17 +401,10 @@ export class BackandService {
     return authHeader;
   }
 
-  /* logError(err: any) {
-    console.error('Error: ' + err);
-  }*/
-
   private extractData(res: Response) {
     const body = res.json();
     console.log(body);
     const result = body.data;
-    // for (let i = 0; i < 2; i++) {
-    //     result = result.concat(result);
-    // }
     return result || {};
   }
 
@@ -504,7 +479,6 @@ export class BackandService {
       })
       .catch((error) => {
         return Observable.throw(new DataError(401, 'error'));
-        // throw ;
       });
 
     return this.userObservable;
