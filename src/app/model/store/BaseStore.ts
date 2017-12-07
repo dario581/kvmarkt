@@ -12,6 +12,7 @@ abstract class BaseStore<T extends IBaseObject> {
 
     protected items: T[];
     protected itemObservable: Observable<T>;
+    public totalRows = -1;
 
     protected filter = [];
     protected defaultFilter = [];
@@ -64,6 +65,7 @@ abstract class BaseStore<T extends IBaseObject> {
     protected extractData(res: Response) {
         const body = res.json();
         console.log('BaseStore Data: ', body);
+        this.totalRows = body.totalRows;
         const result = body.data;
         this.addToCache(result);
         return result || {};
@@ -117,7 +119,7 @@ export class SchemeFavoriteStore extends BaseStore<{ id: number }> {
     }
 
     public getItems(forceRefresh?: boolean): Observable<any> {
-        this.filter = [
+        this.defaultFilter = [
             { fieldName: 'contributor', operator: 'in', value: '' + this.contributor }
         ];
         return super.getItems(forceRefresh ? forceRefresh : false);
@@ -162,15 +164,6 @@ export class SchemeStore extends BaseStore<Scheme> {
             });
         });
     }
-
-    protected extractData(res: Response) {
-        this.totalRows = res.json().totalRows;
-        return super.extractData(res);
-    }
-
-    // protected get filter() {
-    //     return [{ fieldName: 'status', operator: 'equals', value: '1' }];
-    // }
 }
 
 
