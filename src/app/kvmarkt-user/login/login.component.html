@@ -1,9 +1,12 @@
-<main class="" style="width: 100%;">
-  <div class="row" style="margin: auto;width: 90%; padding: 5%; max-width: 500px;">
+<main class="grid-center"> 
+  <!-- width: 100%; -->
+  <div class="block dashboard-card grid-center-content" > 
+     <!-- margin: auto;width: 90%; padding: 5%; max-width: 500px; -->
     <h1>
       Login
     </h1>
-    <form [formGroup]="loginForm" class="form-group" style=" width: 100%" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" class="form-group" (ngSubmit)="onSubmit()">
+       <!-- width: 100% -->
       <label for="username">E-Mail Adresse</label>
       <input id="username" name="username" type="email" class="form-control" placeholder="name@beispiel.de" required formControlName="username" />  <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  -->
       

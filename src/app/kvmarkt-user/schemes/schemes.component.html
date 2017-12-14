@@ -1,4 +1,4 @@
-<div class="main-content" >
+<div class="main-content">
 
   <div class="block block-dark page-info animation-enter-children" style="background-image: url('/assets/rf_dark2.jpg'); background-size: cover; background-position: center">
     <p>
@@ -51,7 +51,7 @@
     <span *ngIf="!totalRows">Keine Ergebnisse gefunden.</span>
   </div>
 
-  <div class="scheme-wrapper-full-width container-fluid" > <!-- [@slideTileAnimation]="getSchemeAnimateState()" -->
+  <div class="scheme-wrapper-full-width container-fluid row row--small-gap" > <!-- [@slideTileAnimation]="getSchemeAnimateState()" -->
     <app-scheme-card class="scheme-card col-xs-12 col-sm-6 col-md-3" *ngFor="let scheme of schemes" [scheme]="scheme"></app-scheme-card>
   </div>
 

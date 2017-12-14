@@ -20,11 +20,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
-        "styles/bootstrap.css",
-        "styles/theme_final.css",
-        "styles/custom.css",
-        "styles/custom-scheme.css"
+        "styles.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

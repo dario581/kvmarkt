@@ -1,6 +1,5 @@
-* {
-    font-family: 'Open Sans', sans-serif;
-}
+
+
 
 .font-style {
     font-family: 'Raleway', sans-serif;
@@ -515,4 +514,13 @@ a {
     .only-print {
         display: unset;
     }
+}
+
+
+/* button */
+.btn {
+    background: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 5px 10px;
 }

@@ -167,11 +167,19 @@ export class SchemesComponent implements OnInit, AfterViewInit {
 
   private loadSchemesFromStore(page: number, pageSize: number) {
     const schemeFilter = [
-      { fieldName: 'category', operator: 'in', value: '' + this.scheme_category},
       { fieldName: 'age_start', operator: 'lessThanOrEqualsTo', value: '' + this.age_end},
-      { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start},
-      { fieldName: 'place', operator: 'in', value: '' + this.scheme_place}
+      { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start}
     ];
+    if (this.scheme_category > 0) {
+      schemeFilter.push(
+        { fieldName: 'category', operator: 'in', value: '' + this.scheme_category }
+      );
+    }
+    if (this.scheme_place > 0) {
+      schemeFilter.push(
+        { fieldName: 'place', operator: 'in', value: '' + this.scheme_place }
+      );
+    }
     // TODO: Add Sorting
     this.schemeStore.setFilter(schemeFilter);
     this.schemeStore.getItems(true, page, pageSize).subscribe(data => this.handleSchemes(data));

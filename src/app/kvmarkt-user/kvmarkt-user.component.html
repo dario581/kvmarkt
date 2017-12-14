@@ -1,8 +1,8 @@
-<header class="container-fluid headbar" style="height: 52px;">
+<header class="container-fluid headbar">
   <a class="hbar-item" routerLink="/dashboard" routerLinkActive="active"><span class="glyphicon glyphicon glyphicon-home glyphicon-correction-right"></span>Home</a>
   <a class="hbar-item" routerLink="/schemes/" routerLinkActive="active"><span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>Programme</a>
 
-  <span class="font-medium" style="left:0; width: 100%; position: absolute; height: 52px; line-height: 52px; vertical-align: middle; z-index: -1; text-align: center; font-size: 11pt; color: #9d9a99;">{{pageTitle | uppercase}}</span>
+  <span class="font-medium page-title">{{pageTitle | uppercase}}</span>
   <div class="menu-icon" (click)="toggleMenu($event)">
     <!-- Generator: Adobe Illustrator 19.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
     <svg version="1.1" id="Ebene_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg"
@@ -24,12 +24,12 @@
   </div>
 
   <a class="hbar-item item-right profile-menu" (click)="profileMenuIsActive = !profileMenuIsActive" [style.background]="profileMenuIsActive ? '#24242a' : 'none'">
-    <div style="margin-left: 10px; float: right; display: inline-block; height: 100%">
-      <span class="contact-img" style="margin-top: 6px; margin-bottom: 3px;"></span>
+    <div>
+      <span class="contact-img"></span>
     </div>
-    <div class="hidden-sm hidden-xs" style="float: right; margin-top: 3px; color:#ebe8ea">
-      <span class="font-light" style="display: block; text-align: right; width: 100%; font-size: 14pt ">{{user_firstname}} {{user_lastname}}</span>
-      <span style="display: block; text-align: right; width: 100%; font-size: 9pt; font-weight: 400; color: #9d9a99; margin-top: -2px;">{{user_association}}</span>
+    <div class="hidden-sm hidden-xs" >
+      <span class="font-light">{{user_firstname}} {{user_lastname}}</span>
+      <span>{{user_association}}</span>
     </div>
   </a>
 
@@ -43,13 +43,12 @@
 
 </header>
 
-<div class="only-print" style="position: absolute; left: 0; top: 10px; text-align: left">
+<div class="only-print" >
   <span><strong >KV Markt</strong><em> - kvmarkt.azurewebsites.de</em></span>
 </div>
 
 <nav class="sidebar" [ngClass]="{active: menuIsOpen}">
   <a class="sbar-item sbar-logo" (click)="toggleMenu($event)">
-    <!--span>JS<span style="font-size:0.86em; color: #E4424A">IDEA</span></span-->
     <span class="glyphicon glyphicon-menu-left"></span>
     <span>Schließen</span>
   </a>

@@ -9,8 +9,7 @@ import { SchemeStore } from '../../../model/store/BaseStore';
 
 @Component({
   selector: 'app-scheme-detail',
-  templateUrl: './scheme-detail.component.html',
-  styleUrls: ['./scheme-detail.component.css']
+  templateUrl: './scheme-detail.component.html'
 })
 export class SchemeDetailComponent implements OnInit {
 
