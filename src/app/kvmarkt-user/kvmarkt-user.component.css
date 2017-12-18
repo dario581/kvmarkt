@@ -1,5 +1,6 @@
 
 /* **************************   H E A D B A R   ***************************** */
+/* #region Headbar */
 header {
     background-color: rgba(46,47,56,0.95);
     color: #ebe8ea;
@@ -18,56 +19,61 @@ header {
     top: 0; left: 0;
 }
 
-.headbar > .hbar-item {
+.headbar .hbar-item-wrapper {
+    display: inline-block;
+}
+
+.headbar .hbar-item {
     display: inline-block;
     height: 100%;
     padding: 0 20px;
     color: #9d9a99
 }
 
-.headbar > .hbar-item > span {
+.headbar .hbar-item > span {
     vertical-align: middle;
 }
-.headbar > .hbar-item  span.glyphicon {
+.headbar .hbar-item  span.glyphicon {
     top: -2px;
     padding: 0 5px;
 }
 
-.headbar > .hbar-item:hover {
+.headbar .hbar-item:hover {
     background-color: #24242a;
     color: #e15038;
     text-decoration: none;
     cursor: pointer;
 }
 
-.headbar > .hbar-item.active {
+.headbar .hbar-item.active {
     color: #e15038;
 }
 
-.headbar > .item-right {
+.headbar .item-right {
     float: right;
 }
 
 
-.headbar > .hbar-logo {
+.headbar .hbar-logo {
     width: 150px;
     font-size: 2em;
     display: inline-block;
 }
 
-.headbar > .hbar-menu {
+.headbar .hbar-menu {
     display: none;
 }
-.headbar > .hbar-anchor {
+.headbar .hbar-anchor {
     display: none;
 }
 
-.headbar > .hbar-item-label {
+.headbar .hbar-item-label {
     font-size: 1.2em;
 }
+/* #endregion */
 
 /* **************************   S I D E B A R   ***************************** */
-
+/* #region Sidebar*/
 .sidebar {
     position: fixed;
     /*top:60px;*/ left: 0; /*******************************/
@@ -146,9 +152,10 @@ header {
     width: calc(100% - 120px);*/
     width: 100%;
 }
+/* #endregion */
 
-/******          New Header         **********/
-
+/* **************************   New Header      ***************************** */
+/* #region New Header*/
 span.glyphicon {
     position: relative;
     top: 1px;
@@ -187,9 +194,9 @@ span.glyphicon {
 
 .profile-overlay {
     width: 300px; 
-    position: absolute; 
-    right: 2%; 
-    top: 54px;
+    margin-left: -100px;
+    position: absolute;
+    top: 50px;
 }
 
 .profile-overlay > div {
@@ -243,6 +250,7 @@ span.glyphicon {
     background-image: url('/assets/profile_icon.JPG');
     background-size: 100%;
 }
+/* #endregion */
 
 
 

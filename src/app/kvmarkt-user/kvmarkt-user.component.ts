@@ -18,6 +18,7 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
 
   menuIsOpen = false;
   profileMenuIsActive = false;
+  notificationCenterIsActive = false;
   user_lastname: string;
   user_firstname: string;
   user_association: string;

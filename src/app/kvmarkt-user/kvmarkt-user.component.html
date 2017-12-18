@@ -23,23 +23,39 @@
     </svg>
   </div>
 
-  <a class="hbar-item item-right profile-menu" (click)="profileMenuIsActive = !profileMenuIsActive" [style.background]="profileMenuIsActive ? '#24242a' : 'none'">
-    <div>
-      <span class="contact-img"></span>
+  
+  <div class="hbar-item-wrapper item-right">
+    <a class="hbar-item item-right profile-menu" (click)="profileMenuIsActive = !profileMenuIsActive" [style.background]="profileMenuIsActive ? '#24242a' : 'none'">
+      <div>
+        <span class="contact-img"></span>
+      </div>
+      <div class="hidden-sm hidden-xs" >
+        <span class="font-light">{{user_firstname}} {{user_lastname}}</span>
+        <span>{{user_association}}</span>
+      </div>
+    </a>
+    <div *ngIf="profileMenuIsActive" class="profile-overlay">
+      <div></div>
+      <ul>
+        <li routerLink="/profile" routerLinkActive="active">Profil</li>
+        <li (click)="logout()">abmelden</li>
+      </ul>
     </div>
-    <div class="hidden-sm hidden-xs" >
-      <span class="font-light">{{user_firstname}} {{user_lastname}}</span>
-      <span>{{user_association}}</span>
-    </div>
-  </a>
-
-  <div *ngIf="profileMenuIsActive" class="profile-overlay">
-    <div></div>
-    <ul>
-      <li routerLink="/profile" routerLinkActive="active">Profil</li>
-      <li (click)="logout()">abmelden</li>
-    </ul>
   </div>
+  
+  <div class="hbar-item-wrapper item-right">
+    <a (click)="notificationCenterIsActive = !notificationCenterIsActive">
+      <span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>U
+    </a>
+    <div *ngIf="notificationCenterIsActive" class="profile-overlay">
+      <div></div>
+      <ul>
+        <li routerLink="/profile" routerLinkActive="active">Benachrichtigungen</li>
+      </ul>
+    </div>
+  </div>
+  
+
 
 </header>
 
