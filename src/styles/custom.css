@@ -517,10 +517,15 @@ a {
 }
 
 
-/* button */
+
+
+/* ******************** button ***************************/
 .btn {
     background: none;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
     padding: 5px 10px;
 }
+
+/* ******************** Notifications ********************/
+

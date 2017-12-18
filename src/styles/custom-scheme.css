@@ -153,11 +153,13 @@ a.button-acc {
     color: #e15038
 }
 
+button.button-acc:hover,
 a.button-acc:hover {
     color: #ebe8ea;
     background: #e15038;
 }
 
+.block-dark button.button-acc:hover,
 .block-dark a.button-acc:hover {
     color: #e15038;
     background-color: #ebe8ea;
