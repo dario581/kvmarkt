@@ -1,10 +1,10 @@
 import { BackandService } from '../../service/backand.service';
 import { DataService } from '../../service/data.service';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Blogpost } from '../../model/blogpost.model';
 import { Scheme } from '../../model/scheme.model';
 import { User } from '../../model/user.model';
+import { SchemeStore, CategoryStore, PlaceStore, UserStore } from '../../model/store/BaseStore';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,10 +23,13 @@ export class DashboardComponent implements OnInit {
   favSchemes: Scheme[];
   ownSchemes: Scheme[] = null;
 
-  constructor(private _backandService: BackandService, private _dataService: DataService,
-    private router: Router) {
-    // _schemeDataService.createIndexedDB();
-  }
+  constructor(
+      private _backandService: BackandService
+    , private _schemeStore: SchemeStore
+    , private _categoryStore: CategoryStore
+    , private _placeStore: PlaceStore
+    , private _userStore: UserStore
+  ) { }
 
   getBlogposts() {
     this._backandService.getBlogposts()
@@ -37,26 +40,28 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getBlogposts();
-    this._dataService.getSchemes().subscribe(
+    this._schemeStore.getItems(true).subscribe(
       (schemes: Scheme[]) => {
         this.favSchemes = schemes.filter((scheme) => {
           return scheme.isFavorite;
         });
       }
     );
-    console.time('Dashboard get Schemes');
-    this._dataService.getUser().subscribe((user: User) => {
-      this._dataService.getSchemes().subscribe((schemes: Scheme[]) => {
-        schemes = schemes.filter((scheme, index) => {
-          if (+scheme.author === user.contributor) {
-            return scheme;
-          }
-        });
-        if (schemes.length > 3) {
-          schemes = schemes.slice(0, 3);
-        }
+
+    this._userStore.getItem().subscribe((user: User) => {
+      const filter = [{ fieldName: 'author', operator: 'in', value: '' + user.contributor }];
+      this._schemeStore.getItems(true, 1, 3, filter).subscribe((schemes: Scheme[]) => {
         this.ownSchemes = schemes;
-        console.timeEnd('Dashboard get Schemes');
+        // schemes = schemes.filter((scheme, index) => {
+        //   if (+scheme.author === user.contributor) {
+        //     return scheme;
+        //   }
+        // });
+        // if (schemes.length > 3) {
+        //   schemes = schemes.slice(0, 3);
+        // }
+        // this.ownSchemes = schemes;
+        // console.timeEnd('Dashboard get Schemes');
       });
     });
     this.hint = 'Wird geladen...';
