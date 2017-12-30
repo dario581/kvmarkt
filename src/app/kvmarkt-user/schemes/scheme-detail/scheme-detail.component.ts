@@ -15,6 +15,7 @@ export class SchemeDetailComponent implements OnInit {
 
   scheme: Scheme;
   tagList: Array<{ name: string, id: number }> = [];
+  user_association: string;
 
   constructor(private route: ActivatedRoute, private schemeStore: SchemeStore,
     private _dataService: DataService, private location: PlatformLocation) {
@@ -28,6 +29,7 @@ export class SchemeDetailComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       const id = +params['id'];
       this.schemeStore.getItem(id).subscribe(data => this.init(data));
+      this.user_association = localStorage.getItem('backand_user_association_name');
       /* this.backandService.getTags().subscribe(() => {
         this.backandService.getSchemeTags(id).subscribe(data => this.tagList = data);
       }); // TODO: add tag_name to database table "scheme_tags" and only fetch them */
