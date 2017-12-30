@@ -1,0 +1,65 @@
+
+.full-background {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-image: url('/assets/zela_back.JPG');
+    background-size: cover;
+}
+
+.login-grid {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 80px;
+    margin-right: auto;
+    margin-left: auto;
+    --shadow-color: var(--primary-dark);
+}
+
+#login-header {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+#username {
+    margin-bottom: 20px;
+}
+#password {
+    margin-bottom: 20px;
+}
+#login-button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.grid-center {
+  display: grid;
+  grid-template-columns: 1fr 450px 1fr;
+}
+
+.grid-center-content {
+  grid-column: 2;
+}
+
+@media (max-width: 450px) {
+  .grid-center {
+    display: grid;
+    grid-template-columns: 0 1fr 0;
+  }
+}

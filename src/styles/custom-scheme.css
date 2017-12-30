@@ -36,7 +36,7 @@ span.custom-heart.active:hover {
 }
 
 
-input[type=text], select, textarea {
+input, select, textarea {
     border:none;
     background: none;
     color: #2e2f38; 
@@ -52,21 +52,23 @@ textarea {
     border-right: 1px solid #9d9a99;
 }
 
-input[type=text] {
-    padding-left: 1%;
+input {
+    padding: 5px 10px 5px 10px;
     width: 99%;
-    font-size: 18pt;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    /* font-size: 18pt; */
 }
 
-input[type=text].input-headline {
+input.input-headline {
     font-size: 30pt;
 }
 
-input[type=text]:focus, select:focus, textarea:focus {
+input:focus, select:focus, textarea:focus {
     border-bottom: 1px solid #e15038;
 }
 
-input[type=text].input-add-item  {
+input.input-add-item  {
     width: 90%;
 }
 

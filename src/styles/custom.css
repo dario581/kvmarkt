@@ -282,7 +282,8 @@ a {
     
 }
 .dashboard-card > *,
-.dashboard-card > a.btn-accent,
+.dashboard-card a[role="button"],
+.dashboard-card button,
 .dashboard-card .card-content-wrapper > * {
     display: block;
     width: 88%;
@@ -363,7 +364,7 @@ a[role="button"]
 {
     --shadow-color: rgba(0,0,0,0);
     padding: 5px 10px;
-    margin: 5px;
+    margin: 5px 5px 5px 0;
     display: inline-block; 
     text-decoration: none;
     text-align: center;
@@ -400,6 +401,21 @@ a[role="button"].btn-accent:hover
     --shadow-color: var(--accent-color);
     color: var(--background-main);
     background: var(--accent-color);
+}
+
+.ng-valid[required], 
+.ng-valid.required 
+{
+    border-left: none;
+    border-bottom: 1px solid #42A948;
+}
+
+/* input:focus, select:focus, textarea:focus {
+    border-bottom: 1px solid #e15038;
+} */
+.ng-invalid:not(form) {
+    border-left: none;
+    border-bottom: 1px solid #da413f;
 }
 
 /* .block-dark button.btn-accent:hover,

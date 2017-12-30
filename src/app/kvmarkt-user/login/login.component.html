@@ -1,29 +1,26 @@
-<main class="grid-center"> 
+<main class="full-background"> 
   <!-- width: 100%; -->
-  <div class="block dashboard-card grid-center-content" > 
+  <div class="block dashboard-card login-grid shadow" > 
      <!-- margin: auto;width: 90%; padding: 5%; max-width: 500px; -->
-    <h1>
+    <h1 id="login-header">
       Login
     </h1>
     <form [formGroup]="loginForm" class="form-group" (ngSubmit)="onSubmit()">
        <!-- width: 100% -->
-      <label for="username">E-Mail Adresse</label>
+      <label for="username" class="text-secondary">E-Mail Adresse</label>
       <input id="username" name="username" type="email" class="form-control" placeholder="name@beispiel.de" required formControlName="username" />  <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  -->
-      
-      <label for="password">Passwort</label>
-      <input id="password" name="password" type="password" class="form-control" placeholder="Passwort" formControlName="password"  />
+
+      <label for="password" class="text-secondary">Passwort</label>
+      <input id="password" name="password" type="password" class="form-control" placeholder="Passwort" required formControlName="password"  />
       <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
-      
-      <button type="submit" >Login</button> <!-- !loginForm.form.valid [disabled]="loginForm.status != 'VALID' --> 
+      <!-- <a>Passwort vergessen?</a><br> -->
+      <button type="submit" id="login-button" class="btn-accent shadow" >Login</button> <!-- !loginForm.form.valid [disabled]="loginForm.status != 'VALID' --> 
     </form>
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{errorMessage}}
     </div>
-    <div *ngIf="loading" class="sk-folding-cube">
-      <div class="sk-cube1 sk-cube"></div>
-      <div class="sk-cube2 sk-cube"></div>
-      <div class="sk-cube4 sk-cube"></div>
-      <div class="sk-cube3 sk-cube"></div>
+    <div *ngIf="loading">
+      Lädt...
     </div>
   </div>
 </main>

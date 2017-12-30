@@ -9,23 +9,6 @@
 @import "styles/custom.css";
 @import "styles/custom-scheme.css";
 
-
-.grid-center {
-  display: grid;
-  grid-template-columns: 1fr 450px 1fr;
-}
-
-.grid-center-content {
-  grid-column: 2;
-}
-
-@media (max-width: 450px) {
-  .grid-center {
-    display: grid;
-    grid-template-columns: 0 1fr 0;
-  }
-}
-
 @import "styles/kvmarkt-user.css";
 @import "styles/schemes/scheme-card.css";
 
