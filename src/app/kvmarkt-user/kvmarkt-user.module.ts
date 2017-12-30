@@ -2,7 +2,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuillEditorModule } from 'ngx-quill-editor';
+// import { QuillEditorModule } from 'ngx-quill-editor';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { KvmarktUserRoutingModule } from './kvmarkt-user-routing.module';
@@ -23,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     CommonModule,
     KvmarktUserRoutingModule,
-    QuillEditorModule,
+    // QuillEditorModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
