@@ -1,0 +1,42 @@
+
+.only-print {
+    display: none;
+}
+
+.no-print {
+    display: unset;
+}
+
+
+@media print {
+    header {
+        display: none !important;
+    }
+
+    .only-print {
+        display: unset;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* .content {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .content > div > * {
+        width: 95%;
+    } */
+
+    /* a[href]:after {
+        content: none !important;
+    } */
+
+    /* .author-card > p {
+        width: auto;
+        max-width: none;
+    } */
+}

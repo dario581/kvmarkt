@@ -26,19 +26,27 @@
     font-weight: 500;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.text-secondary {
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+
+/* 
 a {
     outline: none;
 }
 
-/* helper */
+/* helper 
 
 .no-margin {
     margin:0 !important;
 }
 
-.text-center {
-    text-align: center;
-}
+
 
 .container-fluid {
 
@@ -121,33 +129,9 @@ a {
     text-decoration: none;
     color: #636363;
 }
+*/
 
-
-/********************       ContactBar      *********************/
-.contact-name-small {
-    height: 30px;
-}
-
-.contact-name-small span {
-    line-height: 30px;
-    margin-right: 5px;
-    float: left;
-}
-
-
-.contact-name-small .contact-img { /* span:first-child */
-    display: inline-block;
-    float:left;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    background-image: url('/assets/background_zela.JPG');
-    background-size: 100%;
-}
-
-
+/********************       ContactBar      ********************* *
 
 
 @media(max-width: 600px) {
@@ -161,7 +145,7 @@ a {
         display: block;
         border-top: 1px solid #cecece;
     }
-}
+} */
 
 /*body {
     background-color: #375e7a;
@@ -170,40 +154,6 @@ a {
 .nav-pills > li > a{
     border-radius: 0;
 }
-
-.btn {
-    border-radius: 0;
-    border: 0;
-}
-
-.btn-default {
-    background-color: #5f8b9e;
-    color: #ffffff;
-}
-.btn-default:focus {
-    background-color: #557c8d;
-}
-
-.btn-primary {
-    background-color: #cbb25c;
-    color: #ffffff;
-}
-.btn-primary:focus, .btn-primary:hover {
-    background-color: #e0c566;
-}
-.btn-primary:hover:active,
-.btn-primary.active:hover,
-.open > .dropdown-toggle.btn-primary:hover,
-.btn-primary:focus:active,
-.btn-primary.active:focus,
-.open > .dropdown-toggle.btn-primary:focus,
-.btn-primary.focus:active,
-.btn-primary.active.focus,
-.open > .dropdown-toggle.btn-primary.focus {
-    background-color: #ad984e;
-}
-
-
 
 .nav-pills > li > a {
     color: #f8f8f8;
@@ -223,6 +173,7 @@ a {
 
 
 /*  Loading animation  */
+/* #region sk folding cube*/
 .sk-folding-cube {
   margin: 20px auto;
   width: 40px;
@@ -310,6 +261,7 @@ a {
     opacity: 0; 
   }
 }
+/* #endregion */
 
 
 /*      Forms:      */
@@ -320,29 +272,6 @@ a {
   border-left: 5px solid #a94442; /* red */
 }
 
-.scheme-card {
-    display: block;
-    min-height: 130px;
-    /*height: 250px;*/
-    background-color: #ffffff;
-    font-weight: 300;
-    padding: 0;
-    border: 1px solid #e4e4e4;
-    color: #555555;
-    cursor: pointer;
-}
-
-.scheme-card:hover {
-    background: #efefef;
-}
-
-.scheme-card-style.no-border {
-    border: none;
-}
-
-.scheme-wrapper-full-width {
-
-}
 
 
 
@@ -350,20 +279,21 @@ a {
 .dashboard-card {
     padding-top: 20px;
     padding-bottom: 20px;
-    background: #ebe8ea;
+    
 }
 .dashboard-card > *,
-.dashboard-card > a.button-acc,
+.dashboard-card > a.btn-accent,
 .dashboard-card .card-content-wrapper > * {
     display: block;
     width: 88%;
     margin-left: auto;
     margin-right: auto;
-    max-width: 400px;        
+    max-width: 400px;    
+    margin-top: 5px;    
 }
 
 .dashboard-card.no-max-width > *,
-.dashboard-card.no-max-width > a.button-acc,
+.dashboard-card.no-max-width > a.btn-accent,
 .dashboard-card.no-max-width .card-content-wrapper > * {
     max-width: none;        
 }
@@ -384,13 +314,6 @@ a {
     max-width: none;
 }
 
-.dashboard-card hr {
-    margin-top: 0;
-    margin-bottom: 0;
-    border-top: 1px solid #ebe8ea;
-    max-width: none;
-}
-
 .card-accent {
     display: block; 
     width: 50px;
@@ -400,13 +323,12 @@ a {
     border-radius: 25px;
 }
 
-.item-card {
-    background: #e0dedf;
-    border-bottom: 1px solid #ebe8ea;
+.card-item {
+    background-color: var(--grey-100) !important;
 }
 
-.item-card:hover {
-    background: #d9d7d8;
+.card-item:hover {
+    background: var(--grey-50) !important;
 }
 
 
@@ -429,103 +351,79 @@ a {
     max-width: 400px;
 }
 
-.fixed-full-background {
-    padding-top: 60px;
-    background-color: #555555;
-    background-image: url('/assets/zela_back.JPG');
-    background-position: center;
-    /* background-attachment: fixed; */
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    width: 100%;
+.shadow {
+    box-shadow: var(--box-shadow-values) var(--shadow-color, rgba(0,0,0,0));
+    transition: box-shadow var( --shadow-transition-speed, var(--box-shadow-transition-speed) );
 }
 
-.custom-box-link {
+
+/* ******************** button ************************** */ 
+button,
+a[role="button"]
+{
+    --shadow-color: rgba(0,0,0,0);
+    padding: 5px 10px;
+    margin: 5px;
     display: inline-block; 
-    /*height: 100px; */
-    background-color: #e0dedf; 
-    cursor: pointer;
-    padding: 5px 20px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    color: #2e2f38;
+    text-decoration: none;
     text-align: center;
-}
+    /*text-align: center;
+    margin: 30px 5px; 
+    padding: 5px 10px; */
 
-.custom-box-link.cbl-nbg {
-    background: none;
-}
-
-.custom-box-link .cbl-logo {
-    vertical-align: middle; 
-    display: inline-block; 
-    width: 100px; 
-    height: 90px; 
-    margin-right: 0px; 
-    background-position: center center; 
-    background-size: contain; 
-    background-repeat: no-repeat; 
-}
-
-.custom-box-link .cbl-text {
-    display: inline-block; 
-    vertical-align: middle; 
-    margin-top: 15px; 
-    margin-right: 15px;
-    margin-left: 15px;
-}
-
-.custom-box-link .cbl-text > h3,
-.custom-box-link .cbl-text > h4 {
-    margin-top: 0;
-}
-
-.custom-box-link:hover {
-    background: #c3c3c3;
-    color: #2e2f38;
-}
-
-.custom-box-link.cbl-hover-image:hover {
-    color: #ebe8ea;
-    background-size: cover;
-    background-position: center center;
-}
-
-.custom-box-link.disabled {
-    cursor: not-allowed;
-}
-
-.user-content {
-    padding-top: 20px;
-    padding-bottom: 50px;
-}
-
-.only-print {
-    display: none;
-}
-
-
-@media print {
-    header {
-        display: none;
-    }
-
-    .only-print {
-        display: unset;
-    }
-}
-
-
-
-
-/* ******************** button ***************************/
-.btn {
+    font-weight: 400;
     background: none;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
     padding: 5px 10px;
 }
 
-/* ******************** Notifications ********************/
+button:hover,
+a[role="button"]:hover
+{
+    --shadow-color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--background-main);
+}
 
+
+button.btn-accent,
+a[role="button"].btn-accent
+{
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+button.btn-accent:hover,
+a[role="button"].btn-accent:hover 
+{
+    --shadow-color: var(--accent-color);
+    color: var(--background-main);
+    background: var(--accent-color);
+}
+
+/* .block-dark button.btn-accent:hover,
+.block-dark a.btn-accent:hover {
+    color: var(--accent-color);
+    background-color: var(--grey-150); /* #ebe8ea;*/
+    /*border-color: #ebe8ea;
+    color: #ebe8ea;
+    cursor: pointer;*
+} */
+
+
+/* ******************* PAGE ***************************** */
+
+#my-app-content > *:nth-child(2) > *:first-child {
+    padding-top: 70px;
+}
+
+.image-background { 
+    background-color: var(--background-dark);
+    background-image: url('/assets/zela_back.JPG');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}

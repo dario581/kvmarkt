@@ -17,7 +17,7 @@
 }
 
 .filterbar > div {
-    background: #e0dedf;
+    background: var(--grey-200);
     padding: 10px;
     margin: 3px;
     display: inline-block;
@@ -26,6 +26,8 @@
 
 .filterbar {
     max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;

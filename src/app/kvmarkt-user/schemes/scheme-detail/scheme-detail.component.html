@@ -1,6 +1,6 @@
-<div class="block block-dark page-info animation-enter-children transition-height" [ngClass]="{'transition-height-max': scheme}" style="width: 100%; min-height: 300px; background-image: url('/assets/zela_back.JPG'); background-size: cover; background-position: center">
+<div class="block block-dark page-info animation-enter-children transition-height" [ngClass]="{'transition-height-max': scheme}" style="min-height: 325px; background-image: url('/assets/zela_back.JPG'); background-size: cover; background-position: center">
   <h1 *ngIf="scheme" class="font-style font-extra-light">{{scheme.title}}</h1>
-  <p *ngIf="scheme" class="like-box">
+  <p *ngIf="scheme" class="like-box no-print">
     <span class="fa-stack fa-lg custom-heart" [class.active]="scheme.isFavorite" (click)="toggleSchemeLiked()">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-heart-o fa-stack-1x fa-inverse"></i>
@@ -51,7 +51,7 @@
           <p>
             {{scheme.created | date:"dd.MM.yyyy" }}
           </p>
-          <button class="btn button-acc no-print" (click)="printPage()">Drucken/Als PDF speichern</button>
+          <button class="btn-accent shadow no-print" (click)="printPage()">Drucken/Als PDF speichern</button>
         </div>
       </div>
 

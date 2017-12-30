@@ -1,6 +1,6 @@
-<a id="scheme-card-content{{scheme.id}}" class="" [class.no-border]="!border" [routerLink]="['/schemes', scheme.id]" routerLinkActive="active">
-    <div class="scheme-card-content card-grid">
-        <p class="card-category">{{scheme.category_name | uppercase }}</p>
+<a id="scheme-card-content{{scheme.id}}" class="scheme-card-content card-grid" [class.no-border]="!border" [routerLink]="['/schemes', scheme.id]" routerLinkActive="active">
+    <!-- <div class=""> -->
+        <p class="card-category" [ngClass]="'category-' + scheme.category" >{{scheme.category_name | uppercase }}</p>
 
 
             <h3 class="card-title">{{scheme.title}}</h3>
@@ -8,18 +8,18 @@
             <p class="card-description">{{scheme.description}}</p>
 
         <!-- <div class="scheme-card-content-info scci-asymetric "> -->
-            <span class="card-age"><span class="scheme-card-content-age glyphicon glyphicon-user"></span> {{scheme.age_start}} - {{scheme.age_end}}</span>
+            <span class="card-age"><span class="scheme-card-content-age glyphicon glyphicon-user"></span><span class="text-secondary">Alter:</span> {{scheme.age_start}} - {{scheme.age_end}}</span>
             <!--custom-icon ci-age -->
-            <span class="card-place"><span class="scheme-card-content-location glyphicon glyphicon-home"></span> {{scheme.place_name}}</span>
+            <span class="card-place"><span class="scheme-card-content-location glyphicon glyphicon-home"></span><span class="text-secondary">Ort:</span> {{scheme.place_name}}</span>
             <!--custom-icon ci-forrest -->
             <!--span><span class="scheme-card-content-preparation glyphicon glyphicon-time"></span> 2 Stunden</span> <!--custom-icon ci-preparation-->
         <!-- </div> -->
         <!-- <footer style="grid-area: footer; align-self: end"> -->
-        <!-- <span class="contact-name-small"> -->
+        <span class="card-author contact-name-small">
             <!-- <span class="contact-img"></span> -->
-        <span class="card-author">{{scheme.author_name}}</span>
-        <!-- </span> -->
+            <span class="">{{scheme.author_name}}</span>
+        </span>
         <span class="card-date">{{scheme.created |  date:"dd.MM.yyyy" }}</span>
         <!-- </footer> -->
-    </div>
+    <!-- </div> -->
 </a>

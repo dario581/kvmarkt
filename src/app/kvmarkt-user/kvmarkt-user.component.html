@@ -1,66 +1,76 @@
-<header class="container-fluid headbar">
-  <a class="hbar-item" routerLink="/dashboard" routerLinkActive="active"><span class="glyphicon glyphicon glyphicon-home glyphicon-correction-right"></span>Home</a>
-  <a class="hbar-item" routerLink="/schemes/" routerLinkActive="active"><span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>Programme</a>
-
-  <span class="font-medium page-title">{{pageTitle | uppercase}}</span>
-  <div class="menu-icon" (click)="toggleMenu($event)">
-    <!-- Generator: Adobe Illustrator 19.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-    <svg version="1.1" id="Ebene_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-499 373 24 24" style="enable-background:new -499 373 24 24;"
-      xml:space="preserve">
-      <title></title>
-      <desc></desc>
-      <g id="miu">
-        <g id="Artboard-1" transform="translate(-359.000000, -479.000000)">
-          <g id="slice" transform="translate(215.000000, 119.000000)">
+<header class="container-fluid">
+  <nav class="headbar">
+    <a class="hbar-item shadow" routerLink="/dashboard" routerLinkActive="active">Home</a>
+    <a class="hbar-item shadow" routerLink="/schemes/" routerLinkActive="active">Programme</a>
+    <div class="menu-icon" (click)="toggleMenu($event)">
+      <!-- Generator: Adobe Illustrator 19.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+      <svg version="1.1" id="Ebene_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-499 373 24 24" style="enable-background:new -499 373 24 24;"
+        xml:space="preserve">
+        <title></title>
+        <desc></desc>
+        <g id="miu">
+          <g id="Artboard-1" transform="translate(-359.000000, -479.000000)">
+            <g id="slice" transform="translate(215.000000, 119.000000)">
+            </g>
+            <path style="fill:#e15038;fill-rule:evenodd" id="editor-list-view-hambuger-menu-outline-stroke" d="M-138.4,858c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
+          c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,858z M-138.4,863c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
+          c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,863z M-138.4,868c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
+          c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,868z" />
           </g>
-          <path style="fill:#e15038;fill-rule:evenodd" id="editor-list-view-hambuger-menu-outline-stroke" d="M-138.4,858c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
-                    c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,858z M-138.4,863c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
-                    c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,863z M-138.4,868c-0.3,0-0.6,0.2-0.6,0.5c0,0.3,0.3,0.5,0.6,0.5h20.8
-                    c0.3,0,0.6-0.2,0.6-0.5c0-0.3-0.3-0.5-0.6-0.5H-138.4L-138.4,868z" />
         </g>
-      </g>
-    </svg>
-  </div>
+      </svg>
+    </div>
 
-  
-  <div class="hbar-item-wrapper item-right">
-    <a class="hbar-item item-right profile-menu" (click)="profileMenuIsActive = !profileMenuIsActive" [style.background]="profileMenuIsActive ? '#24242a' : 'none'">
-      <div>
+    <div class="flex-item-middle"></div>
+
+    <!-- Notification Center Item -->
+    <!-- <div class="hbar-item-wrapper"> -->
+      <a class="hbar-item hbar-icon-item shadow" (click)="notificationCenterIsActive = !notificationCenterIsActive" [ngClass]="{'pressed': notificationCenterIsActive }">
+        <span class="" style="font-family: icomoon; font-size: 20pt; user-select: none">bell</span>
+      </a>
+      <!-- <div *ngIf="notificationCenterIsActive" class="hbar-overlay-menu">
+        <div></div>
+        <ul>
+          <li routerLink="/profile" routerLinkActive="active">Benachrichtigungen</li>
+        </ul>
+      </div> -->
+    <!-- </div> -->
+    
+    <!-- Profile Menu Item -->
+    <div class="hbar-item-wrapper">
+      <a class="hbar-item hbar-profile shadow"  (click)="profileMenuIsActive = !profileMenuIsActive" [ngClass]="{'pressed': profileMenuIsActive }">
         <span class="contact-img"></span>
-      </div>
-      <div class="hidden-sm hidden-xs" >
         <span class="font-light">{{user_firstname}} {{user_lastname}}</span>
         <span>{{user_association}}</span>
+      </a>
+      <div *ngIf="profileMenuIsActive" class="hbar-overlay-menu">
+        <div></div>
+        <ul>
+          <li routerLink="/profile" routerLinkActive="active">Profil</li>
+          <li (click)="logout()">abmelden</li>
+        </ul>
       </div>
-    </a>
-    <div *ngIf="profileMenuIsActive" class="profile-overlay">
-      <div></div>
-      <ul>
-        <li routerLink="/profile" routerLinkActive="active">Profil</li>
-        <li (click)="logout()">abmelden</li>
-      </ul>
-    </div>
-  </div>
-  
-  <div class="hbar-item-wrapper item-right">
-    <a (click)="notificationCenterIsActive = !notificationCenterIsActive">
-      <span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>U
-    </a>
-    <div *ngIf="notificationCenterIsActive" class="profile-overlay">
-      <div></div>
-      <ul>
-        <li routerLink="/profile" routerLinkActive="active">Benachrichtigungen</li>
-      </ul>
-    </div>
-  </div>
-  
+    </div>  
 
+    <span class="page-title">{{pageTitle | uppercase}}</span>
+  </nav>
 
 </header>
 
-<div class="only-print" >
-  <span><strong >KV Markt</strong><em> - kvmarkt.azurewebsites.de</em></span>
+<section class="context-pane block" *ngIf="notificationCenterIsActive">
+  <h3>Benachrichtigungen</h3>
+  <hr class="hr--margin">
+  <p class="text-center">
+    Im Moment gibt es keine Nachrichten. 
+  </p>
+</section>
+
+<div class="only-print">
+  <span>
+    <strong>KV Markt</strong>
+    <em> - kvmarkt.azurewebsites.de</em>
+  </span>
 </div>
 
 <nav class="sidebar" [ngClass]="{active: menuIsOpen}">
@@ -68,21 +78,21 @@
     <span class="glyphicon glyphicon-menu-left"></span>
     <span>Schließen</span>
   </a>
-  <a (click)="toggleMenu($event)" class="sbar-item" routerLink="/dashboard" routerLinkActive="active"> 
-        <span class="sbar-item-content">
-            <span class="glyphicon glyphicon-home glyphicon-correction-left"></span>
-            <span class="sbar-item-tile">HOME</span>
-        </span>
-    </a>
+  <a (click)="toggleMenu($event)" class="sbar-item" routerLink="/dashboard" routerLinkActive="active">
+    <span class="sbar-item-content">
+      <span class="glyphicon glyphicon-home glyphicon-correction-left"></span>
+      <span class="sbar-item-tile">HOME</span>
+    </span>
+  </a>
   <a (click)="toggleMenu($event)" class="sbar-item" routerLink="/schemes/" routerLinkActive="active">
-        <span class="sbar-item-content">
-            <span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>
-            <span class="sbar-item-tile">PROGRAMME</span>
-        </span>
-    </a>
+    <span class="sbar-item-content">
+      <span class="glyphicon glyphicon glyphicon-th glyphicon-correction-right"></span>
+      <span class="sbar-item-tile">PROGRAMME</span>
+    </span>
+  </a>
 </nav>
 
 
-<div id="my-app-content" [@routerTransition]="getState(outlet)" >
-  <router-outlet #outlet="outlet" ></router-outlet>
+<div id="my-app-content" [@routerTransition]="getState(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
 </div>

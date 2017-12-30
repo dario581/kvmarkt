@@ -1,0 +1,30 @@
+:root {
+  --primary-color: rgb(46, 47, 56);
+  --primary-dark: #191822;
+  --primary-dark--500: #24242a;;
+  --accent-color: #E15038;
+  --grey-600: #555555;
+  --grey-500: #686464;
+  --grey-400: #9d9a99;
+  --grey-300: #c9c6c6;
+  --grey-200: #e0dede;
+  --grey-150: #ebe8e8;
+  --grey-100: #eeebeb;
+  --grey-50: #f1f1f1;
+  --grey-25: #f7f7f7;
+
+  --primary-color--glass: rgba(46, 47, 56, 0.949);
+
+  --background-main: var(--grey-150);
+  --background-dark: var(--primary-color);
+
+  /* --text-color: #000; */
+  --text-color--secondary: var(--grey-600);
+
+
+  --box-shadow--light: 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  /* --box-shadow--default: 0px 0px 5px 0px; */
+  --box-shadow-values: 0px 0px 10px 0px;
+  /* --box-shadow--accent: var(--box-shadow-values)  var(--accent-color); */
+  --box-shadow-transition-speed: 0.5s;
+}

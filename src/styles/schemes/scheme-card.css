@@ -1,0 +1,166 @@
+/************** scheme card         ***************/
+
+.scheme-card {
+    display: block;
+    width:      100%;
+    max-width:  460px;
+    padding: 0;
+    font-weight: 300;
+    cursor: pointer;
+    color: var(--text-color--secondary);
+    background-color: var(--grey-50);
+    border: 1px solid var(--grey-200); /* #e4e4e4; */
+}
+
+.scheme-card:hover {
+    --shadow-color: rgba(0,0,0,0.1);
+    background: var(--grey-25);
+    /* box-shadow: var(--box-shadow--light); */
+}
+
+.scheme-card-content {
+    /* max-width: 400px; */
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+
+    color: inherit;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    /* border: 1px solid rgb(224, 222, 223); */
+}
+
+.scheme-card-content p, 
+.scheme-card-content h1, 
+.scheme-card-content h2, 
+.scheme-card-content h3 {
+    margin: 0;
+}
+
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* grid-template-rows: 20px 70px 70px 30px 30px; */
+    grid-template-areas:    "topleft topleft topright topright topright topright"
+                            "main1 main1 main1 main1 main1 main1"
+                            "main2 main2 main2 main2 main2 main2"
+                            "item1 item1 item2 item2 item3 item3"
+                            "bottomleft bottomleft bottomleft bottomright bottomright bottomright";
+    height: 230px;
+}
+
+.card-title {
+    grid-area: main1;
+    align-self: center;
+    margin: 0 10px;
+    overflow: hidden;
+    max-height: 70px;
+}
+
+.card-description {
+    grid-area: main2;
+    align-self: center;
+    overflow: hidden;
+    max-height: 69px;
+    line-height: 23px;
+
+}
+
+.card-category {
+    grid-area: topright;
+    justify-self: end;
+    align-self: start;
+}
+.card-category::after {
+    content: " ";
+    display:inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+.card-category.category-1::after { /* Geländespiel */
+    background: #256618;
+}
+.card-category.category-3::after { /* Sport/Bewegung */
+    background: #5e8a4d;
+}
+.card-category.category-::after { /* Junsgcharspiele */
+    background: #131fc0;
+}
+.card-category.category-4::after { /* LARPG */
+    background: #1c7177;
+}
+.card-category.category-5::after { /* Bibelarbeit */
+    background: #dcdda2;
+}
+.card-category.category-6::after { /* Basteln */
+    background: #96233f;
+}
+.card-category.category-7::after { /* Kochen und Backen */
+    background: #256618;
+}
+.card-category.category-8::after { /* Spiel/Show */
+    background: #511d7c;
+}
+.card-category.category-10::after { /* Quiz */
+    background: #811717;
+}
+.card-category.category-12::after { /* Wasser */
+    background: #2876b6;
+}
+.card-category.category-13::after { /* Schnee */
+    background: #f3f3f3;
+}
+.card-category.category-12::after { /* Dorfspiel */
+    background: #d67c28;
+}
+.card-category.category-11::after { /* Sonstiges */
+    background: #585858;
+}
+
+.card-age {
+    grid-area: item1;
+    align-self: center;
+}
+
+.card-place {
+    grid-area: item2;
+    align-self: center;
+}
+
+.card-author {
+    grid-area: bottomleft;
+    align-self: end;
+}
+
+.card-date {
+    grid-area: bottomright;
+    align-self: end;
+    justify-self: end;
+}
+
+
+
+.contact-name-small {
+    height: 30px;
+}
+
+.contact-name-small span {
+    line-height: 30px;
+    margin-right: 5px;
+}
+
+
+.contact-name-small > span.contact-img { /* span:first-child */
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    background-image: url('/assets/background_zela.JPG');
+    background-size: 100%;
+}
