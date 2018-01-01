@@ -1,10 +1,163 @@
-<p>
+<div class="block block-dark page-info" style="background-image: url('/images/zela_back.jpg'); background-size: cover; background-position: center">
+  <p>
+    Gib hier nun alle Informationen über dein Programm ein. Sobald du dein Programm gespeichert hast, wird es noch geprüft und
+    danach ist unsere Sammlung wieder etwas größer geworden.
+    <br>
+    <span>Vielen Dank für deine Mithilfe!</span>
+  </p>
   <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  scheme-create works!
-  {{error}}
-</p>
+  <div class="button-box">
+    <a role="button" (click)="submit()" style="cursor: pointer" class="btn-accent">
+      <!-- <span class="glyphicon glyphicon-floppy-disk"></span>  -->
+      Speichern
+    </a>
+  </div>
+</div>
+<main>
+  <div class="block" style="">
+    <div class="container">
+      <ol class=" ">
+        <li class="">
+          <div class="row" style="">
+            <div class=" col-md-9 col-sm-12">
+              <p>Titlel</p>
+              <input [(ngModel)]="scheme.title" class="input-headline" type="text" value="Programmname" />
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="row" style="">
+            <div class=" col-md-9 col-sm-12">
+              <p>Kategorie</p>
+              <select [(ngModel)]="scheme.category">
+                <option *ngFor="let category of scheme_categories" [ngValue]="category.id">{{category.name}}</option>
+              </select>
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p>Ordne Dein Programm einer Kategorie zu, um sie an einem Ort zu sammeln.</p>
+            </div>
+          </div>
+
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="block">
+    <div class="container">
+      <ol start="3">
+        <li style="">
+          <div class="row">
+            <div class=" col-md-9 col-sm-12">
+              <p>kurze Beschreibung</p>
+              <textarea [(ngModel)]="scheme.description" rows="2">Gib hier eine kurze beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.</textarea>
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p></p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row">
+            <div class=" col-md-9 col-sm-12">
+              <p>Inhalt</p>
+              <!-- <quill-editor [(ngModel)]="scheme.content" [placeholder]="editorPlaceholder" style="color: #000;">
+                <div quill-editor-toolbar>
+                  <span class="ql-formats">
+                    <button class="ql-bold" [title]="'Fett'"></button>
+                    <button class="ql-italic" [title]="'Kursiv'"></button>
+                    <button class="ql-link" [title]="'Link'"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-header" value="1" [title]="'Überschrift 1'"></button>
+                    <button class="ql-header" value="2" [title]="'Überschrift 2'"></button>
+                  </span>
+                </div>
+              </quill-editor> -->
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="block">
+    <div class="container">
+
+      <ol start="5">
+        <li>
+          <div class="row">
+            <div class=" col-md-9 col-sm-12">
+              <p>Alter</p>
+              <p>
+                <span>VON</span>
+                <select [(ngModel)]="scheme.age_start">
+                  <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
+                </select>
+                <span>BIS</span>
+                <select [(ngModel)]="scheme.age_end">
+                  <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
+                </select>
+              </p>
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row">
+            <div class=" col-md-9 col-sm-12">
+              <p>Ort</p>
+              <select [(ngModel)]="scheme.place">
+                <option *ngFor="let place of scheme_places" [ngValue]="place.id">{{place.name}}</option>
+              </select>
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
+            </div>
+          </div>
+
+        </li>
+        <!-- <li>
+          <div class="row">
+            <div class=" col-md-9 col-sm-12">
+              <p>Tags</p>
+              <p>
+                <input class="input-add-item" type="text" value="Programmname" />
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24"
+                  height="24" viewBox="0 0 24 24">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: #ebe8ea;
+                        fill-rule: evenodd;
+                      }
+                    </style>
+                  </defs>
+                  <path d="M20.484,20.485 C18.218,22.752 15.205,24.000 12.000,24.000 C8.795,24.000 5.782,22.752 3.516,20.485 C1.248,18.219 0.000,15.205 0.000,12.000 C0.000,8.795 1.248,5.782 3.516,3.516 C5.781,1.249 8.795,-0.000 12.000,-0.000 C15.205,-0.000 18.219,1.249 20.485,3.516 C22.752,5.782 24.000,8.795 24.000,12.000 C24.000,15.205 22.752,18.219 20.484,20.485 ZM19.070,4.930 C17.182,3.040 14.671,2.000 12.000,2.000 C9.329,2.000 6.818,3.040 4.930,4.930 C3.040,6.819 2.000,9.329 2.000,12.000 C2.000,14.671 3.040,17.182 4.930,19.071 C6.818,20.960 9.329,22.000 12.000,22.000 C14.671,22.000 17.182,20.960 19.070,19.071 C20.960,17.182 22.000,14.671 22.000,12.000 C22.000,9.329 20.960,6.819 19.070,4.930 ZM17.000,13.000 L13.000,13.000 L13.000,17.000 C13.000,17.552 12.552,18.000 12.000,18.000 C11.448,18.000 11.000,17.552 11.000,17.000 L11.000,13.000 L7.000,13.000 C6.448,13.000 6.000,12.552 6.000,12.000 C6.000,11.448 6.448,11.000 7.000,11.000 L11.000,11.000 L11.000,7.000 C11.000,6.448 11.448,6.000 12.000,6.000 C12.552,6.000 13.000,6.448 13.000,7.000 L13.000,11.000 L17.000,11.000 C17.552,11.000 18.000,11.448 18.000,12.000 C18.000,12.552 17.552,13.000 17.000,13.000 Z"
+                    class="cls-1" id="add-item-button" />
+                </svg>
+              </p>
+              <div class="tags-div">
+                <a>Tags</a>
+                <a>Schlagworte</a>
+              </div>
+            </div>
+            <div class="desc-content  col-md-3 col-sm-12">
+              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
+            </div>
+          </div>
+
+        </li> -->
+      </ol>
+      <h3 class="highlight-text">Fertig!</h3>
+      <p>Jetzt nur noch speichern und bald wird dein Programm bei den anderen erscheinen. </p>
+    </div>
+  </div>
+</main>
