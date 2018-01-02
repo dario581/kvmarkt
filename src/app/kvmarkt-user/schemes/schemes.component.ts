@@ -5,8 +5,8 @@ import { filter } from 'rxjs/operator/filter';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Scheme } from '../../model/scheme.model';
 import { slideTileAnimation } from '../../animations';
-import { SchemeStore } from '../../model/store/BaseStore';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { SchemeStore, CategoryStore, PlaceStore } from '../../model/store/BaseStore';
 
 @Component({
   selector: 'app-schemes',
@@ -49,9 +49,14 @@ export class SchemesComponent implements OnInit, OnDestroy {
   scheme_category = 0;
   scheme_place = 0;
 
-  constructor(private schemeStore: SchemeStore, private _dataService: DataService,
-    private route: ActivatedRoute, private router: Router) {
-  }
+  constructor
+    (private schemeStore: SchemeStore
+    , private categoryStore: CategoryStore
+    , private placeStore: PlaceStore
+    // , private _dataService: DataService
+    , private route: ActivatedRoute
+    , private router: Router
+    ) { }
 
   ngOnInit() {
     this.route.params
@@ -60,7 +65,7 @@ export class SchemesComponent implements OnInit, OnDestroy {
         this.schemes = [];
         // set page
         this.page = +params['page'] || this.page;
-         // TODO: Check for parameter changes and reset schemes if needed
+        // TODO: Check for parameter changes and reset schemes if needed
         this.scheme_place = +params['place'] || this.scheme_place;
         this.scheme_category = +params['categories'] || this.scheme_category;
         this.age_start = +params['age_start'] || this.age_start;
@@ -76,18 +81,18 @@ export class SchemesComponent implements OnInit, OnDestroy {
         this.firstLoad = false;
         // }
       });
-    this._dataService.getCategories()
+    this.categoryStore.getItems()
       .first()
       .subscribe(
-        data => this.scheme_categories = this.scheme_categories.concat(data),
-        (err) => this.scheme_categories = [{name: 'Fehler beim laden', id: 1}]
+      data => this.scheme_categories = this.scheme_categories.concat(data),
+      (err) => this.scheme_categories = [{ name: 'Fehler beim laden', id: 1 }]
       );
-      this._dataService.getPlaces()
+    this.placeStore.getItems()
       .first()
       .subscribe(
-        data => this.scheme_places = this.scheme_places.concat(data),
-        (err) => this.scheme_places = [{name: 'Fehler beim laden', id: 1}]
-    );
+      data => this.scheme_places = this.scheme_places.concat(data),
+      (err) => this.scheme_places = [{ name: 'Fehler beim laden', id: 1 }]
+      );
   }
 
   ngOnDestroy() {
@@ -177,8 +182,8 @@ export class SchemesComponent implements OnInit, OnDestroy {
 
   private loadSchemesFromStore(page: number, pageSize: number) {
     const schemeFilter = [
-      { fieldName: 'age_start', operator: 'lessThanOrEqualsTo', value: '' + this.age_end},
-      { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start}
+      { fieldName: 'age_start', operator: 'lessThanOrEqualsTo', value: '' + this.age_end },
+      { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start }
     ];
     if (this.scheme_category > 0) {
       schemeFilter.push(
@@ -191,48 +196,46 @@ export class SchemesComponent implements OnInit, OnDestroy {
       );
     }
     // TODO: Add Sorting
-    this.schemeStore.setFilter(schemeFilter);
+    // this.schemeStore.setFilter(schemeFilter);
     this.schemeStore
-    .getItems(true, page, pageSize)
-    .first()
-    .subscribe(
+      .getItems(true, page, pageSize, schemeFilter)
+      .first()
+      .subscribe(
       data => this.handleSchemes(data),
       err => this.loading = false
-    );
+      );
   }
 
-  private loadSchemesFromService(page: number, pageSize: number) {
-    this._dataService.getSchemes()
-    .first()
-    .subscribe((schemes) => {
-      const result = schemes.filter((scheme) => {
-        if (this.checkSchemeParameters(scheme)) {
-          return true;
-        }
-      });
-      this.totalRows = result.length;
-      // this.countPages = new Array(Math.ceil(this.totalRows / this.pageSize));
-      this.loading = false;
-      this.schemes = result;
-      this.schouldAnimateSchemes = 'yes';
-    });
-  }
+  // private loadSchemesFromService(page: number, pageSize: number) {
+  //   this._dataService.getSchemes().subscribe((schemes) => {
+  //     const result = schemes.filter((scheme) => {
+  //       if (this.checkSchemeParameters(scheme)) {
+  //         return true;
+  //       }
+  //     });
+  //     this.totalRows = result.length;
+  //     // this.countPages = new Array(Math.ceil(this.totalRows / this.pageSize));
+  //     this.loading = false;
+  //     this.schemes = result;
+  //     this.schouldAnimateSchemes = 'yes';
+  //   });
+  // }
 
   checkSchemeParameters(scheme: Scheme): boolean {
-    let filter = scheme.age_end >= this.age_start && scheme.age_start <= this.age_end;
+    let schemeFilter = scheme.age_end >= this.age_start && scheme.age_start <= this.age_end;
     if (this.scheme_category !== 0) {
-      filter = filter && +scheme.category === this.scheme_category;
+      schemeFilter = schemeFilter && +scheme.category === this.scheme_category;
     }
     if (this.scheme_place !== 0) {
-      filter = filter && +scheme.place === this.scheme_place;
+      schemeFilter = schemeFilter && +scheme.place === this.scheme_place;
     }
     if (this.age_start > this.scheme_ages[0]) {
-      filter = filter && +scheme.age_end >= this.age_start;
+      schemeFilter = schemeFilter && +scheme.age_end >= this.age_start;
     }
     if (this.age_end <= this.scheme_ages[this.scheme_ages.length - 1]) {
-      filter = filter && +scheme.age_start <= this.age_end;
+      schemeFilter = schemeFilter && +scheme.age_start <= this.age_end;
     }
-    return filter;
+    return schemeFilter;
   }
 
   handleSchemes(schemes: Scheme[]) {
