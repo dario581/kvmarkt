@@ -6,6 +6,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Scheme } from '../../model/scheme.model';
 import { slideTileAnimation } from '../../animations';
 import { SchemeStore } from '../../model/store/BaseStore';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-schemes',
@@ -13,8 +14,8 @@ import { SchemeStore } from '../../model/store/BaseStore';
   styleUrls: ['./schemes.component.css'],
   animations: [slideTileAnimation]
 })
-export class SchemesComponent implements OnInit, AfterViewInit {
-
+export class SchemesComponent implements OnInit, OnDestroy {
+  private active = true;
   schemes: Scheme[] = [];
 
   typePagination = false;
@@ -54,6 +55,7 @@ export class SchemesComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.route.params
+      .takeWhile(() => this.active)
       .subscribe(params => {
         this.schemes = [];
         // set page
@@ -75,13 +77,21 @@ export class SchemesComponent implements OnInit, AfterViewInit {
         // }
       });
     this._dataService.getCategories()
-      .subscribe(data => this.scheme_categories = this.scheme_categories.concat(data));
-    this._dataService.getPlaces()
-      .subscribe(data => this.scheme_places = this.scheme_places.concat(data));
+      .first()
+      .subscribe(
+        data => this.scheme_categories = this.scheme_categories.concat(data),
+        (err) => this.scheme_categories = [{name: 'Fehler beim laden', id: 1}]
+      );
+      this._dataService.getPlaces()
+      .first()
+      .subscribe(
+        data => this.scheme_places = this.scheme_places.concat(data),
+        (err) => this.scheme_places = [{name: 'Fehler beim laden', id: 1}]
+    );
   }
 
-  ngAfterViewInit() {
-    // this.animate = 10;
+  ngOnDestroy() {
+    this.active = false;
   }
 
   private setSorting(sortingString: string) {
@@ -182,11 +192,19 @@ export class SchemesComponent implements OnInit, AfterViewInit {
     }
     // TODO: Add Sorting
     this.schemeStore.setFilter(schemeFilter);
-    this.schemeStore.getItems(true, page, pageSize).subscribe(data => this.handleSchemes(data));
+    this.schemeStore
+    .getItems(true, page, pageSize)
+    .first()
+    .subscribe(
+      data => this.handleSchemes(data),
+      err => this.loading = false
+    );
   }
 
   private loadSchemesFromService(page: number, pageSize: number) {
-    this._dataService.getSchemes().subscribe((schemes) => {
+    this._dataService.getSchemes()
+    .first()
+    .subscribe((schemes) => {
       const result = schemes.filter((scheme) => {
         if (this.checkSchemeParameters(scheme)) {
           return true;
