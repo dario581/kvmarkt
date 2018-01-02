@@ -12,6 +12,7 @@ import { User } from '../model/user.model';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { DataError } from './data.error';
+import { ErrorService } from './error.service';
 
 @Injectable()
 export class BackandService {
@@ -33,7 +34,11 @@ export class BackandService {
   private blogposts: Blogpost[];
   private blogpostsObservable: Observable<Blogpost[]>;
 
-  constructor(public http: Http, private router: Router) { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private errorService: ErrorService
+  ) { }
 
 
   public getBlogposts(): Observable<any> {
@@ -478,7 +483,9 @@ export class BackandService {
         return this.user;
       })
       .catch((error) => {
-        return Observable.throw(new DataError(401, 'error'));
+        const backandError = new DataError(error.status, error.statusText);
+        // this.errorService.setError(error.status);
+        return Observable.throw(backandError);
       });
 
     return this.userObservable;

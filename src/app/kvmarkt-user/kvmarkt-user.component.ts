@@ -7,6 +7,9 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, NavigationStart } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { fadeAnimation } from '../animations';
+import { User } from '../model/user.model';
+import { BackandService } from '../service/backand.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-kvmarkt-user',
@@ -28,14 +31,19 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
   _subscriptions: any[] = [];
   _routeScrollPositions: any[] = [];
 
+  user: User;
+
   constructor(
     // private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private appTitle: Title,
+    private backandService: BackandService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.backandService.getUser().subscribe(user => this.user = user);
     this.user_firstname = localStorage.getItem('backand_user_firstname');
     this.user_lastname = localStorage.getItem('backand_user_lastname');
     this.user_association = localStorage.getItem('backand_user_association_name');
@@ -93,8 +101,8 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    // this.authService.logout();
-    this.router.navigate(['/login']);
+    this.authService.logout();
+    // this.router.navigate(['/login']);
   }
 
   getState(outlet: any) {

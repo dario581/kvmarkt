@@ -39,9 +39,11 @@ export class DashboardComponent implements OnInit {
     this.getBlogposts();
     this._dataService.getSchemes().subscribe(
       (schemes: Scheme[]) => {
-        this.favSchemes = schemes.filter((scheme) => {
+        this.favSchemes = schemes
+        .filter((scheme) => {
           return scheme.isFavorite;
-        });
+        })
+        .slice(0, 2);
       }
     );
     console.time('Dashboard get Schemes');
@@ -51,7 +53,8 @@ export class DashboardComponent implements OnInit {
           if (+scheme.author === user.contributor) {
             return scheme;
           }
-        });
+        })
+        .slice(0, 2);
         if (schemes.length > 3) {
           schemes = schemes.slice(0, 3);
         }
@@ -60,6 +63,7 @@ export class DashboardComponent implements OnInit {
       });
     });
     this.hint = 'Wird geladen...';
-    this.user_firstname = localStorage.getItem('backand_user_firstname');
+    this._backandService.getUser().subscribe(user => this.user_firstname = user.firstname);
+    // localStorage.getItem('backand_user_firstname');
   }
 }
