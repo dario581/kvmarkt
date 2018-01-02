@@ -419,16 +419,9 @@ export class BackandService {
   }
 
   private handleError(error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
-    console.log('Error Status', error);
-    const backandErrorMessage = error.json().error;
-    console.log(backandErrorMessage);
-    this.router.navigate(['/login']);
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error('Backand Error message: ' + errMsg); // log to console instead
-    // console.log('Error content: ' + error.body);
+    this.errorService.setError(error.status);
     return Observable.throw(errMsg);
   }
 
@@ -484,7 +477,7 @@ export class BackandService {
       })
       .catch((error) => {
         const backandError = new DataError(error.status, error.statusText);
-        // this.errorService.setError(error.status);
+        this.errorService.setError(error.status);
         return Observable.throw(backandError);
       });
 

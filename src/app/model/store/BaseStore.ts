@@ -2,6 +2,8 @@ import { Scheme } from '../scheme.model';
 import { Observable } from 'rxjs/Observable';
 import { Headers, Http, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { DataError } from '../../service/data.error';
+import { ErrorService } from '../../service/error.service';
 
 
 abstract class BaseStore<T extends IBaseObject> {
@@ -18,7 +20,7 @@ abstract class BaseStore<T extends IBaseObject> {
     protected defaultFilter = [];
     // TODO: Add default Filter
 
-    constructor(protected http: Http) { } // private router: Router
+    constructor(protected http: Http, protected errorService: ErrorService) { } // private router: Router
 
     public getItems(forceRefresh?: boolean, pageNumber?: number, pageSize?: number): Observable<any> {
         if (!forceRefresh && this.items) {
@@ -39,10 +41,7 @@ abstract class BaseStore<T extends IBaseObject> {
             headers: this.authHeader,
             search: params
         }).map(data => this.extractData(data))
-        .catch(err => {
-            console.error('BaseStore error', err);
-            return Observable.throw(new Error('BaseStore Error'));
-        });
+            .catch(err => this.handleError(err));
     }
 
     public getItem(id: number, forceRefresh?: boolean): Observable<T> {
@@ -56,10 +55,13 @@ abstract class BaseStore<T extends IBaseObject> {
             headers: this.authHeader,
         })
             .map(x => x.json())
-            .catch(err => {
-                console.error('BaseStore error', err);
-                return Observable.throw(new Error('BaseStore Error'));
-            });
+            .catch(err => this.handleError(err));
+    }
+
+    protected handleError(error) {
+        const dataError = new DataError(error.status, error.statusText);
+        this.errorService.setError(error.status);
+        return Observable.throw(DataError);
     }
 
     protected extractData(res: Response) {
@@ -114,8 +116,8 @@ export class SchemeFavoriteStore extends BaseStore<{ id: number }> {
     // const defaultFilter = [
     //     { fieldName: 'status', operator: 'greaterThanOrEqualsTo', value: '4' },
     // ];
-    constructor(protected http: Http) {
-        super(http);
+    constructor(protected http: Http, protected errorService: ErrorService) {
+        super(http, errorService);
     }
 
     public getItems(forceRefresh?: boolean): Observable<any> {
@@ -125,7 +127,7 @@ export class SchemeFavoriteStore extends BaseStore<{ id: number }> {
         return super.getItems(forceRefresh ? forceRefresh : false);
     }
 
-    public getItem(id: number, forceRefresh?: boolean): Observable<{id: number}> {
+    public getItem(id: number, forceRefresh?: boolean): Observable<{ id: number }> {
 
         this.filter = [
             { fieldName: 'contributor', operator: 'in', value: '' + this.contributor }
@@ -137,8 +139,8 @@ export class SchemeFavoriteStore extends BaseStore<{ id: number }> {
 @Injectable()
 export class SchemeStore extends BaseStore<Scheme> {
     protected identifier = 'schemes';
-    constructor(protected http: Http, private favoriteStore: SchemeFavoriteStore) {
-        super(http);
+    constructor(protected http: Http, protected errorService: ErrorService, private favoriteStore: SchemeFavoriteStore) {
+        super(http, errorService);
     }
 
     public totalRows = -1;
@@ -147,22 +149,22 @@ export class SchemeStore extends BaseStore<Scheme> {
         return this.favoriteStore.getItems()
             .flatMap((favoriteSchemes: Scheme[]) => {
                 return super.getItems(forceRefresh, pageNumber, pageSize)
-            .map(schemes => {
-                schemes.forEach(scheme => {
-                    const favScheme = favoriteSchemes.find((favSchemeObject: any) => {
-                        if (scheme.id === +favSchemeObject.scheme) {
-                            return true;
-                        }
+                    .map(schemes => {
+                        schemes.forEach(scheme => {
+                            const favScheme = favoriteSchemes.find((favSchemeObject: any) => {
+                                if (scheme.id === +favSchemeObject.scheme) {
+                                    return true;
+                                }
+                            });
+                            if (favScheme !== undefined) {
+                                scheme.isFavorite = true;
+                            } else {
+                                scheme.isFavorite = false;
+                            }
+                        });
+                        return schemes;
                     });
-                    if (favScheme !== undefined) {
-                        scheme.isFavorite = true;
-                    } else {
-                        scheme.isFavorite = false;
-                    }
-                });
-                return schemes;
             });
-        });
     }
 }
 

@@ -11,7 +11,7 @@ import { ISubscription } from 'rxjs/Subscription';
 
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnInit {
   requestedUrl: string;
   user: User;
 
@@ -29,6 +29,10 @@ export class AuthService {
     this.reactOnError();
   }
 
+  ngOnInit() {
+
+  }
+
   hasCredentialsSet() {
     this.isLoggedIn = !(!localStorage.getItem('backand_token') || !localStorage.getItem('backand_username'));
     return this.isLoggedIn;
@@ -36,7 +40,7 @@ export class AuthService {
 
   signIn(user: string, pass: string): Observable<any> {
     return this.backandService.signIn(user, pass)
-      .do(this.reactOnError);
+      .do(() => this.reactOnError);
   }
 
   logout() {
@@ -63,16 +67,17 @@ export class AuthService {
   }
 
   reactOnError() {
-    // console.log('error reaction handler registered');
-    // this.errorService.getError()
-    // .takeWhile(() => this.isLoggedIn)
-    // .filter( (error: DataError) => {
-    //   return error.httpCode === 401;
-    // })
-    // .subscribe( (error: DataError) => {
-    //   console.error('[AuthService] Catched 401 Error', error);
-    //   this.logout();
-    // });
+    console.log('error reaction handler registered');
+    this.errorService.getError()
+    .takeWhile(() => this.isLoggedIn)
+    .filter( (error: DataError) => {
+      return error.httpCode === 401;
+    })
+    .subscribe( (error: DataError) => {
+      console.error('[AuthService] Catched 401 Error', error);
+      // this.requestedUrl = this.route TODO
+      this.logout();
+    });
   }
 
 }
