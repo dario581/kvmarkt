@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   ownSchemes: Scheme[] = null;
 
   constructor(
-      private _backandService: BackandService
+    private _backandService: BackandService
     , private _schemeStore: SchemeStore
     , private _categoryStore: CategoryStore
     , private _placeStore: PlaceStore
@@ -40,32 +40,38 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getBlogposts();
-    this._schemeStore.getItems(true).subscribe(
+    this._schemeStore
+      .getItems(true)
+      .distinct()
+      .subscribe(
       (schemes: Scheme[]) => {
         this.favSchemes = schemes
-        .filter((scheme) => {
-          return scheme.isFavorite;
-        })
-        .slice(0, 2);
+          .filter((scheme) => {
+            return scheme.isFavorite;
+          })
+          .slice(0, 2);
       }
-    );
+      );
 
-    this._userStore.getItem().subscribe((user: User) => {
-      const filter = [{ fieldName: 'author', operator: 'in', value: '' + user.contributor }];
-      this._schemeStore.getItems(true, 1, 3, filter).subscribe((schemes: Scheme[]) => {
-        this.ownSchemes = schemes;
-        // schemes = schemes.filter((scheme, index) => {
-        //   if (+scheme.author === user.contributor) {
-        //     return scheme;
-        //   }
-        // });
-        // if (schemes.length > 3) {
-        //   schemes = schemes.slice(0, 3);
-        // }
-        // this.ownSchemes = schemes;
-        // console.timeEnd('Dashboard get Schemes');
+    this._userStore
+      .getItem()
+      .distinct()
+      .subscribe((user: User) => {
+        const filter = [{ fieldName: 'author', operator: 'in', value: '' + user.contributor }];
+        this._schemeStore.getItems(true, 1, 3, filter).subscribe((schemes: Scheme[]) => {
+          this.ownSchemes = schemes;
+          // schemes = schemes.filter((scheme, index) => {
+          //   if (+scheme.author === user.contributor) {
+          //     return scheme;
+          //   }
+          // });
+          // if (schemes.length > 3) {
+          //   schemes = schemes.slice(0, 3);
+          // }
+          // this.ownSchemes = schemes;
+          // console.timeEnd('Dashboard get Schemes');
+        });
       });
-    });
     this.hint = 'Wird geladen...';
     this._backandService.getUser().subscribe(user => this.user_firstname = user.firstname);
     // localStorage.getItem('backand_user_firstname');
