@@ -167,9 +167,7 @@ export class SchemeStore extends BaseStore<Scheme> {
                     .map(schemes => {
                         schemes.forEach(scheme => {
                             const favScheme = favoriteSchemes.find((favSchemeObject: any) => {
-                                if (scheme.id === +favSchemeObject.scheme) {
-                                    return true;
-                                }
+                                return scheme.id === +favSchemeObject.scheme;
                             });
                             if (favScheme !== undefined) {
                                 scheme.isFavorite = true;
