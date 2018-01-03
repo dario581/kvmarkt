@@ -444,13 +444,13 @@ export class BackandService {
   private user: User;
   private userObservable: Observable<User>;
 
-  public getUser(): Observable<User> {
+  public getUser(refresh?: boolean): Observable<User> {
 
-    if (this.user) {
+    if (!refresh && this.user) {
       return Observable.of(this.user);
     }
 
-    if (this.userObservable) {
+    if (!refresh && this.userObservable) {
       return this.userObservable;
     }
 

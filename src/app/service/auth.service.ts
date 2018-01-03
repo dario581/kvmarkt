@@ -55,7 +55,7 @@ export class AuthService implements OnInit {
   }
 
   setUserInfo() {
-    return this.backandService.getUser()
+    return this.backandService.getUser(true)
     .flatMap( (userData: User) => {
       localStorage.setItem('backand_user_firstname', userData.firstname);
       localStorage.setItem('backand_user_lastname', userData.lastname);
