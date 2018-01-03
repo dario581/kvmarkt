@@ -12,7 +12,7 @@ abstract class BaseStore<T extends IBaseObject> {
     protected readonly identifier: String;
 
     protected readonly api_url = 'https://api.backand.com';
-    protected readonly contributor = 1;
+    protected readonly contributor = 1; // TODO: change
 
     protected items: T[];
     protected itemObservable: Observable<T>;
@@ -50,8 +50,10 @@ abstract class BaseStore<T extends IBaseObject> {
         this.itemObservable = this.http.get(this.api_url + '/1/objects/' + this.identifier, {
             headers: this.authHeader,
             search: params
-        }).map(data => this.extractData(data))
+        })
+            .map(data => this.extractData(data))
             .catch(err => this.handleError(err));
+        return this.itemObservable;
     }
 
     public getItem(id: number, forceRefresh?: boolean): Observable<T> {
@@ -135,9 +137,9 @@ export class SchemeFavoriteStore extends BaseStore<{ id: number }> {
             { fieldName: 'contributor', operator: 'in', value: '' + this.contributor }
         ];
         return super.getItems(forceRefresh ? forceRefresh : false, null, null, filter)
-        .finally(() => {
-            this.defaultFilter = [];
-        });
+            .finally(() => {
+                this.defaultFilter = [];
+            });
     }
 
     public getItem(id: number, forceRefresh?: boolean): Observable<{ id: number }> {
@@ -184,24 +186,24 @@ export class SchemeStore extends BaseStore<Scheme> {
 @Injectable()
 export class CategoryStore extends BaseStore<Category> {
     protected identifier = 'scheme_categories';
-    constructor(protected http: Http) {
-        super(http);
+    constructor(protected http: Http, protected errorService: ErrorService) {
+        super(http, errorService);
     }
 }
 
 @Injectable()
 export class PlaceStore extends BaseStore<Category> {
     protected identifier = 'scheme_places';
-    constructor(protected http: Http) {
-        super(http);
+    constructor(protected http: Http, protected errorService: ErrorService) {
+        super(http, errorService);
     }
 }
 
 @Injectable()
 export class UserStore extends BaseStore<User> {
     protected identifier = 'user';
-    constructor(protected http: Http) {
-        super(http);
+    constructor(protected http: Http, protected errorService: ErrorService) {
+        super(http, errorService);
     }
     public getItem() {
         return Observable.of(
