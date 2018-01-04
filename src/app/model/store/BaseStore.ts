@@ -163,7 +163,7 @@ export class SchemeStore extends BaseStore<Scheme> {
     public getItems(forceRefresh?: boolean, pageNumber?: number, pageSize?: number, filter?: any): Observable<any> {
         return this.favoriteStore.getItems()
             .flatMap((favoriteSchemes: Scheme[]) => {
-                return super.getItems(forceRefresh, pageNumber, pageSize)
+                return super.getItems(forceRefresh, pageNumber, pageSize, filter)
                     .map(schemes => {
                         schemes.forEach(scheme => {
                             const favScheme = favoriteSchemes.find((favSchemeObject: any) => {
