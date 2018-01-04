@@ -437,7 +437,7 @@ a[role="button"].disabled:hover
     border-bottom: 1px solid #af2626;
 }
 
-.ng-invalid:not(form) + *::after {
+/* .ng-invalid:not(form) + *::after {
     content: " ";
     display: inline-block;
     width: 10px;
@@ -445,7 +445,7 @@ a[role="button"].disabled:hover
     border-radius: 50%;
     margin-left: 5px;
     background-color: #af2626;
-}
+} */
 
 /* .block-dark button.btn-accent:hover,
 .block-dark a.btn-accent:hover {
