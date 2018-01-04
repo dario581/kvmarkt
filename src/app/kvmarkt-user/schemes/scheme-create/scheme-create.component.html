@@ -1,163 +1,131 @@
 <div class="block block-dark page-info" style="background-image: url('/images/zela_back.jpg'); background-size: cover; background-position: center">
-  <p>
-    Gib hier nun alle Informationen über dein Programm ein. Sobald du dein Programm gespeichert hast, wird es noch geprüft und
-    danach ist unsere Sammlung wieder etwas größer geworden.
+    <p>
+        Gib hier nun alle Informationen über dein Programm ein. Sobald du dein Programm gespeichert hast, wird es noch geprüft und
+        danach ist unsere Sammlung wieder etwas größer geworden.
+        <br>
+        <span>Vielen Dank für deine Mithilfe!</span>
+    </p>
     <br>
-    <span>Vielen Dank für deine Mithilfe!</span>
-  </p>
-  <br>
-  <div class="button-box">
-    <a role="button" (click)="submit()" style="cursor: pointer" class="btn-accent">
-      <!-- <span class="glyphicon glyphicon-floppy-disk"></span>  -->
-      Speichern
-    </a>
-  </div>
+    <div class="button-box">
+        <a role="button" (click)="submit()" class="btn-accent ">
+            <!-- <span class="glyphicon glyphicon-floppy-disk"></span>  -->
+            Speichern
+        </a>
+    </div>
 </div>
+
 <main>
-  <div class="block" style="">
-    <div class="container">
-      <ol class=" ">
-        <li class="">
-          <div class="row" style="">
-            <div class=" col-md-9 col-sm-12">
-              <p>Titlel</p>
-              <input [(ngModel)]="scheme.title" class="input-headline" type="text" value="Programmname" />
+    <form [formGroup]="schemeForm" novalidate>
+        <section class="create-grid">
+            <div>
+                <span class="create-step text-accent">1.</span>
+                <span class="create-title text-secondary">Titel</span>
+                <input name="title" class="input-headline" type="text" formControlName="title" />
+                <!-- <input [(ngModel)]="scheme.title" class="input-headline " type="text" value="Programmname" /> -->
+                <span class="create-description text-secondary">Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</span>
             </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
-            </div>
-          </div>
-        </li>
 
-        <li>
-          <div class="row" style="">
-            <div class=" col-md-9 col-sm-12">
-              <p>Kategorie</p>
-              <select [(ngModel)]="scheme.category">
-                <option *ngFor="let category of scheme_categories" [ngValue]="category.id">{{category.name}}</option>
-              </select>
+            <div>
+                <span class="create-step text-accent">2.</span>
+                <span class="create-title text-secondary">Kategorie</span>
+                <!-- <select [(ngModel)]="scheme.category" class="">
+        <option *ngFor="let category of scheme_categories" [ngValue]="category.id">{{category.name}}</option>
+      </select> -->
+                <select class="form-control" formControlName="category">
+                    <option *ngFor="let category of scheme_categories" [value]="category.id">{{category.name}}</option>
+                </select>
+                <span class="create-description text-secondary">Ordne Dein Programm einer Kategorie zu, um sie an einem Ort zu sammeln.</span>
             </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p>Ordne Dein Programm einer Kategorie zu, um sie an einem Ort zu sammeln.</p>
-            </div>
-          </div>
 
-        </li>
-      </ol>
-    </div>
-  </div>
-  <div class="block">
-    <div class="container">
-      <ol start="3">
-        <li style="">
-          <div class="row">
-            <div class=" col-md-9 col-sm-12">
-              <p>kurze Beschreibung</p>
-              <textarea [(ngModel)]="scheme.description" rows="2">Gib hier eine kurze beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.</textarea>
+            <div>
+                <span class="create-step text-accent">3.</span>
+                <span class="create-title text-secondary">kurze Beschreibung</span>
+                <!-- <textarea [(ngModel)]="scheme.description" rows="2" class="">Gib hier eine kurze beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.</textarea> -->
+                <textarea formControlName="description" rows="2">Gib hier eine kurze beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.</textarea>
+                <span class="create-description text-secondary">Ordne Dein Programm einer Kategorie zu, um sie an einem Ort zu sammeln.</span>
             </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p></p>
+
+            <div>
+                <span class="create-step text-accent">4.</span>
+                <span class="create-title text-secondary">Inhalt</span>
+                <span class="">EDITOR</span>
+                <span class="create-description text-secondary"></span>
             </div>
-          </div>
-        </li>
-        <li>
-          <div class="row">
-            <div class=" col-md-9 col-sm-12">
-              <p>Inhalt</p>
-              <!-- <quill-editor [(ngModel)]="scheme.content" [placeholder]="editorPlaceholder" style="color: #000;">
-                <div quill-editor-toolbar>
-                  <span class="ql-formats">
-                    <button class="ql-bold" [title]="'Fett'"></button>
-                    <button class="ql-italic" [title]="'Kursiv'"></button>
-                    <button class="ql-link" [title]="'Link'"></button>
-                  </span>
-                  <span class="ql-formats">
-                    <button class="ql-header" value="1" [title]="'Überschrift 1'"></button>
-                    <button class="ql-header" value="2" [title]="'Überschrift 2'"></button>
-                  </span>
+
+            <div>
+                <span class="create-step text-accent">5.</span>
+                <span class="create-title text-secondary">Alter</span>
+                <span>
+                    <span>VON</span>
+                    <!-- <select [(ngModel)]="scheme.age_start" class="">
+                        <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
+                    </select> -->
+                    <select class="form-control" formControlName="age_start">
+                        <option *ngFor="let age of scheme_ages" [value]="age">{{age}}</option>
+                    </select>
+                    <span>BIS</span>
+                    <select class="form-control" formControlName="age_end">
+                        <option *ngFor="let age of scheme_ages" [value]="age">{{age}}</option>
+                    </select>
+                    <!-- <select [(ngModel)]="scheme.age_end">
+                        <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
+                    </select> -->
+                </span>
+                <span class="create-description text-secondary">Für welches Alter ist Dein Programm gedacht?</span>
+            </div>
+
+            <div>
+                <span class="create-step text-accent">6.</span>
+                <span class="create-title text-secondary">Ort</span>
+                <div class="places-flex">
+                    <div>
+                        <p>Ort auswählen:
+                            <br>
+                            <span class="text-secondary">(erforderlich)</span>
+                        </p>
+                        <!-- <select [(ngModel)]="scheme.place" class="">
+                            <option *ngFor="let place of scheme_places" [ngValue]="place.id">{{place.name}}</option>
+                        </select> -->
+                        <select class="form-control" formControlName="place">
+                            <option *ngFor="let place of scheme_places" [value]="place.id">{{place.name}}</option>
+                        </select>
+                    </div>
+                    <!-- <div *ngIf="schemeForm.value.place !== 0">
+                        <p>Alternative auswählen:
+                            <br>
+                            <span class="text-secondary">(falls vorhanden)</span>
+                        </p>
+                        <select class="form-control" formControlName="place2">
+                            <option *ngFor="let place of scheme_places" [value]="place.id">{{place.name}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="schemeForm.value.place2 != 0">
+                        <p>2. Alternative auswählen:
+                            <br>
+                            <span class="text-secondary">(falls vorhanden)</span>
+                        </p>
+                        <select class="form-control" formControlName="place3">
+                            <option *ngFor="let place of scheme_places" [value]="place.id">{{place.name}}</option>
+                        </select>
+                    </div> -->
                 </div>
-              </quill-editor> -->
-            </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </div>
-  <div class="block">
-    <div class="container">
 
-      <ol start="5">
-        <li>
-          <div class="row">
-            <div class=" col-md-9 col-sm-12">
-              <p>Alter</p>
-              <p>
-                <span>VON</span>
-                <select [(ngModel)]="scheme.age_start">
-                  <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
-                </select>
-                <span>BIS</span>
-                <select [(ngModel)]="scheme.age_end">
-                  <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
-                </select>
-              </p>
+                <span class="create-description text-secondary">Wo sollte man das Programm durchführen? Es können bis zu zwei Alternativen ausgewählt werden.</span>
             </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="row">
-            <div class=" col-md-9 col-sm-12">
-              <p>Ort</p>
-              <select [(ngModel)]="scheme.place">
-                <option *ngFor="let place of scheme_places" [ngValue]="place.id">{{place.name}}</option>
-              </select>
-            </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
-            </div>
-          </div>
 
-        </li>
-        <!-- <li>
-          <div class="row">
-            <div class=" col-md-9 col-sm-12">
-              <p>Tags</p>
-              <p>
-                <input class="input-add-item" type="text" value="Programmname" />
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="24"
-                  height="24" viewBox="0 0 24 24">
-                  <defs>
-                    <style>
-                      .cls-1 {
-                        fill: #ebe8ea;
-                        fill-rule: evenodd;
-                      }
-                    </style>
-                  </defs>
-                  <path d="M20.484,20.485 C18.218,22.752 15.205,24.000 12.000,24.000 C8.795,24.000 5.782,22.752 3.516,20.485 C1.248,18.219 0.000,15.205 0.000,12.000 C0.000,8.795 1.248,5.782 3.516,3.516 C5.781,1.249 8.795,-0.000 12.000,-0.000 C15.205,-0.000 18.219,1.249 20.485,3.516 C22.752,5.782 24.000,8.795 24.000,12.000 C24.000,15.205 22.752,18.219 20.484,20.485 ZM19.070,4.930 C17.182,3.040 14.671,2.000 12.000,2.000 C9.329,2.000 6.818,3.040 4.930,4.930 C3.040,6.819 2.000,9.329 2.000,12.000 C2.000,14.671 3.040,17.182 4.930,19.071 C6.818,20.960 9.329,22.000 12.000,22.000 C14.671,22.000 17.182,20.960 19.070,19.071 C20.960,17.182 22.000,14.671 22.000,12.000 C22.000,9.329 20.960,6.819 19.070,4.930 ZM17.000,13.000 L13.000,13.000 L13.000,17.000 C13.000,17.552 12.552,18.000 12.000,18.000 C11.448,18.000 11.000,17.552 11.000,17.000 L11.000,13.000 L7.000,13.000 C6.448,13.000 6.000,12.552 6.000,12.000 C6.000,11.448 6.448,11.000 7.000,11.000 L11.000,11.000 L11.000,7.000 C11.000,6.448 11.448,6.000 12.000,6.000 C12.552,6.000 13.000,6.448 13.000,7.000 L13.000,11.000 L17.000,11.000 C17.552,11.000 18.000,11.448 18.000,12.000 C18.000,12.552 17.552,13.000 17.000,13.000 Z"
-                    class="cls-1" id="add-item-button" />
-                </svg>
-              </p>
-              <div class="tags-div">
-                <a>Tags</a>
-                <a>Schlagworte</a>
-              </div>
-            </div>
-            <div class="desc-content  col-md-3 col-sm-12">
-              <p>Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</p>
-            </div>
-          </div>
+            <h3 class="text-accent">Fertig!</h3>
+            <p>Jetzt nur noch speichern und bald wird dein Programm bei den anderen erscheinen. </p>
+            <button class="btn-accent" [class.disabled]="!schemeForm.valid" (click)="submit()">Speichern</button><span *ngIf="!schemeForm.valid"  class="text-secondary">Nicht alle Angaben wurden korrekt angegeben.</span>
 
-        </li> -->
-      </ol>
-      <h3 class="highlight-text">Fertig!</h3>
-      <p>Jetzt nur noch speichern und bald wird dein Programm bei den anderen erscheinen. </p>
-    </div>
-  </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p>Form value: {{ schemeForm.value | json }}</p>
+            <p>Form value: {{ schemeForm.status | json }}</p>
+            <p>{{scheme.content}}</p>
+        </section>
+    </form>
+
 </main>

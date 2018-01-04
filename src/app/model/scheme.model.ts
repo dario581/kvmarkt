@@ -7,6 +7,8 @@ export interface Scheme extends IBaseObject {
     content?: string;
     place_name?: string;
     place: number;
+    place2?: number;
+    place3?: number;
     author_name?: string;
     author: number;
     category_name?: string;

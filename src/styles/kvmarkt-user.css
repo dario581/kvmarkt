@@ -63,6 +63,11 @@ nav.headbar .hbar-item:hover {
     --shadow-transition-speed: 0.2s;
 }
 
+
+nav.headbar .hbar-item * {
+    --shadow-color: rgba(0, 0, 0, 0);
+}
+
 nav.headbar .hbar-item.pressed:hover {
     background-color: var(--grey-100);
     /* --shadow-color: var(--primary-dark); */
@@ -223,10 +228,11 @@ nav.headbar .hbar-profile {
     line-height: 14pt;
     display: grid;
     grid-template-areas: 
-        "main img"
-        "secondary img";
+    "main img"
+    "secondary img";
     grid-column-gap: 15px;
 }
+
 
 .hbar-profile > span:first-child {
     grid-area: img;

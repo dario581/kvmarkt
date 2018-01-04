@@ -34,6 +34,9 @@ export class BackandService {
   private blogposts: Blogpost[];
   private blogpostsObservable: Observable<Blogpost[]>;
 
+  private user: User;
+  private userObservable: Observable<User>;
+
   constructor(
     private http: Http,
     private router: Router,
@@ -55,7 +58,7 @@ export class BackandService {
         this.blogposts = this.extractData(data);
         return this.blogposts;
       })
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
     return this.blogpostsObservable;
   }
 
@@ -68,7 +71,7 @@ export class BackandService {
       search: params
     })
       .map(this.extractData)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public getSchemesPage(pageSize: number, pageNumber: number): Observable<any> {
@@ -84,7 +87,7 @@ export class BackandService {
       search: params
     })
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   /* public getFavSchemes(size: number) {
@@ -113,7 +116,7 @@ export class BackandService {
         const data = this.extractData(response);
         return data;
       })
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
     return observable;
   }
 
@@ -131,7 +134,7 @@ export class BackandService {
       search: params
     })
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   /**
@@ -187,7 +190,7 @@ export class BackandService {
       search: params
     })
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public getScheme(id: number): Observable<any> {
@@ -195,7 +198,7 @@ export class BackandService {
       headers: this.authHeader,
     })
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public addScheme(scheme: Scheme) {
@@ -204,7 +207,7 @@ export class BackandService {
 
     return this.http.post(this.api_url + '/1/objects/schemes', body, options)
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public addSchemeTags(scheme_id: number, tagsOfScheme: number[]) {
@@ -214,7 +217,7 @@ export class BackandService {
 
     return this.http.post(this.api_url + '/1/objects/scheme_tagsOfScheme', body, options)
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public addSchemeToFavorites(favoriteSchemeId: number): Observable<number> {
@@ -226,7 +229,7 @@ export class BackandService {
 
     return this.http.post(this.api_url + '/1/objects/contributor_favoriteSchemes', body, options)
       .map(this.extractBody)
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public removeSchemeFromFavorites(schemeId: number): Observable<number> {
@@ -241,7 +244,7 @@ export class BackandService {
         data = this.extractBody(data);
         return data;
       })
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   /* TAGS */
@@ -254,7 +257,7 @@ export class BackandService {
       headers: this.authHeader
     })
       .map(this.extractData)
-      .catch(this.handleError)
+      .catch((err) => this.handleError(err))
       .subscribe(data => {
         this.scheme_tags = data;
         this._tagSubject.next(this.scheme_tags);
@@ -273,7 +276,7 @@ export class BackandService {
         this.scheme_tags = data;
         return this.scheme_tags;
       })
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   public getTag(id: number) {
@@ -437,12 +440,10 @@ export class BackandService {
         const data = this.extractData(response);
         return data;
       })
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
     return teamsObservable;
   }
 
-  private user: User;
-  private userObservable: Observable<User>;
 
   public getUser(refresh?: boolean): Observable<User> {
 

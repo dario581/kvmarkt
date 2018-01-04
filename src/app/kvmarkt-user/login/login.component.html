@@ -1,6 +1,6 @@
 <main class="full-background"> 
   <!-- width: 100%; -->
-  <div class="block dashboard-card login-grid shadow" > 
+  <div class="block dashboard-card login-grid" > 
      <!-- margin: auto;width: 90%; padding: 5%; max-width: 500px; -->
     <h1 id="login-header">
       Login
@@ -14,7 +14,7 @@
       <input id="password" name="password" type="password" class="form-control" placeholder="Passwort" required formControlName="password"  />
       <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
       <!-- <a>Passwort vergessen?</a><br> -->
-      <button type="submit" id="login-button" class="btn-accent shadow" >Login</button> <!-- !loginForm.form.valid [disabled]="loginForm.status != 'VALID' --> 
+      <button type="submit" id="login-button" class="btn-accent" >Login</button> <!-- !loginForm.form.valid [disabled]="loginForm.status != 'VALID' --> 
     </form>
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{errorMessage}}

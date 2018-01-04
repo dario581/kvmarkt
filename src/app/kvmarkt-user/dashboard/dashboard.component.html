@@ -11,9 +11,9 @@
         <p>
           Willkommen bei deinem KV Markt! Finde hier Prgramme für deine Gruppe oder Teile deine Ideen mit anderen!
         </p>
-        <a role="button" class="btn-accent shadow" [routerLink]="['/schemes']" routerLinkActive="active">
+        <a role="button" class="btn-accent" [routerLink]="['/schemes']" routerLinkActive="active">
           <span class="glyphicon glyphicon-th"></span> Alle Programme anzeigen</a>
-        <a role="button" class="btn-accent shadow" [routerLink]="['/schemes/create']" routerLinkActive="active">
+        <a role="button" class="btn-accent" [routerLink]="['/schemes/create']" routerLinkActive="active">
           <span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
 
         <hr class="full-width card-seperator">
@@ -58,15 +58,15 @@
           Finde hier alle Programme wieder, die du als „Mag ich“ gekennzeichnet hast.
         </p>
         <hr class="full-width">
-        <app-scheme-card *ngFor="let scheme of favSchemes" class="scheme-card card-item shadow" [scheme]="scheme"></app-scheme-card>
+        <app-scheme-card *ngFor="let scheme of favSchemes" class="scheme-card card-item" [scheme]="scheme"></app-scheme-card>
         <p *ngIf="!favSchemes ||favSchemes.length === 0" class="text-center">
           <br>Wie es aussieht, hast du noch keine eigenen Favoriten. Entdecke jetzt coole Programme und speichere sie dir für
           später!
           <br>
           <br>
-          <a role="button" class="btn-accent shadow" [routerLink]="['/schemes']" routerLinkActive="active">Programme anzeigen</a>
+          <a role="button" class="btn-accent" [routerLink]="['/schemes']" routerLinkActive="active">Programme anzeigen</a>
         </p>
-        <a role="button" *ngIf="favSchemes && favSchemes.length > 0" class="btn-accent shadow" [routerLink]="['/profile']" fragment="favorites" routerLinkActive="active">Alle Favoriten anzeigen</a>
+        <a role="button" *ngIf="favSchemes && favSchemes.length > 0" class="btn-accent" [routerLink]="['/profile']" fragment="favorites" routerLinkActive="active">Alle Favoriten anzeigen</a>
       </div>
     </div>
 
@@ -85,11 +85,11 @@
           <br>Wie es aussieht, hast du noch keine eigenen Programme. Klick auf den Link und erstelle jetzt dein erstes Programm!
           <br>
           <br>
-          <a role="button" class="btn-accent shadow" [routerLink]="['/schemes/create']" routerLinkActive="active">
+          <a role="button" class="btn-accent" [routerLink]="['/schemes/create']" routerLinkActive="active">
             <span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
         </p>
-        <app-scheme-card *ngFor="let scheme of ownSchemes" class="scheme-card card-item shadow" [scheme]="scheme"></app-scheme-card>
-        <a role="button" *ngIf="ownSchemes && ownSchemes.length > 0" class="btn-accent shadow" [routerLink]="['/profile']" fragment="schemes" routerLinkActive="active">Deine Programme anzeigen</a>
+        <app-scheme-card *ngFor="let scheme of ownSchemes" class="scheme-card card-item" [scheme]="scheme"></app-scheme-card>
+        <a role="button" *ngIf="ownSchemes && ownSchemes.length > 0" class="btn-accent" [routerLink]="['/profile']" fragment="schemes" routerLinkActive="active">Deine Programme anzeigen</a>
       </div>
     </div>
   </div>

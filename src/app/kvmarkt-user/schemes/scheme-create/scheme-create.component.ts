@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { ValidatorFn, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ErrorService, NETWORK_ERROR } from '../../../service/error.service';
 import { BackandService } from '../../../service/backand.service';
 import { Scheme } from '../../../model/scheme.model';
@@ -11,12 +11,21 @@ import { Scheme } from '../../../model/scheme.model';
 })
 export class SchemeCreateComponent implements OnInit {
 
-  constructor(private errorService: ErrorService, private backandService: BackandService) { }
-  error = '';
+  schemeForm: FormGroup;
 
-  editorText: string;
-  editorPlaceholder = 'Hier kannst du ausführlich dein Programm beschreiben.';
-  editor: any;
+  constructor(
+    private errorService: ErrorService,
+    private backandService: BackandService,
+    private formBuilder: FormBuilder
+  ) {
+    this.createForm();
+  }
+
+  // error = '';
+
+  // editorText: string;
+  // editorPlaceholder = 'Hier kannst du ausführlich dein Programm beschreiben.';
+  // editor: any;
 
   // quillModules: { [index: string]: Object } = {
   //   toolbar: [
@@ -33,13 +42,18 @@ export class SchemeCreateComponent implements OnInit {
   scheme_places: Array<{ name: string, id: number }> = [];
   scheme_ages: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
+  placeholderTitle = 'Programmname';
+  placeholderDescription = 'Gib hier eine kurze Beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.';
+
   scheme: Scheme = {
     id: null,
-    title: 'Programmname',
-    description: 'Gib hier eine kurze Beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.',
+    title: this.placeholderTitle,
+    description: this.placeholderDescription,
     content: '',
     place_name: null,
     place: 0,
+    place2: 0,
+    place3: 0,
     author_name: null,
     author: null,
     category: 0,
@@ -50,28 +64,74 @@ export class SchemeCreateComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.errorService.getError().subscribe( (error) => {
-      this.error = error.message;
-    });
-    this.errorService.setError(NETWORK_ERROR);
-    setTimeout(() => {
-      this.errorService.setError(2);
-    }, 2000);
     this.backandService.getCategories().subscribe(data => this.setSchemeCategories(data));
     this.backandService.getTags().subscribe((data: any) => this.scheme_tags = data);
     this.backandService.getPlaces().subscribe(data => this.setSchemePlaces(data));
   }
 
-  forbiddenEmailPatternValidator(nameRe: RegExp): ValidatorFn {
+  // forbiddenEmailPatternValidator(nameRe: RegExp): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } => {
+  //     const forbidden = nameRe.test(control.value);
+  //     return forbidden ? { 'forbiddenEmailPattern': { value: control.value } } : null;
+  //   };
+  // }
+
+  // forbiddenSelectorValidator(id: number): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } => {
+  //     return id === 0 ? { 'forbittenSelectorValue': { value: control.value } } : null;
+  //   };
+  // }
+
+
+  createForm() {
+    this.schemeForm = this.formBuilder.group({
+      title:        ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60),
+        this.forbiddenStringValidator(this.placeholderTitle)] ],
+      category:     ['', [Validators.required, this.forbiddenSelectorValidator()]],
+      description:  ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), Validators.maxLength(500),
+        this.forbiddenStringValidator(this.placeholderDescription) ]],
+      content:      ['', Validators.minLength(40)],
+      age_start:    ['', [Validators.required]],
+      age_end:      ['', [Validators.required, this.forbiddenSelectorValidator()]],
+      place:        ['', [Validators.required, this.forbiddenSelectorValidator()]],
+      place2:       ['' ],
+      place3:       ['' ],
+    }, { validator: this.forbiddenAgeValidator() });
+
+    this.schemeForm.setValue({
+      title: this.scheme.title,
+      category: this.scheme.category,
+      description: this.scheme.description,
+      content: this.scheme.content,
+      age_start: this.scheme.age_start,
+      age_end: this.scheme.age_end,
+      place: this.scheme.place,
+      place2: this.scheme.place2,
+      place3: this.scheme.place3,
+    });
+  }
+
+  forbiddenStringValidator(placeholder: string): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-      const forbidden = nameRe.test(control.value);
-      return forbidden ? { 'forbiddenEmailPattern': { value: control.value } } : null;
+      const forbidden = control.value === placeholder;
+      return forbidden ? { 'forbiddenStringValue': { value: control.value } } : null;
     };
   }
 
-  forbiddenSelectorValidator(id: number): ValidatorFn {
+  /**
+   * Check if option 0 (default) is selected
+   */
+  forbiddenSelectorValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-      return id === 0 ? { 'forbittenSelectorValue': { value: control.value } } : null;
+      return +control.value === 0 ? { 'forbittenSelectorValue': { value: control.value } } : null;
+    };
+  }
+  forbiddenAgeValidator(): ValidatorFn {
+    return (group: FormGroup): { [key: string]: any } => {
+      const input = group.controls['age_start'];
+      input.setErrors(input.validator(input));
+      return +group.controls['age_start'].value > +group.controls['age_end'].value ?
+        { 'forbittenSelectorValue': { value: +group.controls['age_start'].value } } : null;
     };
   }
 
@@ -101,10 +161,24 @@ export class SchemeCreateComponent implements OnInit {
   }
 
   submit() {
-    console.log('scheme create save');
     this.scheme.status = 'published';
-    this.backandService.addScheme(this.scheme).subscribe((data: any) => {
-      this.backandService.addSchemeTags(data.id, [1, 2]).subscribe((data2: any) => console.log(data2));
+    const scheme: Scheme = {
+      id: null,
+      author: null,
+      status: null,
+      title: this.schemeForm.value.title,
+      description: this.schemeForm.value.description,
+      content: this.schemeForm.value.content,
+      category: this.schemeForm.value.category,
+      age_start: this.schemeForm.value.age_start,
+      age_end: this.schemeForm.value.age_end,
+      place: this.schemeForm.value.place,
+      place2: this.schemeForm.value.place2 > 0 ? this.schemeForm.value.place2 : undefined,
+      place3: this.schemeForm.value.place3 > 0 ? this.schemeForm.value.place3 : undefined
+    };
+    this.backandService.addScheme(scheme).subscribe((data: any) => {
+      console.log('scheme create save');
+      // this.backandService.addSchemeTags(data.id, [1, 2]).subscribe((data2: any) => console.log(data2));
     });
   }
 

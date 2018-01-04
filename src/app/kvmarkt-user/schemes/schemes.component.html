@@ -5,8 +5,8 @@
   <br>
   <div class="button-box">
     <br>
-    <a role="button" class="btn-accent shadow" [routerLink]="['/schemes/start']" routerLinkActive="active">Programme entdecken</a>
-    <a role="button" class="btn-accent shadow" [routerLink]="['/schemes/create']" routerLinkActive="active">
+    <a role="button" class="btn-accent" [routerLink]="['/schemes/start']" routerLinkActive="active">Programme entdecken</a>
+    <a role="button" class="btn-accent" [routerLink]="['/schemes/create']" routerLinkActive="active">
       <span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
   </div>
 </div>
@@ -55,7 +55,7 @@
 
 <div class="scheme-wrapper-full-width container-fluid row row--small-gap row--center-items">
   <!-- [@slideTileAnimation]="getSchemeAnimateState()" -->
-  <app-scheme-card class="scheme-card shadow col-xs-12 col-sm-6 col-md-3" *ngFor="let scheme of schemes" [scheme]="scheme"></app-scheme-card>
+  <app-scheme-card class="scheme-card col-xs-12 col-sm-6 col-md-3" *ngFor="let scheme of schemes" [scheme]="scheme"></app-scheme-card>
 </div>
 
 <ul *ngIf="typePagination" class="pagination">
@@ -75,6 +75,6 @@
 </ul>
 
 <div *ngIf="!typePagination" class="" style="width: 100%; text-align: center; padding-top: 10px; padding-bottom: 50px">
-  <button *ngIf="!loading && schemes.length < totalRows" class="shadow" (click)="appendSchemes()">Mehr laden</button>
+  <button *ngIf="!loading && schemes.length < totalRows" class="" (click)="appendSchemes()">Mehr laden</button>
   <span *ngIf="loading" style="color: #aaaaaa">Wird geladen...</span>
 </div>

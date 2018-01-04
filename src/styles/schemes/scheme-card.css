@@ -19,6 +19,7 @@
 }
 
 .scheme-card-content {
+    --shadow-color: rgba(0, 0, 0, 0);
     /* max-width: 400px; */
     margin-left: auto;
     margin-right: auto;

@@ -3,6 +3,8 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
         box-sizing: border-box;
+    box-shadow: var(--box-shadow-values) var(--shadow-color, rgba(0,0,0,0));
+    transition: box-shadow var( --shadow-transition-speed, var(--box-shadow-transition-speed) );
 }
 *:before,
 *:after {
@@ -50,7 +52,9 @@ a:focus {
 [role="button"] {
   cursor: pointer;
 }
-[role="button"].disabled {
+[role="button"].disabled,
+button.disabled 
+{
   cursor: not-allowed;
 }
 

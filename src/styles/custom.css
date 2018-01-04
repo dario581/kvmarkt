@@ -35,6 +35,11 @@
     font-size: 0.9em;
 }
 
+.text-accent {
+    color: var(--accent-color);
+    font-weight: 400;
+}
+
 /* 
 a {
     outline: none;
@@ -353,8 +358,7 @@ a {
 }
 
 .shadow {
-    box-shadow: var(--box-shadow-values) var(--shadow-color, rgba(0,0,0,0));
-    transition: box-shadow var( --shadow-transition-speed, var(--box-shadow-transition-speed) );
+    
 }
 
 
@@ -403,6 +407,21 @@ a[role="button"].btn-accent:hover
     background: var(--accent-color);
 }
 
+button.disabled,
+a[role="button"].disabled
+{
+    border: 1px solid var(--grey-400);
+    color: var(--grey-400);
+}
+
+button.disabled:hover,
+a[role="button"].disabled:hover
+{
+    --shadow-color: var(--grey-200);
+    color: var(--grey-400);
+    background: var(--grey-200);
+}
+
 .ng-valid[required], 
 .ng-valid.required 
 {
@@ -415,7 +434,17 @@ a[role="button"].btn-accent:hover
 } */
 .ng-invalid:not(form) {
     border-left: none;
-    border-bottom: 1px solid #da413f;
+    border-bottom: 1px solid #af2626;
+}
+
+.ng-invalid:not(form) + *::after {
+    content: " ";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 5px;
+    background-color: #af2626;
 }
 
 /* .block-dark button.btn-accent:hover,

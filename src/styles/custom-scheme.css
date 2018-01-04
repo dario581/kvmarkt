@@ -31,25 +31,31 @@ span.custom-heart.active:hover {
 }
 
 
-.highlight-text {
-    color: #e15038;
-}
-
-
 input, select, textarea {
+    --input-border-color: var(--grey-300);
     border:none;
     background: none;
     color: #2e2f38; 
-    border-bottom: 1px solid #9d9a99;
+    border-bottom: 1px solid var(--input-border-color);
     /*border-bottom: 1px solid #4d586a;*/
     outline: none;
     border-radius: 0;
 }
 
 textarea {
+    /* --input-border-color: var(--grey-300); */
     width: 100%;
     margin: 0px;
-    border-right: 1px solid #9d9a99;
+    padding: 2px;
+    border: 1px solid var(--input-border-color);
+    resize: none;
+    /* background: var(--grey-50); */
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    --input-border-color: var(--grey-400);
 }
 
 input {
@@ -65,16 +71,14 @@ input.input-headline {
 }
 
 input:focus, select:focus, textarea:focus {
-    border-bottom: 1px solid #e15038;
+    /* border-bottom: 1px solid #e15038; */
+    --input-border-color: var(--accent-color);
 }
 
 input.input-add-item  {
     width: 90%;
 }
 
-textarea:focus {
-    border-right: 1px solid #e15038;
-}
 
 select {
     /*width: 300px;
@@ -143,6 +147,78 @@ option {
 
 .page-info div.button-box {
     margin: 0 0 20px 0;
+}
+
+
+
+.create-grid {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 60px 10px;
+}
+
+.create-grid > div {
+    display: grid;
+    grid-template-columns: 10px 1fr 280px;
+    grid-template-areas: 
+        "left title . "
+        ". main description";
+    grid-gap: 5px 15px;
+    margin-bottom: 30px;
+}
+
+.create-grid .create-step {
+    /* grid-row: span 2; */
+    grid-area: left;
+}
+
+.create-grid .create-title {
+    /* grid-column: span 2; */
+    grid-area: title;
+}
+
+.create-grid > div > :nth-child(3) {
+    grid-area: main;
+    align-self: center;
+}
+
+.create-grid .create-description {
+    /* grid-row: span 2; */
+    grid-area: description;
+    align-self: center;
+    /* grid-auto-columns:  */
+}
+
+.places-flex {
+    display: flex;
+    
+    /* justify-content: space-between; */
+    /* align-items: flex-end; */
+}
+
+.places-flex > * {
+    flex-grow: 1;
+}
+
+@media(max-width: 700px) {
+    .create-grid > div {
+        grid-template-columns: 15px 1fr;
+        grid-template-areas:
+            "left title"
+            "main main"
+            "description description"
+    }
+
+    .create-grid input,
+    .create-grid select,
+    .create-grid textarea {
+        width: 100%;
+    }
+
+    .places-flex {
+        flex-direction: column;
+    }
 }
 
 

@@ -1,7 +1,7 @@
 <header class="container-fluid">
   <nav class="headbar">
-    <a class="hbar-item shadow" routerLink="/dashboard" routerLinkActive="active">Home</a>
-    <a class="hbar-item shadow" routerLink="/schemes/" routerLinkActive="active">Programme</a>
+    <a class="hbar-item" routerLink="/dashboard" routerLinkActive="active">Home</a>
+    <a class="hbar-item" routerLink="/schemes/" routerLinkActive="active">Programme</a>
     <div class="menu-icon" (click)="toggleMenu($event)">
       <!-- Generator: Adobe Illustrator 19.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
       <svg version="1.1" id="Ebene_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@
 
     <!-- Notification Center Item -->
     <!-- <div class="hbar-item-wrapper"> -->
-      <a class="hbar-item hbar-icon-item shadow" (click)="notificationCenterIsActive = !notificationCenterIsActive" [ngClass]="{'pressed': notificationCenterIsActive }">
+      <a class="hbar-item hbar-icon-item" (click)="notificationCenterIsActive = !notificationCenterIsActive" [ngClass]="{'pressed': notificationCenterIsActive }">
         <span class="" style="font-family: icomoon; font-size: 20pt; user-select: none">bell</span>
       </a>
       <!-- <div *ngIf="notificationCenterIsActive" class="hbar-overlay-menu">
@@ -39,7 +39,7 @@
     
     <!-- Profile Menu Item -->
     <div class="hbar-item-wrapper">
-      <a class="hbar-item hbar-profile shadow"  (click)="profileMenuIsActive = !profileMenuIsActive" [ngClass]="{'pressed': profileMenuIsActive }">
+      <a class="hbar-item hbar-profile"  (click)="profileMenuIsActive = !profileMenuIsActive" [ngClass]="{'pressed': profileMenuIsActive }">
         <span class="contact-img"></span>
         <span class="font-light">{{user_firstname}} {{user_lastname}}</span>
         <span>{{user_association}}</span>

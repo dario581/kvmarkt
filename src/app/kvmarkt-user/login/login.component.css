@@ -17,6 +17,21 @@
     --shadow-color: var(--primary-dark);
 }
 
+.login-grid a,
+.login-grid span,
+.login-grid p,
+.login-grid div,
+.login-grid input,
+.login-grid h1,
+.login-grid h2,
+.login-grid h3,
+.login-grid h4,
+.login-grid h5,
+.login-grid form
+{
+    --shadow-color: rgba(0, 0, 0, 0);
+}
+
 #login-header {
     margin-top: 30px;
     margin-bottom: 40px;
