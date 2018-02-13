@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.authService.signIn(this.loginForm.get('username').value, this.loginForm.get('password').value)
-    .flatMap(res => {
-      localStorage.setItem('backand_token', res.access_token);
-      localStorage.setItem('backand_username', res.username);
+    .flatMap( res => {
+      localStorage.setItem('backand_token', res.token);
+      localStorage.setItem('backand_username', res.email);
       return this.authService.setUserInfo();
     })
     .subscribe(

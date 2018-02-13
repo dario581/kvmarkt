@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ErrorService } from './error.service';
 import { ISubscription } from 'rxjs/Subscription';
 
-
+import 'rxjs/add/operator/takeWhile';
 
 @Injectable()
 export class AuthService implements OnInit {

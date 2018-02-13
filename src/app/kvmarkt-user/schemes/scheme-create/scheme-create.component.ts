@@ -3,6 +3,7 @@ import { ValidatorFn, AbstractControl, FormBuilder, Validators, FormGroup } from
 import { ErrorService, NETWORK_ERROR } from '../../../service/error.service';
 import { BackandService } from '../../../service/backand.service';
 import { Scheme } from '../../../model/scheme.model';
+import { CategoryStore, PlaceStore } from '../../../model/store/BaseStore';
 
 @Component({
   selector: 'app-scheme-create',
@@ -15,7 +16,9 @@ export class SchemeCreateComponent implements OnInit {
 
   constructor(
     private errorService: ErrorService,
-    private backandService: BackandService,
+    // private backandService: BackandService,
+    private categoryStore: CategoryStore,
+    private placeStore: PlaceStore,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -50,23 +53,25 @@ export class SchemeCreateComponent implements OnInit {
     title: this.placeholderTitle,
     description: this.placeholderDescription,
     content: '',
-    place_name: null,
+    placeName: null,
     place: 0,
     place2: 0,
     place3: 0,
-    author_name: null,
+    authorName: null,
     author: null,
     category: 0,
-    age_start: 0,
-    age_end: 0,
-    like_count: null,
+    ageStart: 0,
+    ageEnd: 0,
+    likeCount: null,
     status: 'unknown'
   };
 
   ngOnInit() {
-    this.backandService.getCategories().subscribe(data => this.setSchemeCategories(data));
-    this.backandService.getTags().subscribe((data: any) => this.scheme_tags = data);
-    this.backandService.getPlaces().subscribe(data => this.setSchemePlaces(data));
+    // this.backandService.getCategories().subscribe(data => this.setSchemeCategories(data));
+    // this.backandService.getTags().subscribe((data: any) => this.scheme_tags = data);
+    // this.backandService.getPlaces().subscribe(data => this.setSchemePlaces(data));
+    this.categoryStore.getItems().subscribe(data => this.setSchemeCategories(data));
+    this.placeStore.getItems().subscribe(data => this.setSchemePlaces(data));
   }
 
   // forbiddenEmailPatternValidator(nameRe: RegExp): ValidatorFn {
@@ -103,8 +108,8 @@ export class SchemeCreateComponent implements OnInit {
       category: this.scheme.category,
       description: this.scheme.description,
       content: this.scheme.content,
-      age_start: this.scheme.age_start,
-      age_end: this.scheme.age_end,
+      age_start: this.scheme.ageStart,
+      age_end: this.scheme.ageEnd,
       place: this.scheme.place,
       place2: this.scheme.place2,
       place3: this.scheme.place3,
@@ -170,16 +175,16 @@ export class SchemeCreateComponent implements OnInit {
       description: this.schemeForm.value.description,
       content: this.schemeForm.value.content,
       category: this.schemeForm.value.category,
-      age_start: this.schemeForm.value.age_start,
-      age_end: this.schemeForm.value.age_end,
+      ageStart: this.schemeForm.value.age_start,
+      ageEnd: this.schemeForm.value.age_end,
       place: this.schemeForm.value.place,
       place2: this.schemeForm.value.place2 > 0 ? this.schemeForm.value.place2 : undefined,
       place3: this.schemeForm.value.place3 > 0 ? this.schemeForm.value.place3 : undefined
     };
-    this.backandService.addScheme(scheme).subscribe((data: any) => {
-      console.log('scheme create save');
-      // this.backandService.addSchemeTags(data.id, [1, 2]).subscribe((data2: any) => console.log(data2));
-    });
+    // this.backandService.addScheme(scheme).subscribe((data: any) => {
+    //   console.log('scheme create save');
+    //   // this.backandService.addSchemeTags(data.id, [1, 2]).subscribe((data2: any) => console.log(data2));
+    // });
   }
 
 

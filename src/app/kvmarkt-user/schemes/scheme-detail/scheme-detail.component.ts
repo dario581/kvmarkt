@@ -4,7 +4,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Scheme } from '../../../model/scheme.model';
 import { BackandService } from '../../../service/backand.service';
-import { DataService } from '../../../service/data.service';
 import { SchemeStore } from '../../../model/store/BaseStore';
 
 @Component({
@@ -17,8 +16,10 @@ export class SchemeDetailComponent implements OnInit {
   tagList: Array<{ name: string, id: number }> = [];
   user_association: string;
 
-  constructor(private route: ActivatedRoute, private schemeStore: SchemeStore,
-    private _dataService: DataService, private location: PlatformLocation) {
+  constructor(private route: ActivatedRoute,
+    private schemeStore: SchemeStore,
+    private location: PlatformLocation
+  ) {
     location.onPopState(() => {
       console.log('back');
       return false;
@@ -42,17 +43,17 @@ export class SchemeDetailComponent implements OnInit {
 
   public toggleSchemeLiked() {
     if (this.scheme.isFavorite) {
-      this._dataService.removeSchemeFromFavorites(this.scheme.id).subscribe((data) => {
-        this._dataService.getScheme(this.scheme.id).subscribe((scheme) => {
-          this.scheme = scheme;
-        });
-      });
-    } else {
-      this._dataService.addSchemeToFavorites(this.scheme.id).subscribe((data) => {
-        this._dataService.getScheme(this.scheme.id).subscribe((scheme) => {
-          this.scheme = scheme;
-        });
-      });
+    //   this..removeSchemeFromFavorites(this.scheme.id).subscribe((data) => {
+    //     this..getScheme(this.scheme.id).subscribe((scheme) => {
+    //       this.scheme = scheme;
+    //     });
+    //   });
+    // } else {
+    //   this..addSchemeToFavorites(this.scheme.id).subscribe((data) => {
+    //     this..getScheme(this.scheme.id).subscribe((scheme) => {
+    //       this.scheme = scheme;
+    //     });
+    //   });
     }
   }
 

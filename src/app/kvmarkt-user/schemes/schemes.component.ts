@@ -1,12 +1,13 @@
 import { BackandService } from '../../service/backand.service';
-import { DataService } from '../../service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs/operator/filter';
+// import { filter, first } from 'rxjs/operators';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Scheme } from '../../model/scheme.model';
 import { slideTileAnimation } from '../../animations';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { SchemeStore, CategoryStore, PlaceStore } from '../../model/store/BaseStore';
+
+import 'rxjs/add/operator/first';
 
 @Component({
   selector: 'app-schemes',
@@ -53,7 +54,6 @@ export class SchemesComponent implements OnInit, OnDestroy {
     (private schemeStore: SchemeStore
     , private categoryStore: CategoryStore
     , private placeStore: PlaceStore
-    // , private _dataService: DataService
     , private route: ActivatedRoute
     , private router: Router
     ) { }
@@ -222,7 +222,7 @@ export class SchemesComponent implements OnInit, OnDestroy {
   // }
 
   checkSchemeParameters(scheme: Scheme): boolean {
-    let schemeFilter = scheme.age_end >= this.age_start && scheme.age_start <= this.age_end;
+    let schemeFilter = scheme.ageEnd >= this.age_start && scheme.ageStart <= this.age_end;
     if (this.scheme_category !== 0) {
       schemeFilter = schemeFilter && +scheme.category === this.scheme_category;
     }
@@ -230,10 +230,10 @@ export class SchemesComponent implements OnInit, OnDestroy {
       schemeFilter = schemeFilter && +scheme.place === this.scheme_place;
     }
     if (this.age_start > this.scheme_ages[0]) {
-      schemeFilter = schemeFilter && +scheme.age_end >= this.age_start;
+      schemeFilter = schemeFilter && +scheme.ageEnd >= this.age_start;
     }
     if (this.age_end <= this.scheme_ages[this.scheme_ages.length - 1]) {
-      schemeFilter = schemeFilter && +scheme.age_start <= this.age_end;
+      schemeFilter = schemeFilter && +scheme.ageStart <= this.age_end;
     }
     return schemeFilter;
   }

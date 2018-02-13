@@ -11,7 +11,7 @@ import { User } from '../user.model';
 abstract class BaseStore<T extends IBaseObject> {
     protected readonly identifier: String;
 
-    protected readonly api_url = 'https://api.backand.com';
+    protected readonly api_url = 'http://kvmarkt-api.azurewebsites.net/api/';
     protected readonly contributor = 1; // TODO: change
 
     protected items: T[];
@@ -32,24 +32,24 @@ abstract class BaseStore<T extends IBaseObject> {
         //     return this.itemObservable;
         // }
 
-        let filter = this.defaultFilter;
-        if (customFilter) {
-            filter = filter.concat(customFilter);
-        }
-        const params = new URLSearchParams();
+        // let filter = this.defaultFilter;
+        // if (customFilter) {
+        //     filter = filter.concat(customFilter);
+        // }
+        // const params = new URLSearchParams();
 
-        if (pageSize) {
-            params.set('pageSize', pageSize.toString());
-        }
-        if (pageNumber) {
-            params.set('pageNumber', pageNumber.toString());
-        }
-        if (filter.length > 0) {
-            params.set('filter', JSON.stringify(filter));
-        }
-        this.itemObservable = this.http.get(this.api_url + '/1/objects/' + this.identifier, {
+        // if (pageSize) {
+        //     params.set('pageSize', pageSize.toString());
+        // }
+        // if (pageNumber) {
+        //     params.set('pageNumber', pageNumber.toString());
+        // }
+        // if (filter.length > 0) {
+        //     params.set('filter', JSON.stringify(filter));
+        // }
+        this.itemObservable = this.http.get(this.api_url + this.identifier, {
             headers: this.authHeader,
-            search: params
+            // search: params
         })
             .map(data => this.extractData(data))
             .catch(err => this.handleError(err));
@@ -63,7 +63,7 @@ abstract class BaseStore<T extends IBaseObject> {
                 return Observable.of(item);
             }
         }
-        return this.http.get(this.api_url + '/1/objects/' + this.identifier + '/' + id, {
+        return this.http.get(this.api_url + this.identifier + '/' + id, {
             headers: this.authHeader,
         })
             .map(x => x.json())
@@ -79,8 +79,8 @@ abstract class BaseStore<T extends IBaseObject> {
     protected extractData(res: Response) {
         const body = res.json();
         console.log('BaseStore Data: ', body);
-        this.totalRows = body.totalRows;
-        const result = body.data;
+        // this.totalRows = body.totalRows;
+        const result = body.result;
         this.addToCache(result);
         return result || {};
     }
@@ -153,37 +153,37 @@ export class SchemeFavoriteStore extends BaseStore<{ id: number }> {
 
 @Injectable()
 export class SchemeStore extends BaseStore<Scheme> {
-    protected identifier = 'schemes';
+    protected identifier = 'scheme';
     constructor(protected http: Http, protected errorService: ErrorService, private favoriteStore: SchemeFavoriteStore) {
         super(http, errorService);
     }
 
     public totalRows = -1;
 
-    public getItems(forceRefresh?: boolean, pageNumber?: number, pageSize?: number, filter?: any): Observable<any> {
-        return this.favoriteStore.getItems()
-            .flatMap((favoriteSchemes: Scheme[]) => {
-                return super.getItems(forceRefresh, pageNumber, pageSize, filter)
-                    .map(schemes => {
-                        schemes.forEach(scheme => {
-                            const favScheme = favoriteSchemes.find((favSchemeObject: any) => {
-                                return scheme.id === +favSchemeObject.scheme;
-                            });
-                            if (favScheme !== undefined) {
-                                scheme.isFavorite = true;
-                            } else {
-                                scheme.isFavorite = false;
-                            }
-                        });
-                        return schemes;
-                    });
-            });
-    }
+    // public getItems(forceRefresh?: boolean, pageNumber?: number, pageSize?: number, filter?: any): Observable<any> {
+    //     return this.favoriteStore.getItems()
+    //         .flatMap((favoriteSchemes: Scheme[]) => {
+    //             return super.getItems(forceRefresh, pageNumber, pageSize, filter)
+    //                 .map(schemes => {
+    //                     schemes.forEach(scheme => {
+    //                         const favScheme = favoriteSchemes.find((favSchemeObject: any) => {
+    //                             return scheme.id === +favSchemeObject.scheme;
+    //                         });
+    //                         if (favScheme !== undefined) {
+    //                             scheme.isFavorite = true;
+    //                         } else {
+    //                             scheme.isFavorite = false;
+    //                         }
+    //                     });
+    //                     return schemes;
+    //                 });
+    //         });
+    // }
 }
 
 @Injectable()
 export class CategoryStore extends BaseStore<Category> {
-    protected identifier = 'scheme_categories';
+    protected identifier = 'category';
     constructor(protected http: Http, protected errorService: ErrorService) {
         super(http, errorService);
     }
@@ -191,7 +191,7 @@ export class CategoryStore extends BaseStore<Category> {
 
 @Injectable()
 export class PlaceStore extends BaseStore<Category> {
-    protected identifier = 'scheme_places';
+    protected identifier = 'place';
     constructor(protected http: Http, protected errorService: ErrorService) {
         super(http, errorService);
     }
@@ -199,22 +199,12 @@ export class PlaceStore extends BaseStore<Category> {
 
 @Injectable()
 export class UserStore extends BaseStore<User> {
-    protected identifier = 'user';
+    protected identifier = 'contributor';
     constructor(protected http: Http, protected errorService: ErrorService) {
         super(http, errorService);
     }
     public getItem() {
-        return Observable.of(
-            {
-                id: 11,
-                contributor: 1,
-                firstname: 'Max',
-                lastname: 'Mustermann',
-                email: 'string',
-                association: 2,
-                association_name: 'string'
-            }
-        );
+        return super.getItem(+localStorage.getItem('backand_user_id'));
     }
 
     public getItems() {

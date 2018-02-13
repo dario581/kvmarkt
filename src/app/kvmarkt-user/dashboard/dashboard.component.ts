@@ -1,10 +1,11 @@
 import { BackandService } from '../../service/backand.service';
-import { DataService } from '../../service/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Blogpost } from '../../model/blogpost.model';
 import { Scheme } from '../../model/scheme.model';
 import { User } from '../../model/user.model';
 import { SchemeStore, CategoryStore, PlaceStore, UserStore } from '../../model/store/BaseStore';
+
+import 'rxjs/add/operator/distinct';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,14 +33,14 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   getBlogposts() {
-    this._backandService.getBlogposts()
-      .subscribe(
-      bp => this.blogposts = bp,
-      error => this.errorMessage = <any>error);
+    // this._backandService.getBlogposts()
+    //   .subscribe(
+    //   bp => this.blogposts = bp,
+    //   error => this.errorMessage = <any>error);
   }
 
   ngOnInit() {
-    this.getBlogposts();
+    // this.getBlogposts();
     this._schemeStore
       .getItems(true)
       .distinct()
@@ -73,7 +74,10 @@ export class DashboardComponent implements OnInit {
         });
       });
     this.hint = 'Wird geladen...';
-    this._backandService.getUser().subscribe(user => this.user_firstname = user.firstname);
+    this._backandService.getUser()
+      .subscribe(
+        user => this.user_firstname = user.firstname
+    );
     // localStorage.getItem('backand_user_firstname');
   }
 }

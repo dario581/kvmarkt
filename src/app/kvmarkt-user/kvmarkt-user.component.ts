@@ -1,6 +1,8 @@
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/pairwise';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -48,7 +50,7 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
     this.user_lastname = localStorage.getItem('backand_user_lastname');
     this.user_association = localStorage.getItem('backand_user_association_name');
     this.setPageTitle();
-    this.setWindowScrolling();
+    // this.setWindowScrolling();
   }
 
   ngOnDestroy() {

@@ -7,9 +7,7 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-
-localStorage.setItem('backand_url', 'https://api.backand.com');
-localStorage.setItem('backand_app_name', 'cvjs');
+const localBackand = true;
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));

@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { KvmarktUserModule } from './kvmarkt-user/kvmarkt-user.module';
-import { DataService } from './service/data.service';
 import { BackandService } from './service/backand.service';
 import { AuthService } from './service/auth.service';
 import { AuthGuardService } from './service/auth-guard.service';
@@ -29,8 +28,7 @@ import { SchemeStore, SchemeFavoriteStore, PlaceStore, CategoryStore, UserStore 
     KvmarktUserModule
   ],
   providers: [
-      DataService
-    , BackandService
+    BackandService
     , AuthService
     , AuthGuardService
     , ErrorService
