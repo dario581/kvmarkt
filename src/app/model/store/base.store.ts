@@ -17,8 +17,8 @@ import 'rxjs/add/observable/throw';
 export abstract class BaseStore<T extends IBaseObject> {
     protected readonly identifier: String;
 
-    // protected readonly api_url = 'http://kvmarkt-api.azurewebsites.net/api/';
-    protected readonly api_url = 'http://localhost:5000/api/';
+    protected readonly api_url = 'http://kvmarkt-api.azurewebsites.net/api/';
+    // protected readonly api_url = 'http://localhost:5000/api/';
 
     protected items: T[];
     protected itemObservable: Observable<T[]>;
