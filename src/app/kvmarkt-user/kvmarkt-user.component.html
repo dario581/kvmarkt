@@ -25,17 +25,9 @@
     <div class="flex-item-middle"></div>
 
     <!-- Notification Center Item -->
-    <!-- <div class="hbar-item-wrapper"> -->
-      <a class="hbar-item hbar-icon-item" (click)="notificationCenterIsActive = !notificationCenterIsActive" [ngClass]="{'pressed': notificationCenterIsActive }">
-        <span class="" style="font-family: icomoon; font-size: 20pt; user-select: none">bell</span>
-      </a>
-      <!-- <div *ngIf="notificationCenterIsActive" class="hbar-overlay-menu">
-        <div></div>
-        <ul>
-          <li routerLink="/profile" routerLinkActive="active">Benachrichtigungen</li>
-        </ul>
-      </div> -->
-    <!-- </div> -->
+    <!-- <a class="hbar-item hbar-icon-item" (click)="notificationCenterIsActive = !notificationCenterIsActive" [ngClass]="{'pressed': notificationCenterIsActive }">
+      <span class="" style="font-family: icomoon; font-size: 20pt; user-select: none">bell</span>
+    </a> -->
     
     <!-- Profile Menu Item -->
     <div class="hbar-item-wrapper">
@@ -55,8 +47,9 @@
 
     <span class="page-title">{{pageTitle | uppercase}}</span>
   </nav>
-
 </header>
+
+<app-kvuser-notification-box *ngIf="showNotification" (close)="showNotification = false" [notification]="activeNotification" ></app-kvuser-notification-box> 
 
 <section class="context-pane block" *ngIf="notificationCenterIsActive">
   <h3>Benachrichtigungen</h3>

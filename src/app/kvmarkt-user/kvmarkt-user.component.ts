@@ -12,97 +12,116 @@ import { fadeAnimation } from '../animations';
 import { User } from '../model/user.model';
 import { AuthService } from '../service/auth.service';
 import { UserStore } from '../model/store';
+import { ErrorService } from '../service/error.service';
 
 @Component({
-  selector: 'app-kvmarkt-user',
-  templateUrl: './kvmarkt-user.component.html',
-  styleUrls: ['./kvmarkt-user.component.css'],
-  animations: [fadeAnimation]
+    selector: 'app-kvmarkt-user',
+    templateUrl: './kvmarkt-user.component.html',
+    styleUrls: ['./kvmarkt-user.component.css'],
+    animations: [fadeAnimation]
 })
 export class KvmarktUserComponent implements OnInit, OnDestroy {
 
-  menuIsOpen = false;
-  profileMenuIsActive = false;
-  notificationCenterIsActive = false;
-  usergroup: string;
+    menuIsOpen = false;
+    profileMenuIsActive = false;
+    notificationCenterIsActive = false;
+    showNotification = false;
+    activeNotification: { title: string, message: string };
+    usergroup: string;
 
-  pageTitle = '';
-  _subscriptions: any[] = [];
-  _routeScrollPositions: any[] = [];
+    pageTitle = '';
+    _subscriptions: any[] = [];
+    _routeScrollPositions: any[] = [];
 
-  user: User;
+    user: User;
 
-  constructor(
-    // private authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private appTitle: Title,
-    private userStore: UserStore,
-    private authService: AuthService
-  ) { }
+    constructor(
+        // private authService: AuthService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private appTitle: Title,
+        private userStore: UserStore,
+        private authService: AuthService,
+        private errorService: ErrorService
+    ) { }
 
-  ngOnInit() {
-    this.userStore.getItem().subscribe(user => this.user = user);
-    this.setPageTitle();
-    // this.setWindowScrolling();
-  }
+    ngOnInit() {
+        this.userStore.getItem()
+            .subscribe(user => this.user = user);
+        this.setPageTitle();
+        this.connectToErrorService();
+        // this.setWindowScrolling();
+    }
 
-  ngOnDestroy() {
-    this._subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
+    connectToErrorService() {
+        this.errorService
+            .getError()
+            .subscribe((error) => {
+                this.activeNotification = {
+                    title: '' + error.httpCode,
+                    message: error.message
+                };
+                this.showNotification = true;
+                setTimeout(() => this.showNotification = false, 5000);
+            });
+    }
 
-  setWindowScrolling() {
-    this._subscriptions.push(
-      // save or restore scroll position on route change
-      this.router.events.pairwise().subscribe(([prevRouteEvent, currRouteEvent]) => {
-        if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
-          this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
-        }
-        if (currRouteEvent instanceof NavigationEnd) {
-          window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] || 0);
-        }
-      })
-    );
-  }
+    ngOnDestroy() {
+        this._subscriptions.forEach(subscription => subscription.unsubscribe());
+    }
 
-  setPageTitle() {
-    this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .map(() => this.activatedRoute)
-      .map((route): any => {
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
-        return route;
-      })
-      .mergeMap(route => route.data)
-      .subscribe((event) => {
-        if ('title' in event) {
-          this.pageTitle = event['title'];
-          this.appTitle.setTitle(this.pageTitle + ' - KV Markt');
-        } else {
-          this.pageTitle = '';
-          this.appTitle.setTitle('KV Markt');
-        }
-      });
-  }
+    setWindowScrolling() {
+        this._subscriptions.push(
+            // save or restore scroll position on route change
+            this.router.events.pairwise().subscribe(([prevRouteEvent, currRouteEvent]) => {
+                if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
+                    this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
+                }
+                if (currRouteEvent instanceof NavigationEnd) {
+                    window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] || 0);
+                }
+            })
+        );
+    }
 
-  toggleMenu(event: Event) {
-    this.menuIsOpen ? this.menuIsOpen = false : this.menuIsOpen = true;
-    event.preventDefault();
-  }
+    setPageTitle() {
+        this.router.events
+            .filter(event => event instanceof NavigationEnd)
+            .map(() => this.activatedRoute)
+            .map((route): any => {
+                while (route.firstChild) {
+                    route = route.firstChild;
+                }
+                return route;
+            })
+            .mergeMap(route => route.data)
+            .subscribe((event) => {
+                if ('title' in event) {
+                    this.pageTitle = event['title'];
+                    this.appTitle.setTitle(this.pageTitle + ' - KV Markt');
+                } else {
+                    this.pageTitle = '';
+                    this.appTitle.setTitle('KV Markt');
+                }
+            });
+    }
 
-  toggleProfileMenu(event: Event) {
-    this.profileMenuIsActive ? this.profileMenuIsActive = false : this.profileMenuIsActive = true;
-  }
+    toggleMenu(event: Event) {
+        this.menuIsOpen ? this.menuIsOpen = false : this.menuIsOpen = true;
+        event.preventDefault();
+    }
 
-  logout() {
-    this.authService.logout();
-    // this.router.navigate(['/login']);
-  }
+    toggleProfileMenu(event: Event) {
+        this.profileMenuIsActive ? this.profileMenuIsActive = false : this.profileMenuIsActive = true;
+    }
 
-  getState(outlet: any) {
-    return outlet.activatedRouteData.title;
-  }
+    logout() {
+        this.authService.logout();
+        // this.router.navigate(['/login']);
+    }
+
+    getState(outlet: any) {
+        return outlet.activatedRouteData.title;
+    }
 
 }

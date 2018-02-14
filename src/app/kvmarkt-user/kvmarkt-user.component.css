@@ -1,0 +1,62 @@
+.notification-box {
+    position: fixed;
+    z-index: 10;
+    top: 60px;
+    right: 10px;
+    width: 390px;
+    padding: 5px 10px;
+    background: rgba(159, 7, 7, 0.8);
+    border: 1px solid #fff;
+    border-radius: 8px;
+
+    color: #ffa0a0;
+
+    display: grid;
+    grid-template-areas: 
+                            "icon heading close"
+                            "icon description description";
+}
+
+.notification-box > span {
+    grid-area: close;
+    align-self: start;
+    justify-self: right;
+
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(124, 0, 0, 0.35);
+}
+
+.notification-box > span:hover {
+    background: rgba(51, 0, 0, 0.35);
+    color: #eee;
+}
+
+.notification-box > svg {
+    grid-area: icon;
+    width: 50px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.notification-box > svg path {
+    stroke:#ffa0a0;
+    stroke-width:7px;
+    fill: none;
+}
+
+
+.notification-box > h3 {
+    grid-area: heading;
+    margin: 10px 0 5px 0;
+}
+
+.notification-box > p {
+    grid-area: description;
+    margin: 0 0 10px 0;
+}

@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationBoxComponent } from './notification-box.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SchemeCreateComponent,
     SchemeCardComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    NotificationBoxComponent
   ]
 })
 export class KvmarktUserModule { }
