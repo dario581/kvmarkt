@@ -158,6 +158,10 @@ option {
     padding: 60px 10px;
 }
 
+.create-grid select {
+    font-size: 1.2em;
+}
+
 .create-grid > div {
     display: grid;
     grid-template-columns: 10px 1fr 280px;

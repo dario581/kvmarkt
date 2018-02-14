@@ -31,7 +31,8 @@
 }
 
 .text-secondary {
-    opacity: 0.5;
+    /* opacity: 0.5; */
+    color: var(--grey-400);
     font-size: 0.9em;
 }
 
@@ -434,17 +435,19 @@ a[role="button"].disabled:hover
 } */
 .ng-invalid:not(form) {
     border-left: none;
-    border-bottom: 1px solid #af2626;
+    /* border-bottom: 2px solid #dfc3c3; */
+    --input-border-color: #dfc3c3;
 }
 
-.ng-invalid:not(form) + *::after {
+.invalid-label::after {
     content: " ";
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    --diameter: 8px;
+    width: var(--diameter);
+    height: var(--diameter);
     border-radius: 50%;
     margin-left: 5px;
-    background-color: #af2626;
+    background-color: #af2626ad;
 }
 
 /* .block-dark button.btn-accent:hover,

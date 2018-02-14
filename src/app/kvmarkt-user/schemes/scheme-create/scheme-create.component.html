@@ -6,28 +6,28 @@
         <span>Vielen Dank für deine Mithilfe!</span>
     </p>
     <br>
-    <div class="button-box">
+    <!-- <div class="button-box">
         <a role="button" (click)="submit()" class="btn-accent ">
-            <!-- <span class="glyphicon glyphicon-floppy-disk"></span>  -->
+            <!-- <span class="glyphicon glyphicon-floppy-disk"></span>  --
             Speichern
         </a>
-    </div>
+    </div> -->
 </div>
 
 <main>
     <form [formGroup]="schemeForm" novalidate>
-        <section class="create-grid">
+        <div class="create-grid">
             <div>
                 <span class="create-step text-accent">1.</span>
-                <span class="create-title text-secondary">Titel</span>
-                <input name="title" class="input-headline" type="text" formControlName="title" />
+                <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('title').valid}" >Titel</span>
+                <input name="title" class="input-headline" type="text" formControlName="title" placeholder="{{placeholderTitle}}" />
                 <!-- <input [(ngModel)]="scheme.title" class="input-headline " type="text" value="Programmname" /> -->
                 <span class="create-description text-secondary">Gib hier einen passenden Titel für Dein Programm ein, damit es gut zu finden ist.</span>
             </div>
 
             <div>
                 <span class="create-step text-accent">2.</span>
-                <span class="create-title text-secondary">Kategorie</span>
+                <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('category').valid}">Kategorie</span>
                 <!-- <select [(ngModel)]="scheme.category" class="">
         <option *ngFor="let category of scheme_categories" [ngValue]="category.id">{{category.name}}</option>
       </select> -->
@@ -39,22 +39,22 @@
 
             <div>
                 <span class="create-step text-accent">3.</span>
-                <span class="create-title text-secondary">kurze Beschreibung</span>
+                <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('description').valid}">kurze Beschreibung</span>
                 <!-- <textarea [(ngModel)]="scheme.description" rows="2" class="">Gib hier eine kurze beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.</textarea> -->
-                <textarea formControlName="description" rows="2">Gib hier eine kurze beschreibung ein, um direkt zu sehen, worum es in deinem Programm geht.</textarea>
+                <textarea formControlName="description" rows="2" placeholder="{{placeholderDescription}}" ></textarea>
                 <span class="create-description text-secondary">Ordne Dein Programm einer Kategorie zu, um sie an einem Ort zu sammeln.</span>
             </div>
 
             <div>
                 <span class="create-step text-accent">4.</span>
-                <span class="create-title text-secondary">Inhalt</span>
+                <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('content').valid}">Inhalt</span>
                 <span class="">EDITOR</span>
                 <span class="create-description text-secondary"></span>
             </div>
 
             <div>
                 <span class="create-step text-accent">5.</span>
-                <span class="create-title text-secondary">Alter</span>
+                <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('age_end').valid}">Alter</span>
                 <span>
                     <span>VON</span>
                     <!-- <select [(ngModel)]="scheme.age_start" class="">
@@ -76,7 +76,7 @@
 
             <div>
                 <span class="create-step text-accent">6.</span>
-                <span class="create-title text-secondary">Ort</span>
+                <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('place').valid}">Ort</span>
                 <div class="places-flex">
                     <div>
                         <p>Ort auswählen:
@@ -113,10 +113,20 @@
                 <span class="create-description text-secondary">Wo sollte man das Programm durchführen? Es können bis zu zwei Alternativen ausgewählt werden.</span>
             </div>
 
-            <h3 class="text-accent">Fertig!</h3>
-            <p>Jetzt nur noch speichern und bald wird dein Programm bei den anderen erscheinen. </p>
-            <button class="btn-accent" [class.disabled]="!schemeForm.valid" (click)="submit()">Speichern</button><span *ngIf="!schemeForm.valid"  class="text-secondary">Nicht alle Angaben wurden korrekt angegeben.</span>
-
+            <section>
+                <h3 class="text-accent">Fertig!</h3>
+                <p>
+                    Jetzt nur noch speichern und bald wird dein Programm bei den anderen erscheinen.
+                </p>
+                <div style="display: flex; align-items: center" >
+                    <button class="btn-accent" [class.disabled]="!schemeForm.valid" (click)="submit()">Speichern</button>
+                    <p *ngIf="!schemeForm.valid"  class="text-secondary" style="margin-left: 20px;">
+                        Nicht alle Felder wurden (korrekt) ausgefüllt. <br>
+                        Überprüfe alle Felder mit einer<i class="invalid-label"></i> Markierung.
+                    </p>
+                </div>
+            </section>
+<!-- 
             <br>
             <br>
             <br>
@@ -124,8 +134,8 @@
             <br>
             <p>Form value: {{ schemeForm.value | json }}</p>
             <p>Form value: {{ schemeForm.status | json }}</p>
-            <p>{{scheme.content}}</p>
-        </section>
+            <p>{{scheme.content}}</p> -->
+        </div>
     </form>
 
 </main>

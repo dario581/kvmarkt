@@ -49,8 +49,8 @@ export class SchemeCreateComponent implements OnInit {
 
   scheme: Scheme = {
     id: null,
-    title: this.placeholderTitle,
-    description: this.placeholderDescription,
+    title: '',
+    description: '',
     content: '',
     placeName: null,
     place: 0,

@@ -7,10 +7,10 @@
     </h1>
     <form [formGroup]="loginForm" class="form-group" (ngSubmit)="signIn()">
        <!-- width: 100% -->
-      <label for="username" class="text-secondary">E-Mail Adresse</label>
+      <label for="username" class="text-secondary" [ngClass]="{'invalid-label' : !this.loginForm.get('username').valid}" >E-Mail Adresse</label>
       <input id="username" name="username" type="email" class="form-control" placeholder="name@beispiel.de" required formControlName="username" />  <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  -->
 
-      <label for="password" class="text-secondary">Passwort</label>
+      <label for="password" class="text-secondary" [ngClass]="{'invalid-label' : !this.loginForm.get('password').valid}">Passwort</label>
       <input id="password" name="password" type="password" class="form-control" placeholder="Passwort" required formControlName="password"  />
       <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
       <!-- <a>Passwort vergessen?</a><br> -->
