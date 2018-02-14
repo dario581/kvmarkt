@@ -35,6 +35,7 @@ const appRoutes: Routes = [
       }, */
     ]
   },
+  { path: '**', redirectTo: '/dashboard'}
 ];
 
 @NgModule({

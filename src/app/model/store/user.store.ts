@@ -62,7 +62,7 @@ export class UserStore extends BaseStore<User> {
                 const data = res.json().result;
                 localStorage.setItem('backand_token', data.token); // TODO: Use functions of BaseStore
                 localStorage.setItem('backand_user_id', data.id);
-                this.items = [{
+                const userInfo = {
                     id: data.id,
                     firstname: data.firstname,
                     lastname: data.lastname,
@@ -70,8 +70,9 @@ export class UserStore extends BaseStore<User> {
                     email: data.email,
                     association: data.association.id,
                     associationName: data.association.name
-                }];
-                return this.extractData(res);
+                };
+                this.items = [userInfo];
+                return userInfo;
             })
             .catch(err => this.handleError(err));
         return this.userSignInObservable;

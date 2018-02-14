@@ -13,12 +13,11 @@ import { UserStore } from '../model/store';
 @Injectable()
 export class AuthService implements OnInit {
     requestedUrl: string;
-    user: User;
-
+    screenMessage: string;
+    private user: User;
 
     private isLoggedIn = true;
     private userObservable: Observable<boolean>;
-
 
     constructor(
         private http: Http,
@@ -40,31 +39,21 @@ export class AuthService implements OnInit {
 
     signIn(user: string, pass: string): Observable<any> {
         return this.userStore.signIn(user, pass)
-            .do(() => this.reactOnError);
+            .do(() => this.reactOnError)
+            .do(() => this.screenMessage = null);
     }
 
-    logout() {
-        // localStorage.removeItem('backand_user_username');
-        // localStorage.removeItem('backand_user_firstname');
-        // localStorage.removeItem('backand_user_lastname');
-        // localStorage.removeItem('backand_username');
+    logout(message?: string) {
         localStorage.removeItem('backand_user_id');
-        // localStorage.removeItem('backand_token');
+        localStorage.removeItem('backand_token');
         this.isLoggedIn = false;
+        this.screenMessage = 'Du wurdest abgemeldet.';
+        if (message) {
+            this.screenMessage = this.screenMessage + ' ' + message;
+        }
         this.router.navigate(['/login']);
     }
 
-    setUserInfo() {
-        return this.userStore.getItem();
-        // .flatMap( (userData: User) => {
-        //   localStorage.setItem('backand_user_firstname', userData.firstname);
-        //   localStorage.setItem('backand_user_lastname', userData.lastname);
-        //   localStorage.setItem('backand_user_association', '' + userData.association);
-        //   localStorage.setItem('backand_user_association_name', userData.association_name);
-        //   localStorage.setItem('backand_user_id', '' + userData.id);
-        //   return Observable.of(true);
-        // });
-    }
 
     reactOnError() {
         console.log('Error reaction handler registered.');
@@ -76,7 +65,7 @@ export class AuthService implements OnInit {
             .subscribe((error: DataError) => {
                 console.error('[AuthService] Catched 401 Error', error);
                 // this.requestedUrl = this.route TODO
-                this.logout();
+                this.logout('Anmedlung abgelaufen.');
             });
     }
 

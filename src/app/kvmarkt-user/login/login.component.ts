@@ -13,13 +13,14 @@ import { Observable } from 'rxjs/Observable';
 })
 export class LoginComponent implements OnInit {
 
-    loginForm: FormGroup;
-    errorMessage: string;
+    protected loginForm: FormGroup;
+    protected errorMessage: string;
+    protected infoMessage: string;
 
-    loading = false;
+    protected loading = false;
 
-    username = '';
-    password = '';
+    private username = '';
+    private password = '';
 
     constructor(private router: Router, private authService: AuthService) {
         this.loginForm = new FormGroup({
@@ -38,9 +39,11 @@ export class LoginComponent implements OnInit {
         if (this.authService.hasCredentialsSet()) {
             this.router.navigate(['/dashboard']);
         }
+        this.infoMessage = this.authService.screenMessage;
     }
 
     signIn() {
+        this.infoMessage = null;
         if ((this.loginForm.get('username').status || this.loginForm.get('password').status) !== 'VALID') {
             this.errorMessage = 'Bitte gib eine gültige E-Mail Adresse und ein Passwort ein.';
             // if (this.loginForm.get('username').status !== 'VALID') {
@@ -53,11 +56,6 @@ export class LoginComponent implements OnInit {
         }
         this.loading = true;
         this.authService.signIn(this.loginForm.get('username').value, this.loginForm.get('password').value)
-            .flatMap(res => {
-                localStorage.setItem('backand_token', res.token);
-                localStorage.setItem('backand_username', res.email);
-                return this.authService.setUserInfo();
-            })
             .subscribe(
                 (data) => {
                     this.loading = false;
