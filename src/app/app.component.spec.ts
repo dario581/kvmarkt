@@ -3,8 +3,6 @@ import { AppComponent } from './app.component';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { KvmarktUserModule } from './kvmarkt-user/kvmarkt-user.module';
-import { DataService } from './service/data.service';
-import { BackandService } from './service/backand.service';
 import { AuthService } from './service/auth.service';
 import { APP_BASE_HREF } from '@angular/common';
 

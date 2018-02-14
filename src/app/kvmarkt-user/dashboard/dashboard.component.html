@@ -7,7 +7,7 @@
         <div>
           <span class="card-accent"></span>
         </div>
-        <h1 class="font-style font-extra-light">Hallo, {{user_firstname}}</h1>
+        <h1 class="font-style font-extra-light">Hallo <span *ngIf="user" >, {{user.firstname}}</span></h1>
         <p>
           Willkommen bei deinem KV Markt! Finde hier Prgramme für deine Gruppe oder Teile deine Ideen mit anderen!
         </p>

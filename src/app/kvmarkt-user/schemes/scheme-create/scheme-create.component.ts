@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidatorFn, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ErrorService, NETWORK_ERROR } from '../../../service/error.service';
-import { BackandService } from '../../../service/backand.service';
 import { Scheme } from '../../../model/scheme.model';
-import { CategoryStore, PlaceStore } from '../../../model/store/BaseStore';
+import { CategoryStore, PlaceStore } from '../../../model/store';
+import { Category, Place } from '../../../model/helpers.model';
 
 @Component({
   selector: 'app-scheme-create',
@@ -16,7 +16,6 @@ export class SchemeCreateComponent implements OnInit {
 
   constructor(
     private errorService: ErrorService,
-    // private backandService: BackandService,
     private categoryStore: CategoryStore,
     private placeStore: PlaceStore,
     private formBuilder: FormBuilder
@@ -41,8 +40,8 @@ export class SchemeCreateComponent implements OnInit {
   // };
 
   private scheme_tags: Array<{ name: string, id: number }> = [];
-  scheme_categories: Array<{ name: string, id: number }> = [];
-  scheme_places: Array<{ name: string, id: number }> = [];
+  scheme_categories: Category[] = [];
+  scheme_places: Place[] = [];
   scheme_ages: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
   placeholderTitle = 'Programmname';
@@ -67,9 +66,6 @@ export class SchemeCreateComponent implements OnInit {
   };
 
   ngOnInit() {
-    // this.backandService.getCategories().subscribe(data => this.setSchemeCategories(data));
-    // this.backandService.getTags().subscribe((data: any) => this.scheme_tags = data);
-    // this.backandService.getPlaces().subscribe(data => this.setSchemePlaces(data));
     this.categoryStore.getItems().subscribe(data => this.setSchemeCategories(data));
     this.placeStore.getItems().subscribe(data => this.setSchemePlaces(data));
   }
@@ -155,12 +151,12 @@ export class SchemeCreateComponent implements OnInit {
 
 
 
-  private setSchemeCategories(data: Array<{ name: string, id: number }>) {
+  private setSchemeCategories(data: Category[]) {
     this.scheme_categories = [{ name: 'Kategorie wählen', id: 0 }];
     this.scheme_categories = this.scheme_categories.concat(data);
   }
 
-  private setSchemePlaces(data: Array<{ name: string, id: number }>) {
+  private setSchemePlaces(data: Place[]) {
     this.scheme_places = [{ name: 'Ort wählen', id: 0 }];
     this.scheme_places = this.scheme_places.concat(data);
   }
@@ -181,9 +177,9 @@ export class SchemeCreateComponent implements OnInit {
       place2: this.schemeForm.value.place2 > 0 ? this.schemeForm.value.place2 : undefined,
       place3: this.schemeForm.value.place3 > 0 ? this.schemeForm.value.place3 : undefined
     };
+    // TODO: Add saving of scheme
     // this.backandService.addScheme(scheme).subscribe((data: any) => {
     //   console.log('scheme create save');
-    //   // this.backandService.addSchemeTags(data.id, [1, 2]).subscribe((data2: any) => console.log(data2));
     // });
   }
 

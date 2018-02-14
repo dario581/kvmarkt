@@ -6,5 +6,5 @@ export interface User {
     lastname: string;
     email: string;
     association: number;
-    association_name: string;
+    associationName: string;
 }

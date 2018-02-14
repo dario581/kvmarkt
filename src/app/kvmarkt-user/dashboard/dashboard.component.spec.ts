@@ -2,8 +2,6 @@ import { AuthService } from '../../service/auth.service';
 import { HttpModule } from '@angular/http';
 import { SchemeCardComponent } from '../schemes/scheme-card/scheme-card.component';
 import { By } from '@angular/platform-browser';
-import { BackandService } from '../../service/backand.service';
-import { DataService } from '../../service/data.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
@@ -13,7 +11,6 @@ import { APP_BASE_HREF } from '@angular/common';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let dataService: BackandService;
   let spy: any;
   let el;
 
@@ -22,7 +19,7 @@ describe('DashboardComponent', () => {
       declarations: [
         DashboardComponent, SchemeCardComponent,
         { provide: APP_BASE_HREF, useValue: '/' },
-        DataService, BackandService, AuthService,
+        , AuthService,
         RouterModule.forRoot([]),
         RouterModule,
         HttpModule
@@ -37,11 +34,11 @@ describe('DashboardComponent', () => {
     component = fixture.componentInstance;
 
     // TwainService actually injected into the component
-    dataService = fixture.debugElement.injector.get(BackandService);
+    // dataService = fixture.debugElement.injector.get(BackandService);
 
     // Setup spy on the `getQuote` method
-    spy = spyOn(dataService, 'getBlogposts')
-      .and.returnValue(Promise.resolve([]));
+    // spy = spyOn(dataService, 'getBlogposts')
+    //   .and.returnValue(Promise.resolve([]));
 
     // Get the Twain quote element by CSS selector (e.g., by class name)
     // const de = fixture.debugElement.query(By.css('blopost-title'));

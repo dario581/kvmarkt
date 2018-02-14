@@ -41,8 +41,8 @@
     <div class="hbar-item-wrapper">
       <a class="hbar-item hbar-profile"  (click)="profileMenuIsActive = !profileMenuIsActive" [ngClass]="{'pressed': profileMenuIsActive }">
         <span class="contact-img"></span>
-        <span class="font-light">{{user_firstname}} {{user_lastname}}</span>
-        <span>{{user_association}}</span>
+        <span class="font-light">{{user?.firstname}} {{user?.lastname}}</span>
+        <span>{{user?.associationName}}</span>
       </a>
       <div *ngIf="profileMenuIsActive" class="hbar-overlay-menu">
         <div></div>

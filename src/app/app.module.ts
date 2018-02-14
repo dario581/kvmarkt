@@ -5,11 +5,10 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { KvmarktUserModule } from './kvmarkt-user/kvmarkt-user.module';
-import { BackandService } from './service/backand.service';
 import { AuthService } from './service/auth.service';
 import { AuthGuardService } from './service/auth-guard.service';
 import { ErrorService } from './service/error.service';
-import { SchemeStore, SchemeFavoriteStore, PlaceStore, CategoryStore, UserStore } from './model/store/BaseStore';
+import { SchemeStore, PlaceStore, CategoryStore, UserStore } from './model/store';
 
 @NgModule({
   declarations: [
@@ -28,15 +27,13 @@ import { SchemeStore, SchemeFavoriteStore, PlaceStore, CategoryStore, UserStore 
     KvmarktUserModule
   ],
   providers: [
-    BackandService
-    , AuthService
+    AuthService
     , AuthGuardService
     , ErrorService
     , SchemeStore
     , CategoryStore
     , PlaceStore
     , UserStore
-    , SchemeFavoriteStore
   ],
   bootstrap: [AppComponent]
 })

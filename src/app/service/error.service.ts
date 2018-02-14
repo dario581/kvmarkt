@@ -13,9 +13,14 @@ export class ErrorService {
     this.subject = new Subject();
    }
 
-  setError(type: number) {
-    this.error = new DataError(type, 'Oh, leider ist etwas schief gelaufen. Versuche es bald nochmal');
+  setError(type: number, message?: string) {
 
+    if (!message) {
+      message = 'Oh, leider ist etwas schief gelaufen. Versuche es bald nochmal';
+    }
+
+    this.error = new DataError(type, message);
+    console.error('ErrorService', this.error);
     // this.error.id = type;
     // this.error.message = 'Oh, leider ist etwas schief gelaufen. Versuche es bald nochmal';
 

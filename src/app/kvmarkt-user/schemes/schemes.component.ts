@@ -1,13 +1,13 @@
-import { BackandService } from '../../service/backand.service';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { filter, first } from 'rxjs/operators';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Scheme } from '../../model/scheme.model';
 import { slideTileAnimation } from '../../animations';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { SchemeStore, CategoryStore, PlaceStore } from '../../model/store/BaseStore';
+import { SchemeStore, CategoryStore, PlaceStore } from '../../model/store';
 
 import 'rxjs/add/operator/first';
+import { Category, Place } from '../../model/helpers.model';
 
 @Component({
   selector: 'app-schemes',
@@ -41,8 +41,8 @@ export class SchemesComponent implements OnInit, OnDestroy {
   firstLoad = true;
   private schouldAnimateSchemes = 'yes';
 
-  scheme_categories: Array<{ name: string, id: number }> = [];
-  scheme_places: Array<{ name: string, id: number }> = [];
+  scheme_categories: Category[] = [];
+  scheme_places: Place[] = [];
   scheme_ages: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
   age_start = this.scheme_ages[0];
@@ -180,46 +180,46 @@ export class SchemesComponent implements OnInit, OnDestroy {
     setTimeout(() => this.loadSchemesFromStore(page, pageSize), 1);
   }
 
-  private loadSchemesFromStore(page: number, pageSize: number) {
-    const schemeFilter = [
-      { fieldName: 'age_start', operator: 'lessThanOrEqualsTo', value: '' + this.age_end },
-      { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start }
-    ];
-    if (this.scheme_category > 0) {
-      schemeFilter.push(
-        { fieldName: 'category', operator: 'in', value: '' + this.scheme_category }
-      );
-    }
-    if (this.scheme_place > 0) {
-      schemeFilter.push(
-        { fieldName: 'place', operator: 'in', value: '' + this.scheme_place }
-      );
-    }
-    // TODO: Add Sorting
-    // this.schemeStore.setFilter(schemeFilter);
-    this.schemeStore
-      .getItems(true, page, pageSize, schemeFilter)
-      .first()
-      .subscribe(
-      data => this.handleSchemes(data),
-      err => this.loading = false
-      );
-  }
-
-  // private loadSchemesFromService(page: number, pageSize: number) {
-  //   this._dataService.getSchemes().subscribe((schemes) => {
-  //     const result = schemes.filter((scheme) => {
-  //       if (this.checkSchemeParameters(scheme)) {
-  //         return true;
-  //       }
-  //     });
-  //     this.totalRows = result.length;
-  //     // this.countPages = new Array(Math.ceil(this.totalRows / this.pageSize));
-  //     this.loading = false;
-  //     this.schemes = result;
-  //     this.schouldAnimateSchemes = 'yes';
-  //   });
+  // private loadSchemesFromStore(page: number, pageSize: number) {
+  //   const schemeFilter = [
+  //     { fieldName: 'age_start', operator: 'lessThanOrEqualsTo', value: '' + this.age_end },
+  //     { fieldName: 'age_end', operator: 'greaterThanOrEqualsTo', value: '' + this.age_start }
+  //   ];
+  //   if (this.scheme_category > 0) {
+  //     schemeFilter.push(
+  //       { fieldName: 'category', operator: 'in', value: '' + this.scheme_category }
+  //     );
+  //   }
+  //   if (this.scheme_place > 0) {
+  //     schemeFilter.push(
+  //       { fieldName: 'place', operator: 'in', value: '' + this.scheme_place }
+  //     );
+  //   }
+  //   // TODO: Add Sorting
+  //   // this.schemeStore.setFilter(schemeFilter);
+  //   this.schemeStore
+  //     .getItems(true, page, pageSize, schemeFilter)
+  //     .first()
+  //     .subscribe(
+  //     data => this.handleSchemes(data),
+  //     err => this.loading = false
+  //     );
   // }
+
+  private loadSchemesFromStore(page: number, pageSize: number) {
+    this.schemeStore.getItems(true).subscribe((schemes) => {
+      const result = schemes.filter((scheme) => {
+        if (this.checkSchemeParameters(scheme)) {
+          return true;
+        }
+      });
+      this.totalRows = result.length;
+      // this.countPages = new Array(Math.ceil(this.totalRows / this.pageSize));
+      this.loading = false;
+      this.schemes = result;
+      this.schouldAnimateSchemes = 'yes';
+    });
+  }
 
   checkSchemeParameters(scheme: Scheme): boolean {
     let schemeFilter = scheme.ageEnd >= this.age_start && scheme.ageStart <= this.age_end;

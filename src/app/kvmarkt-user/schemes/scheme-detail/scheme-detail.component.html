@@ -6,7 +6,7 @@
                 <i class="fa fa-heart-o fa-stack-1x fa-inverse"></i>
             </span> Mag ich
   </p>
-  <h3 *ngIf="scheme" ><a [routerLink]="[ '/schemes', {categories: scheme.category} ]">{{scheme.category_name}}</a></h3>
+  <h3 *ngIf="scheme" ><a [routerLink]="[ '/schemes', {categories: scheme.category} ]">{{scheme.categoryName}}</a></h3>
 </div>
 
 <div *ngIf="!scheme" style="width: 100%; padding-top: 300px; text-align: center; color: #aaaaaa">
@@ -28,9 +28,9 @@
     <div class="row animation-enter-children">
       <div class="col-sm-12 col-md-8 col-lg-8 col-xs-12 content transition-height" [ngClass]="{'transition-height-max': scheme}">
         <div class="dashboard-card no-max-width" style="background: #e0dedf; ">
-          <p style="padding-bottom: 10px">Alter: <a style="font-size: 1.3em; padding-right: 40px;">{{scheme.age_start}} - {{scheme.age_end}}</a> Ort:
+          <p style="padding-bottom: 10px">Alter: <a style="font-size: 1.3em; padding-right: 40px;">{{scheme.ageStart}} - {{scheme.ageEnd}}</a> Ort:
             <a
-              style="font-size: 1.3em">{{scheme.place_name}}</a>
+              style="font-size: 1.3em">{{scheme.placeName}}</a>
           </p>
           <hr class="full-width">
           <div style="font-size: 1.3em; padding: 20px 0" [innerHtml]="scheme.description"></div>
@@ -44,8 +44,8 @@
         <div class="block block-dark dashboard-card author-card">
 
           <p>
-            <span class="font-light" style="display: block;  width: 100%; font-size: 14pt ">{{scheme.author_name}}</span>
-            <span style="display: block;  width: 100%; font-size: 9pt; font-weight: 400; color: #9d9a99; margin-top: -2px;">{{user_association}}</span>
+            <span class="font-light" style="display: block;  width: 100%; font-size: 14pt ">{{scheme.authorName}}</span>
+            <span style="display: block;  width: 100%; font-size: 9pt; font-weight: 400; color: #9d9a99; margin-top: -2px;">{{user?.association_name}}</span>
           </p>
 
           <p>

@@ -1,4 +1,4 @@
-import { IBaseObject } from './store/BaseStore';
+import { IBaseObject } from './store';
 
 export interface Scheme extends IBaseObject {
     id: number;

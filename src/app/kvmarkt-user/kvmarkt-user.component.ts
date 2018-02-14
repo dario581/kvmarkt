@@ -10,8 +10,8 @@ import { ActivatedRoute, NavigationEnd, Router, NavigationStart } from '@angular
 import { OAuthService } from 'angular-oauth2-oidc';
 import { fadeAnimation } from '../animations';
 import { User } from '../model/user.model';
-import { BackandService } from '../service/backand.service';
 import { AuthService } from '../service/auth.service';
+import { UserStore } from '../model/store';
 
 @Component({
   selector: 'app-kvmarkt-user',
@@ -24,9 +24,6 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
   menuIsOpen = false;
   profileMenuIsActive = false;
   notificationCenterIsActive = false;
-  user_lastname: string;
-  user_firstname: string;
-  user_association: string;
   usergroup: string;
 
   pageTitle = '';
@@ -40,15 +37,12 @@ export class KvmarktUserComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private appTitle: Title,
-    private backandService: BackandService,
+    private userStore: UserStore,
     private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.backandService.getUser().subscribe(user => this.user = user);
-    this.user_firstname = localStorage.getItem('backand_user_firstname');
-    this.user_lastname = localStorage.getItem('backand_user_lastname');
-    this.user_association = localStorage.getItem('backand_user_association_name');
+    this.userStore.getItem().subscribe(user => this.user = user);
     this.setPageTitle();
     // this.setWindowScrolling();
   }
