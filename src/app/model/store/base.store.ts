@@ -71,7 +71,7 @@ export abstract class BaseStore<T extends IBaseObject> {
     protected handleError(error) {
         const dataError = new DataError(error.status, error.message);
         this.errorService.setError(error.status);
-        console.error(`BaseStore; ${ this.identifier }`, error);
+        console.error(`BaseStore; ${this.identifier}`, error);
         return Observable.throw(error);
     }
 
@@ -112,7 +112,40 @@ export abstract class BaseStore<T extends IBaseObject> {
 }
 
 export abstract class BaseCreateStore<T extends IBaseObject> extends BaseStore<T> {
+
+    protected addObservable: Observable<any>;
+
+    public addItem(item: T) {
+        // const body = {
+        //     'Email': user,
+        //     'Password': pass
+        // };
+        this.addObservable = this
+            .http
+            .post(this.api_url + this.identifier, item, {
+                headers: this.authHeader,
+            })
+            .map(data => this.extractData(data))
+            .do( (data) => {
+                if (!this.items) {
+                    this.items = [];
+                }
+                this.items.push(data);
+                // if (this.items) {
+                //     const changedIndex = this.items.findIndex( i => {
+                //         if (i.id === data.id) {
+                //             return true;
+                //         }
+                //     });
+                //     this.items[changedIndex] = data;
+                // }
+            })
+            .catch(err => this.handleError(err));
+        return this.addObservable;
+    }
+
 }
+
 export abstract class BaseCreateAndFavoriteStore<T extends IBaseFavoriteObject> extends BaseCreateStore<T> {
 
     favoriteObservalbe: Observable<boolean>;

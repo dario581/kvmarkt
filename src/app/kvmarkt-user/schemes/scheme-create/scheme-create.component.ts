@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ValidatorFn, AbstractControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ErrorService, NETWORK_ERROR } from '../../../service/error.service';
 import { Scheme } from '../../../model/scheme.model';
-import { CategoryStore, PlaceStore } from '../../../model/store';
+import { CategoryStore, PlaceStore, SchemeStore } from '../../../model/store';
 import { Category, Place } from '../../../model/helpers.model';
 
 @Component({
@@ -18,6 +18,7 @@ export class SchemeCreateComponent implements OnInit {
     private errorService: ErrorService,
     private categoryStore: CategoryStore,
     private placeStore: PlaceStore,
+    private schemeStore: SchemeStore,
     private formBuilder: FormBuilder
   ) {
     this.createForm();
@@ -178,9 +179,9 @@ export class SchemeCreateComponent implements OnInit {
       place3: this.schemeForm.value.place3 > 0 ? this.schemeForm.value.place3 : undefined
     };
     // TODO: Add saving of scheme
-    // this.backandService.addScheme(scheme).subscribe((data: any) => {
-    //   console.log('scheme create save');
-    // });
+    this.schemeStore.addItem(scheme).subscribe((data: any) => {
+      console.log('scheme create save', data);
+    });
   }
 
 

@@ -207,7 +207,7 @@ export class SchemesComponent implements OnInit, OnDestroy {
   // }
 
   private loadSchemesFromStore(page: number, pageSize: number) {
-    this.schemeStore.getItems(true).subscribe((schemes) => {
+    this.schemeStore.getItems().subscribe((schemes) => {
       const result = schemes.filter((scheme) => {
         if (this.checkSchemeParameters(scheme)) {
           return true;
