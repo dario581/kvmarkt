@@ -5,6 +5,8 @@ import { Scheme } from '../../../model/scheme.model';
 import { CategoryStore, PlaceStore, SchemeStore } from '../../../model/store';
 import { Category, Place } from '../../../model/helpers.model';
 
+import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+
 @Component({
   selector: 'app-scheme-create',
   templateUrl: './scheme-create.component.html',
@@ -92,7 +94,7 @@ export class SchemeCreateComponent implements OnInit {
       category:     ['', [Validators.required, this.forbiddenSelectorValidator()]],
       description:  ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), Validators.maxLength(500),
         this.forbiddenStringValidator(this.placeholderDescription) ]],
-      content:      ['', Validators.minLength(40)],
+      content:      ['', Validators.required],
       age_start:    ['', [Validators.required]],
       age_end:      ['', [Validators.required, this.forbiddenSelectorValidator()]],
       place:        ['', [Validators.required, this.forbiddenSelectorValidator()]],

@@ -48,7 +48,7 @@
             <div>
                 <span class="create-step text-accent">4.</span>
                 <span class="create-title text-secondary" [ngClass]="{'invalid-label' : !schemeForm.get('content').valid}">Inhalt</span>
-                <span class="">EDITOR</span>
+                <quill-editor formControlName="content"></quill-editor>
                 <span class="create-description text-secondary"></span>
             </div>
 

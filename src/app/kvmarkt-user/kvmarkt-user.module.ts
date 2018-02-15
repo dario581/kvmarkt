@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationBoxComponent } from './notification-box.component';
 
 
+import { QuillModule } from 'ngx-quill';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -28,7 +30,8 @@ import { NotificationBoxComponent } from './notification-box.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    QuillModule
   ],
   declarations: [
     KvmarktUserComponent,
