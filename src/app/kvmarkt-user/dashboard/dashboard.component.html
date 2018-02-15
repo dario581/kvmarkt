@@ -66,7 +66,7 @@
           <br>
           <a role="button" class="btn-accent" [routerLink]="['/schemes']" routerLinkActive="active">Programme anzeigen</a>
         </p>
-        <a role="button" *ngIf="favSchemes && favSchemes.length > 0" class="btn-accent" [routerLink]="['/profile']" fragment="favorites" routerLinkActive="active">Alle Favoriten anzeigen</a>
+        <a role="button" *ngIf="favSchemes && favSchemes.length > 0" class="btn-accent" [routerLink]="['/schemes', { favorites:1} ]" routerLinkActive="active">Alle Favoriten anzeigen</a>
       </div>
     </div>
 
@@ -89,7 +89,7 @@
             <span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
         </p>
         <app-scheme-card *ngFor="let scheme of ownSchemes" class="scheme-card card-item" [scheme]="scheme"></app-scheme-card>
-        <a role="button" *ngIf="ownSchemes && ownSchemes.length > 0" class="btn-accent" [routerLink]="['/profile']" fragment="schemes" routerLinkActive="active">Deine Programme anzeigen</a>
+        <a role="button" *ngIf="ownSchemes && ownSchemes.length > 0" class="btn-accent" [routerLink]="['/schemes', { own:1} ]" routerLinkActive="active">Deine Programme anzeigen</a>
       </div>
     </div>
   </div>

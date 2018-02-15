@@ -5,7 +5,7 @@
   <br>
   <div class="button-box">
     <br>
-    <a role="button" class="btn-accent" [routerLink]="['/schemes/start']" routerLinkActive="active">Programme entdecken</a>
+    <!-- <a role="button" class="btn-accent" [routerLink]="['/schemes/start']" routerLinkActive="active">Programme entdecken</a> -->
     <a role="button" class="btn-accent" [routerLink]="['/schemes/create']" routerLinkActive="active">
       <span class="glyphicon glyphicon-file"></span> Neues Programm erstellen</a>
   </div>
@@ -13,14 +13,14 @@
 
 <div class="filterbar container-fluid animation-enter">
   <!-- [style.visibility]="loading ? 'hidden' : 'visible'" -->
-  <div> Sortieren nach:
+  <!-- <div> Sortieren nach:
     <select [(ngModel)]="selectedSortingString" (ngModelChange)="onParameterChange()">
       <option [value]="'date_asc'">Datum aufsteigend [alt -> neu]</option>
       <option [value]="'date_desc'">Datum absteigend [neu -> alt]</option>
       <option [value]="'alpha_desc'">Alphabetisch absteigend [Z -> A]</option>
       <option [value]="'alpha_asc'">Alphabetisch aufsteigend [A -> Z]</option>
     </select>
-  </div>
+  </div> -->
   <div> Kategorie:
     <select [(ngModel)]="scheme_category" (ngModelChange)="onParameterChange()">
       <option [ngValue]="0">Alle</option>
@@ -42,6 +42,16 @@
     <select [(ngModel)]="age_end" (ngModelChange)="onParameterChange()">
       <option *ngFor="let number of scheme_ages" [ngValue]="number">{{number}}</option>
     </select>
+  </div>
+  <div>
+    <label for="favorite-schemes-checkbox">
+      <input id="favorite-schemes-checkbox" type="checkbox" [(ngModel)]="onlyFavorites" (ngModelChange)="onParameterChange()"/> Nur meine Favoriten
+    </label>
+  </div>
+  <div>
+    <label for="own-schemes-checkbox">
+      <input id="own-schemes-checkbox" type="checkbox" [(ngModel)]="onlyOwn" (ngModelChange)="onParameterChange()"/> Nur eigene Programme
+    </label>
   </div>
   <div>
     <span *ngIf="totalRows == 1">{{totalRows}} Ergebnis</span>

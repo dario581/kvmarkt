@@ -66,6 +66,13 @@ input {
     /* font-size: 18pt; */
 }
 
+input[type='checkbox'] {
+    width: auto;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 3px;
+}
+
 input.input-headline {
     font-size: 30pt;
 }
