@@ -35,27 +35,26 @@ export class DashboardComponent implements OnInit {
         this._schemeStore
             .getItems()
             .distinct()
-            .subscribe( (schemes: Scheme[]) => {
+            .subscribe((schemes: Scheme[]) => {
                 this.favSchemes = schemes
                     .filter((scheme) => {
                         return scheme.isFavorite;
                     })
-                    /* .slice(0, 2) */;
+                    .slice(0, 3);
             });
 
         this._userStore
             .getItem()
             .distinct()
             .subscribe((user: User) => {
+                this.user = user;
                 this._schemeStore.getItems(false)
                     .subscribe((schemes: Scheme[]) => {
-                        this.ownSchemes = schemes.filter((scheme: Scheme) => scheme.author === user.id);
+                        this.ownSchemes = schemes
+                            .filter((scheme: Scheme) => scheme.author === user.id)
+                            .slice(0, 3);
                     });
             });
         this.hint = 'Wird geladen...';
-        this._userStore.getItem()
-            .subscribe(
-                user => this.user = user
-            );
     }
 }
