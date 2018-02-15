@@ -13,11 +13,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class LoginComponent implements OnInit {
 
-    protected loginForm: FormGroup;
-    protected errorMessage: string;
-    protected infoMessage: string;
+    loginForm: FormGroup;
+    errorMessage: string;
+    infoMessage: string;
 
-    protected loading = false;
+    loading = false;
 
     private username = '';
     private password = '';
