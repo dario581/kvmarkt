@@ -32,7 +32,7 @@ export class SchemeDetailComponent implements OnInit {
             const id = +params['id'];
             this.schemeStore.getItem(id).subscribe(data => this.init(data));
         });
-        this.userStore.getItem().subscribe(user => this.user);
+        this.userStore.getItem().subscribe(user => this.user = user);
     }
 
     public init(data: Scheme) {
