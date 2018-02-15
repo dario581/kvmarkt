@@ -439,6 +439,7 @@ a[role="button"].disabled:hover
     --input-border-color: #dfc3c3;
 }
 
+
 .invalid-label::after {
     content: " ";
     display: inline-block;
@@ -449,6 +450,7 @@ a[role="button"].disabled:hover
     margin-left: 5px;
     background-color: #af2626ad;
 }
+
 
 /* .block-dark button.btn-accent:hover,
 .block-dark a.btn-accent:hover {
