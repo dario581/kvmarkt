@@ -59,7 +59,11 @@
         </p>
         <hr class="full-width">
         <app-scheme-card *ngFor="let scheme of favSchemes" class="scheme-card card-item" [scheme]="scheme"></app-scheme-card>
-        <p *ngIf="!favSchemes ||favSchemes.length === 0" class="text-center">
+        <div *ngIf="!favSchemes" class="spinner">
+          <span></span>
+          <span class="text-secondary">Wird geladen...</span>
+        </div> 
+        <p *ngIf="favSchemes && favSchemes.length === 0" class="text-center">
           <br>Wie es aussieht, hast du noch keine eigenen Favoriten. Entdecke jetzt coole Programme und speichere sie dir für
           später!
           <br>
@@ -81,7 +85,11 @@
           Finde hier deine erstellten Programme:
         </p>
         <hr class="full-width">
-        <p *ngIf="!ownSchemes || ownSchemes.length === 0" class="text-center">
+        <div *ngIf="!ownSchemes" class="spinner">
+          <span></span>
+          <span class="text-secondary">Wird geladen...</span>
+        </div>
+        <p *ngIf="ownSchemes && ownSchemes.length === 0" class="text-center">
           <br>Wie es aussieht, hast du noch keine eigenen Programme. Klick auf den Link und erstelle jetzt dein erstes Programm!
           <br>
           <br>

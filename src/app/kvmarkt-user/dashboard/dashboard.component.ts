@@ -23,6 +23,9 @@ export class DashboardComponent implements OnInit {
     favSchemes: Scheme[];
     ownSchemes: Scheme[] = null;
 
+    loadingFavSchemes = true;
+    loadingOwnSchemes = true;
+
     constructor(
         private _schemeStore: SchemeStore
         , private _categoryStore: CategoryStore
@@ -41,6 +44,7 @@ export class DashboardComponent implements OnInit {
                         return scheme.isFavorite;
                     })
                     .slice(0, 3);
+                this.loadingFavSchemes = false;
             });
 
         this._userStore
@@ -54,6 +58,7 @@ export class DashboardComponent implements OnInit {
                             .filter((scheme: Scheme) => scheme.author === user.id)
                             .slice(0, 3);
                     });
+                this.loadingOwnSchemes = false;
             });
         this.hint = 'Wird geladen...';
     }

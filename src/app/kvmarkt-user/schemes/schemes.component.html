@@ -86,5 +86,8 @@
 
 <div *ngIf="!typePagination" class="" style="width: 100%; text-align: center; padding-top: 10px; padding-bottom: 50px">
   <button *ngIf="!loading && schemes.length < totalRows" class="" (click)="appendSchemes()">Mehr laden</button>
-  <span *ngIf="loading" style="color: #aaaaaa">Wird geladen...</span>
+  <div *ngIf="loading" class="spinner">
+    <span></span>
+    <span class="text-secondary">Wird geladen...</span>
+  </div>
 </div>
