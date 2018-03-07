@@ -207,7 +207,7 @@ span.glyphicon {
     -webkit-font-smoothing: antialiased;
 }
 
-.menu-icon {
+nav.headbar > .menu-icon {
     display: none;
     height: 52px;
     padding-left: 15px;
@@ -395,8 +395,14 @@ nav.headbar .hbar-profile.pressed > span {
         display: none;
     }
 
-    .menu-icon {
+    nav.headbar > .menu-icon {
         display: inline-block;
+        order: -2;
+    }
+    
+    nav.headbar > .page-title {
+        position: relative;
+        order: -1;
     }
 }
 
