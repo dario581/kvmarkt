@@ -54,6 +54,7 @@
             {{scheme.created | date:"dd.MM.yyyy" }}
           </p>
           <button class="btn-accent no-print" (click)="printPage()">Drucken/Als PDF speichern</button>
+          <a *ngIf="userIsAuthor" role="button"  class="btn-accent no-print" [routerLink]="[ './edit']" >Bearbeiten</a>
         </div>
       </div>
 

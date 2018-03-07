@@ -16,6 +16,8 @@ export class SchemeDetailComponent implements OnInit {
     tagList: Array<{ name: string, id: number }> = [];
     user: User;
 
+    userIsAuthor = false;
+
     constructor(private route: ActivatedRoute,
         private schemeStore: SchemeStore,
         private userStore: UserStore,
@@ -30,13 +32,16 @@ export class SchemeDetailComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe((params: Params) => {
             const id = +params['id'];
-            this.schemeStore.getItem(id).subscribe(data => this.init(data));
+            this.schemeStore.getItem(id)
+                .flatMap( scheme => {
+                    this.scheme = scheme;
+                    return this.userStore.getItem();
+                })
+                .subscribe(user => {
+                    this.user = user;
+                    this.userIsAuthor = this.user.id === this.scheme.author;
+                });
         });
-        this.userStore.getItem().subscribe(user => this.user = user);
-    }
-
-    public init(data: Scheme) {
-        this.scheme = data;
     }
 
     public toggleSchemeLiked() {
