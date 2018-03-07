@@ -26,8 +26,8 @@
 
   <div class="container " style="max-width: 1200px">
 
-    <div class="row animation-enter-children">
-      <div class="col-sm-12 col-md-8 col-lg-8 col-xs-12 content transition-height" [ngClass]="{'transition-height-max': scheme}">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-8 col-xs-12 content">
         <div class="dashboard-card no-max-width" style="background: #e0dedf; ">
           <p style="padding-bottom: 10px">Alter: 
             <a [routerLink]="[ '/schemes', {age_start: scheme.ageStart, age_end: scheme.ageEnd} ]" style="font-size: 1.3em; padding-right: 40px;">{{scheme.ageStart}} - {{scheme.ageEnd}}</a> Ort:
