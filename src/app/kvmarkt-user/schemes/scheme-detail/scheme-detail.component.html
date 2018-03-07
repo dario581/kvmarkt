@@ -9,8 +9,9 @@
   <h3 *ngIf="scheme" ><a [routerLink]="[ '/schemes', {categories: scheme.category} ]">{{scheme.categoryName}}</a></h3>
 </div>
 
-<div *ngIf="!scheme" style="width: 100%; padding-top: 300px; text-align: center; color: #aaaaaa">
-  lädt...
+<div *ngIf="!scheme" class="spinner" style="padding-top: 300px;">
+  <span></span>
+  <span class="text-secondary"> Wird geladen...</span>
 </div>
 <style>
   .transition-height {

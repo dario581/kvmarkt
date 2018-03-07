@@ -19,8 +19,9 @@
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{errorMessage}}
     </div>
-    <div *ngIf="loading">
-      Lädt...
+    <div *ngIf="!loading" class="spinner">
+      <span></span> 
+      <span class="text-secondary"> Wird geladen...</span>
     </div>
   </div>
   <br><br>
