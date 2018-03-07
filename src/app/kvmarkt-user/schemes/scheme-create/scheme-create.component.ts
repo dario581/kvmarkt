@@ -6,6 +6,7 @@ import { CategoryStore, PlaceStore, SchemeStore } from '../../../model/store';
 import { Category, Place } from '../../../model/helpers.model';
 
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-scheme-create',
@@ -17,6 +18,8 @@ export class SchemeCreateComponent implements OnInit {
   schemeForm: FormGroup;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private errorService: ErrorService,
     private categoryStore: CategoryStore,
     private placeStore: PlaceStore,
@@ -71,6 +74,15 @@ export class SchemeCreateComponent implements OnInit {
   ngOnInit() {
     this.categoryStore.getItems().subscribe(data => this.setSchemeCategories(data));
     this.placeStore.getItems().subscribe(data => this.setSchemePlaces(data));
+    this.route.params.subscribe((params: Params) => {
+      const id = +params['id'];
+      this.schemeStore.getItem(id).subscribe( (scheme) => {
+        this.scheme = scheme;
+        this.scheme.place2 = this.scheme.place2 || 0;
+        this.scheme.place3 = this.scheme.place3 || 0;
+        this.setSchemeFormValues();
+      } );
+    });
   }
 
   // forbiddenEmailPatternValidator(nameRe: RegExp): ValidatorFn {
@@ -92,8 +104,7 @@ export class SchemeCreateComponent implements OnInit {
       title:        ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60),
         this.forbiddenStringValidator(this.placeholderTitle)] ],
       category:     ['', [Validators.required, this.forbiddenSelectorValidator()]],
-      description:  ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), Validators.maxLength(500),
-        this.forbiddenStringValidator(this.placeholderDescription) ]],
+      description:  ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3), Validators.maxLength(500) ]],
       content:      ['', Validators.required],
       age_start:    ['', [Validators.required]],
       age_end:      ['', [Validators.required, this.forbiddenSelectorValidator()]],
@@ -101,7 +112,10 @@ export class SchemeCreateComponent implements OnInit {
       place2:       ['' ],
       place3:       ['' ],
     }, { validator: this.forbiddenAgeValidator() });
+    this.setSchemeFormValues();
+  }
 
+  setSchemeFormValues() {
     this.schemeForm.setValue({
       title: this.scheme.title,
       category: this.scheme.category,
@@ -165,7 +179,6 @@ export class SchemeCreateComponent implements OnInit {
   }
 
   submit() {
-    this.scheme.status = 'published';
     const scheme: Scheme = {
       id: null,
       author: null,
@@ -180,10 +193,22 @@ export class SchemeCreateComponent implements OnInit {
       place2: this.schemeForm.value.place2 > 0 ? this.schemeForm.value.place2 : undefined,
       place3: this.schemeForm.value.place3 > 0 ? this.schemeForm.value.place3 : undefined
     };
-    // TODO: Add saving of scheme
-    this.schemeStore.addItem(scheme).subscribe((data: any) => {
-      console.log('scheme create save', data);
-    });
+    if (this.scheme.id) {
+      scheme.id = this.scheme.id;
+      this.schemeStore.updateItem(scheme).subscribe(
+        (data: any) => {
+          console.log('scheme update', data);
+          this.router.navigate(['/dashboard']);
+        }
+      );
+    } else {
+      this.scheme.status = 'published';
+      // TODO: Add saving of scheme
+      this.schemeStore.addItem(scheme).subscribe((data: any) => {
+        console.log('scheme create save', data);
+        this.router.navigate(['/dashboard']);
+      });
+    }
   }
 
 

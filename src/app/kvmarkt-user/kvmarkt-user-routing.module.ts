@@ -25,6 +25,7 @@ const appRoutes: Routes = [
       { path: 'schemes/create', component: SchemeCreateComponent, data: { title: 'Programm erstellen' } },
       { path: 'schemes/start', component: SchemesComponent, data: { title: 'Programme entdecken' } },
       { path: 'schemes/:id', component: SchemeDetailComponent, data: { title: 'Programm Details' } },
+      { path: 'schemes/:id/edit', component: SchemeCreateComponent, data: { title: 'Programm bearbeiten' } },
         // ]
       // },
       /* {

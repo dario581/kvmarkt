@@ -17,8 +17,8 @@ import 'rxjs/add/observable/throw';
 export abstract class BaseStore<T extends IBaseObject> {
     protected readonly identifier: String;
 
-    protected readonly api_url = 'http://kvmarkt-api.azurewebsites.net/api/';
-    // protected readonly api_url = 'http://localhost:5000/api/';
+    // protected readonly api_url = 'http://kvmarkt-api.azurewebsites.net/api/';
+    protected readonly api_url = 'http://localhost:5000/api/';
 
     protected items: T[];
     protected itemObservable: Observable<T[]>;
@@ -142,6 +142,19 @@ export abstract class BaseCreateStore<T extends IBaseObject> extends BaseStore<T
             })
             .catch(err => this.handleError(err));
         return this.addObservable;
+    }
+
+    updateItem(item: T) {
+        return this.http
+            .patch(this.api_url + this.identifier, item, {
+                headers: this.authHeader,
+            })
+            .map(data => this.extractData(data))
+            .do((data) => {
+                const index = this.items.findIndex(x => x.id === item.id);
+                this.items[index] = data;
+            })
+            .catch(err => this.handleError(err));
     }
 
 }

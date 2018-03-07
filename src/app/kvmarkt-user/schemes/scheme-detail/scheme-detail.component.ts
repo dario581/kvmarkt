@@ -28,7 +28,7 @@ export class SchemeDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.params.forEach((params: Params) => {
+        this.route.params.subscribe((params: Params) => {
             const id = +params['id'];
             this.schemeStore.getItem(id).subscribe(data => this.init(data));
         });

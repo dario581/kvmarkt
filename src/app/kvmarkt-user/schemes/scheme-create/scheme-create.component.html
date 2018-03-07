@@ -119,7 +119,7 @@
                     Jetzt nur noch speichern und bald wird dein Programm bei den anderen erscheinen.
                 </p>
                 <div style="display: flex; align-items: center" >
-                    <button class="btn-accent" [class.disabled]="!schemeForm.valid" (click)="submit()">Speichern</button>
+                    <button class="btn-accent" [class.disabled]="!schemeForm.valid" (click)="submit()">Speichern<br>und veröffentlichen</button>
                     <p *ngIf="!schemeForm.valid"  class="text-secondary" style="margin-left: 20px;">
                         Nicht alle Felder wurden (korrekt) ausgefüllt. <br>
                         Überprüfe alle Felder mit einer<i class="invalid-label"></i> Markierung.
